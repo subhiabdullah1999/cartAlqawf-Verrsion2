@@ -14,12 +14,12 @@ import '../../../widgets/loader/shimmer_load_data.dart';
 import '../../../widgets/loader/shimmer_products.dart';
 
 class ProductByCategory extends StatefulWidget {
-  const ProductByCategory({
+  ProductByCategory({
     Key? key,
     required this.id,
     this.title,
   }) : super(key: key);
-  final int? id;
+  int? id;
   final String? title;
 
   @override
@@ -100,18 +100,44 @@ class _ProductByCategoryState extends State<ProductByCategory> {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
+                        widget.id = _catController
+                            .categoryList[_catController.index.value]
+                            .subCategories![index]
+                            .id;
+                        // key = GlobalKey<PaginationViewState>();
+
+                        // page = 0;
+
+                        // getData(widget.id!);
+                        // key.currentState?.refresh();
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (_) => ProductByCategory(
+                              id: widget.id,
+                              title: _catController
+                                  .categoryList[_catController.index.value]
+                                  .subCategories![index]
+                                  .title,
+                            ),
+                          ),
+                        );
+
                         controller.indexsubcat = index;
                         controller.updateVal();
+                        print("idddddddddddddddddddddddddf");
+                        print(widget.id);
+                        print("idddddddddddddddddddddddddf");
                       },
                       child: Container(
                         margin: EdgeInsets.symmetric(horizontal: 4),
-                        height: 35,
-                        width: 75,
+                        padding: EdgeInsets.symmetric(horizontal: 22),
+                        height: 22,
+                        // width: 75,
                         decoration: BoxDecoration(
                             color: controller.indexsubcat == index
                                 ? Colors.white
                                 : Colors.transparent,
-                            borderRadius: BorderRadius.circular(13)),
+                            borderRadius: BorderRadius.circular(20)),
                         child: Center(
                           child: Text(
                             _catController
@@ -129,35 +155,42 @@ class _ProductByCategoryState extends State<ProductByCategory> {
                   }),
             ),
           ),
-          PaginationView<CategoryProductData>(
-            key: key,
-            paginationViewType: PaginationViewType.gridView,
-            pageFetch: getData,
-            pullToRefresh: false,
-            onError: (dynamic error) => Center(
-              child: Text(AppTags.somethingWentWrong.tr),
-            ),
-            onEmpty: Center(
-              child: Text(AppTags.noProduct.tr),
-            ),
-            bottomLoader: const ShimmerLoadData(),
-            initialLoader: const ShimmerProducts(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: isMobile(context) ? 2 : 3,
-              childAspectRatio: 0.63,
-              // mainAxisSpacing: isMobile(context) ? 7 : 12,
-              // crossAxisSpacing: isMobile(context) ? 7 : 12,
-            ),
-            itemBuilder:
-                (BuildContext context, CategoryProductData product, int index) {
-              return CategoryProductCard(
-                dataModel: product,
-                index: index,
-              );
-            },
-            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
-            shrinkWrap: true,
-          ),
+          GetBuilder<CategoryContentController>(
+            builder: (controller) => _catController.isLoading == true
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : PaginationView<CategoryProductData>(
+                    key: key,
+                    paginationViewType: PaginationViewType.gridView,
+                    pageFetch: getData,
+                    pullToRefresh: false,
+                    onError: (dynamic error) => Center(
+                      child: Text(AppTags.somethingWentWrong.tr),
+                    ),
+                    onEmpty: Center(
+                      child: Text(AppTags.noProduct.tr),
+                    ),
+                    bottomLoader: const ShimmerLoadData(),
+                    initialLoader: const ShimmerProducts(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: isMobile(context) ? 2 : 3,
+                      childAspectRatio: 0.63,
+                      // mainAxisSpacing: isMobile(context) ? 7 : 12,
+                      // crossAxisSpacing: isMobile(context) ? 7 : 12,
+                    ),
+                    itemBuilder: (BuildContext context,
+                        CategoryProductData product, int index) {
+                      return CategoryProductCard(
+                        dataModel: product,
+                        index: index,
+                      );
+                    },
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
+                    shrinkWrap: true,
+                  ),
+          )
         ],
       ),
     );

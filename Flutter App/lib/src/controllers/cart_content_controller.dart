@@ -34,6 +34,9 @@ class CartContentController extends GetxController {
   }
 
   int incrementProduct(int productId) {
+    print(
+        "ftrrrrrrrrdcccf66666645555555555555555555555ddfghhhhjjjjjjjjjjjj00009989000");
+
     int index = _addToCartListModel.value.data!.carts!
         .indexWhere((element) => element.productId == productId);
     //printLog("index == $index");
@@ -41,8 +44,11 @@ class CartContentController extends GetxController {
   }
 
   Future getCartList({bool isShowLoading = true}) async {
+    print("ftrrrrrrrrdcccf66666645555555555555555555555ddfghhhhjjjjjjjjjjjj");
     _isLoading(isShowLoading);
     await Repository().getCartItemList().then((value) {
+      print("ftrrrrrrrrdcccf66666645555555555555555555555ddfghhhhjjjjjjjjjjjj");
+
       _addToCartListModel.value = value;
       _isLoading(false);
     });

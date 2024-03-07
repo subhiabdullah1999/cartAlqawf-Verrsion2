@@ -491,6 +491,41 @@ class DetailsPage extends StatelessWidget {
                             ),
                           ),
                         ),
+                        Positioned(
+                          right: 10,
+                          bottom: 5,
+                          child: Container(
+                            height: isMobile(context) ? 18.h : 28.h,
+                            width: isMobile(context) ? 40.w : 60.w,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5.r)),
+                              boxShadow: [
+                                BoxShadow(
+                                    spreadRadius: 0,
+                                    blurRadius: 10,
+                                    color: AppThemeData.boxShadowColor
+                                        .withOpacity(0.1),
+                                    offset: const Offset(0, 1))
+                              ],
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                isMobile(context)
+                                    ? SvgPicture.asset(Images.ratingIcon)
+                                    : SvgPicture.asset(Images.ratingIcon,
+                                        width: 15.w, height: 15.h),
+                                SizedBox(width: 4.w),
+                                Text(
+                                  detailsModel.data!.rating.toString(),
+                                  style: AppThemeData.reatingTextStyle_12,
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -733,37 +768,37 @@ class DetailsPage extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
-                                Container(
-                                  height: isMobile(context) ? 18.h : 28.h,
-                                  width: isMobile(context) ? 40.w : 60.w,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.r)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          spreadRadius: 0,
-                                          blurRadius: 10,
-                                          color: AppThemeData.boxShadowColor
-                                              .withOpacity(0.1),
-                                          offset: const Offset(0, 1))
-                                    ],
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      isMobile(context)
-                                          ? SvgPicture.asset(Images.ratingIcon)
-                                          : SvgPicture.asset(Images.ratingIcon,
-                                              width: 15.w, height: 15.h),
-                                      SizedBox(width: 4.w),
-                                      Text(
-                                        detailsModel.data!.rating.toString(),
-                                        style: AppThemeData.reatingTextStyle_12,
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                // Container(
+                                //   height: isMobile(context) ? 18.h : 28.h,
+                                //   width: isMobile(context) ? 40.w : 60.w,
+                                //   decoration: BoxDecoration(
+                                //     color: Colors.white,
+                                //     borderRadius:
+                                //         BorderRadius.all(Radius.circular(5.r)),
+                                //     boxShadow: [
+                                //       BoxShadow(
+                                //           spreadRadius: 0,
+                                //           blurRadius: 10,
+                                //           color: AppThemeData.boxShadowColor
+                                //               .withOpacity(0.1),
+                                //           offset: const Offset(0, 1))
+                                //     ],
+                                //   ),
+                                //   child: Row(
+                                //     mainAxisAlignment: MainAxisAlignment.center,
+                                //     children: [
+                                //       isMobile(context)
+                                //           ? SvgPicture.asset(Images.ratingIcon)
+                                //           : SvgPicture.asset(Images.ratingIcon,
+                                //               width: 15.w, height: 15.h),
+                                //       SizedBox(width: 4.w),
+                                //       Text(
+                                //         detailsModel.data!.rating.toString(),
+                                //         style: AppThemeData.reatingTextStyle_12,
+                                //       ),
+                                //     ],
+                                //   ),
+                                // ),
                               ],
                             ),
                             // dropdown for size
@@ -923,7 +958,7 @@ class DetailsPage extends StatelessWidget {
                                           ? const SizedBox()
                                           : Obx(
                                               () => SizedBox(
-                                                width: 75.w,
+                                                width: 90.w,
                                                 child: Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment
@@ -935,8 +970,8 @@ class DetailsPage extends StatelessWidget {
                                                             .decrementProductQuantity();
                                                       },
                                                       child: Container(
-                                                        height: 23.h,
-                                                        width: 23.w,
+                                                        height: 35.h,
+                                                        width: 35.w,
                                                         alignment:
                                                             Alignment.center,
                                                         decoration:
@@ -947,10 +982,11 @@ class DetailsPage extends StatelessWidget {
                                                               BorderRadius.all(
                                                                   Radius
                                                                       .circular(
-                                                                          3.r)),
+                                                                          8.r)),
                                                         ),
                                                         child: Icon(
                                                             Icons.remove,
+                                                            color: Colors.red,
                                                             size: 16.r),
                                                       ),
                                                     ),
@@ -992,8 +1028,8 @@ class DetailsPage extends StatelessWidget {
                                                             .incrementProductQuantity();
                                                       },
                                                       child: Container(
-                                                          height: 23.h,
-                                                          width: 23.w,
+                                                          height: 35.h,
+                                                          width: 35.w,
                                                           alignment:
                                                               Alignment.center,
                                                           decoration:
@@ -1004,11 +1040,12 @@ class DetailsPage extends StatelessWidget {
                                                                 BorderRadius
                                                                     .all(
                                                               Radius.circular(
-                                                                  3.r),
+                                                                  8.r),
                                                             ),
                                                           ),
                                                           child: Icon(
                                                             Icons.add,
+                                                            color: Colors.green,
                                                             size: 16.r,
                                                           )),
                                                     ),
@@ -1458,160 +1495,6 @@ class DetailsPage extends StatelessWidget {
                                 ? SizedBox(height: 10.h)
                                 : const SizedBox(),
 
-                            //Social shear
-                            Container(
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: AppThemeData.borderSideColor,
-                                ),
-                                color: Colors.white,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(3.r),
-                                ),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.all(10.r),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        InkWell(
-                                          onTap: () {
-                                            Get.toNamed(
-                                              Routes.wvScreen,
-                                              parameters: {
-                                                'url': detailsModel
-                                                    .data!.links!.facebook
-                                                    .toString(),
-                                                'title': "Facebook",
-                                              },
-                                            );
-                                          },
-                                          child: Container(
-                                            height:
-                                                isMobile(context) ? 38.h : 40.h,
-                                            width:
-                                                isMobile(context) ? 38.w : 40.w,
-                                            alignment: Alignment.center,
-                                            decoration: BoxDecoration(
-                                              color: const Color(0xffF5F5F5),
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(5.r),
-                                              ),
-                                            ),
-                                            child: SvgPicture.asset(
-                                              Images.facebook,
-                                              height: 15.h,
-                                              width: 8.w,
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(width: 8.w),
-                                        InkWell(
-                                          onTap: () {
-                                            Get.toNamed(
-                                              Routes.wvScreen,
-                                              parameters: {
-                                                'url': detailsModel
-                                                    .data!.links!.linkedin
-                                                    .toString(),
-                                                'title': "Linkedin",
-                                              },
-                                            );
-                                          },
-                                          child: Container(
-                                            height:
-                                                isMobile(context) ? 38.h : 40.h,
-                                            width:
-                                                isMobile(context) ? 38.w : 40.w,
-                                            alignment: Alignment.center,
-                                            decoration: BoxDecoration(
-                                              color: const Color(0xffF5F5F5),
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(5.r),
-                                              ),
-                                            ),
-                                            child: SvgPicture.asset(
-                                              Images.linkedin,
-                                              height: 14.h,
-                                              width: 14.w,
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(width: 8.h),
-                                        InkWell(
-                                          onTap: () {
-                                            Get.toNamed(
-                                              Routes.wvScreen,
-                                              parameters: {
-                                                'url': detailsModel
-                                                    .data!.links!.twitter
-                                                    .toString(),
-                                                'title': "Twitter",
-                                              },
-                                            );
-                                          },
-                                          child: Container(
-                                            height:
-                                                isMobile(context) ? 38.h : 40.h,
-                                            width:
-                                                isMobile(context) ? 38.w : 40.w,
-                                            alignment: Alignment.center,
-                                            decoration: BoxDecoration(
-                                              color: const Color(0xffF5F5F5),
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(5.r),
-                                              ),
-                                            ),
-                                            child: SvgPicture.asset(
-                                              Images.twitter,
-                                              height: 14.h,
-                                              width: 17.w,
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(width: 8.w),
-                                        InkWell(
-                                          onTap: () {
-                                            launchUrl(
-                                              Uri.parse(detailsModel
-                                                  .data!.links!.whatsapp
-                                                  .toString()),
-                                              mode: LaunchMode
-                                                  .externalApplication,
-                                            );
-                                          },
-                                          child: Container(
-                                            height:
-                                                isMobile(context) ? 38.h : 40.h,
-                                            width:
-                                                isMobile(context) ? 38.w : 40.w,
-                                            alignment: Alignment.center,
-                                            decoration: BoxDecoration(
-                                              color: const Color(0xffF5F5F5),
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(5.r),
-                                              ),
-                                            ),
-                                            child: SvgPicture.asset(
-                                              "assets/icons/details/whatsapp.svg",
-                                              height: 17.h,
-                                              width: 17.w,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 10.h),
                             //Specification
 
                             //Description
@@ -1633,7 +1516,7 @@ class DetailsPage extends StatelessWidget {
                                     Obx(
                                       () => InkWell(
                                         onTap: () {
-                                          detailsController.isDeliveryUpdate();
+                                          // detailsController.isDeliveryUpdate();
                                         },
                                         child: Row(
                                           mainAxisAlignment:
@@ -1647,18 +1530,18 @@ class DetailsPage extends StatelessWidget {
                                                   : AppThemeData
                                                       .titleTextStyle_11Tab,
                                             ),
-                                            detailsController
-                                                    .isDescription.value
-                                                ? Icon(Icons.remove,
-                                                    size: 16.r,
-                                                    color: AppThemeData
-                                                        .detailsIconColor)
-                                                : Icon(
-                                                    Icons.add,
-                                                    size: 16.r,
-                                                    color: AppThemeData
-                                                        .detailsIconColor,
-                                                  )
+                                            // detailsController
+                                            //         .isDescription.value
+                                            //     ? Icon(Icons.remove,
+                                            //         size: 16.r,
+                                            //         color: AppThemeData
+                                            //             .detailsIconColor)
+                                            //     : Icon(
+                                            //         Icons.add,
+                                            //         size: 16.r,
+                                            //         color: AppThemeData
+                                            //             .detailsIconColor,
+                                            //       )
                                           ],
                                         ),
                                       ),
@@ -2338,6 +2221,145 @@ class DetailsPage extends StatelessWidget {
                       ),
                     ),
                   ),
+                  //Social shear
+                  Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: AppThemeData.borderSideColor,
+                      ),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(3.r),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(10.r),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Get.toNamed(
+                                    Routes.wvScreen,
+                                    parameters: {
+                                      'url': detailsModel.data!.links!.facebook
+                                          .toString(),
+                                      'title': "Facebook",
+                                    },
+                                  );
+                                },
+                                child: Container(
+                                  height: isMobile(context) ? 38.h : 40.h,
+                                  width: isMobile(context) ? 38.w : 40.w,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xffF5F5F5),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(5.r),
+                                    ),
+                                  ),
+                                  child: SvgPicture.asset(
+                                    Images.facebook,
+                                    height: 15.h,
+                                    width: 8.w,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 8.w),
+                              InkWell(
+                                onTap: () {
+                                  Get.toNamed(
+                                    Routes.wvScreen,
+                                    parameters: {
+                                      'url': detailsModel.data!.links!.linkedin
+                                          .toString(),
+                                      'title': "Linkedin",
+                                    },
+                                  );
+                                },
+                                child: Container(
+                                  height: isMobile(context) ? 38.h : 40.h,
+                                  width: isMobile(context) ? 38.w : 40.w,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xffF5F5F5),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(5.r),
+                                    ),
+                                  ),
+                                  child: SvgPicture.asset(
+                                    Images.linkedin,
+                                    height: 14.h,
+                                    width: 14.w,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 8.h),
+                              InkWell(
+                                onTap: () {
+                                  Get.toNamed(
+                                    Routes.wvScreen,
+                                    parameters: {
+                                      'url': detailsModel.data!.links!.twitter
+                                          .toString(),
+                                      'title': "Twitter",
+                                    },
+                                  );
+                                },
+                                child: Container(
+                                  height: isMobile(context) ? 38.h : 40.h,
+                                  width: isMobile(context) ? 38.w : 40.w,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xffF5F5F5),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(5.r),
+                                    ),
+                                  ),
+                                  child: SvgPicture.asset(
+                                    Images.twitter,
+                                    height: 14.h,
+                                    width: 17.w,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 8.w),
+                              InkWell(
+                                onTap: () {
+                                  launchUrl(
+                                    Uri.parse(detailsModel.data!.links!.whatsapp
+                                        .toString()),
+                                    mode: LaunchMode.externalApplication,
+                                  );
+                                },
+                                child: Container(
+                                  height: isMobile(context) ? 38.h : 40.h,
+                                  width: isMobile(context) ? 38.w : 40.w,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xffF5F5F5),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(5.r),
+                                    ),
+                                  ),
+                                  child: SvgPicture.asset(
+                                    "assets/icons/details/whatsapp.svg",
+                                    height: 17.h,
+                                    width: 17.w,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  // SizedBox(height: 10.h),
                 ],
               ),
             ),
@@ -2380,7 +2402,7 @@ class DetailsPage extends StatelessWidget {
                                     Radius.circular(10.r),
                                   ),
                                   border: Border.all(
-                                    color: AppThemeData.headlineTextColor,
+                                    color: Colors.green,
                                     width: 1.r,
                                   ),
                                 ),

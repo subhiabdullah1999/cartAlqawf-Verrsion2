@@ -1016,6 +1016,11 @@ class Repository {
     var url =
         "${NetworkService.apiUrl}/products-by-category/$id?page=$page&$langCurrCode";
     final response = await _service.fetchJsonData(url);
+
+    print("4655555522228eeettttttt3777733333");
+    print(response);
+    print("4655555522228eeettttttt3777733333");
+
     return product.ProductByCategoryModel.fromJson(response).data;
   }
 

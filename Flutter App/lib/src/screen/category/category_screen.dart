@@ -3117,7 +3117,11 @@ class CategoryScreen extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (_) => ProductByCategory(
-              id: _catController.categoryList[index].id,
+              id: _catController.categoryList[_catController.index.value]
+                      .subCategories!.isEmpty
+                  ? _catController.categoryList[index].id
+                  : _catController.categoryList[_catController.index.value]
+                      .subCategories![0].id,
               title: _catController.categoryList[index].title,
             ),
           ),

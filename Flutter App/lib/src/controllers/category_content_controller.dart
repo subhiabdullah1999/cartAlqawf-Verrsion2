@@ -67,6 +67,7 @@ class CategoryContentController extends GetxController {
     });
 
     _isLoading(false);
+    update();
   }
 
   Future<void> getMoreData(int page) async {

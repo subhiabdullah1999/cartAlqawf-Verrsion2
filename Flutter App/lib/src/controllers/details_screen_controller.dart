@@ -19,7 +19,7 @@ class DetailsPageController extends GetxController {
   late double rating;
   double initialRating = 2.0;
   var isLoading = true.obs;
-  var isDescription = false.obs;
+  var isDescription = true.obs;
   var isSpecific = false.obs;
   var isFavorite = false.obs;
   var isFavoriteLocal = false.obs;
