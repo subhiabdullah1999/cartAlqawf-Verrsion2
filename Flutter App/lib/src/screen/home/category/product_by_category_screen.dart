@@ -110,17 +110,31 @@ class _ProductByCategoryState extends State<ProductByCategory> {
 
                         // getData(widget.id!);
                         // key.currentState?.refresh();
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (_) => ProductByCategory(
-                              id: widget.id,
-                              title: _catController
-                                  .categoryList[_catController.index.value]
-                                  .subCategories![index]
-                                  .title,
-                            ),
+
+                        Navigator.of(context).pushReplacement(PageRouteBuilder(
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) =>
+                                  ProductByCategory(
+                            id: widget.id,
+                            title: _catController
+                                .categoryList[_catController.index.value]
+                                .subCategories![index]
+                                .title,
                           ),
-                        );
+                          transitionDuration: const Duration(milliseconds: 0),
+                          opaque: true,
+                        ));
+                        // Navigator.of(context).pushReplacement(
+                        //   MaterialPageRoute(
+                        //     builder: (_) => ProductByCategory(
+                        //       id: widget.id,
+                        //       title: _catController
+                        //           .categoryList[_catController.index.value]
+                        //           .subCategories![index]
+                        //           .title,
+                        //     ),
+                        //   ),
+                        // );
 
                         controller.indexsubcat = index;
                         controller.updateVal();

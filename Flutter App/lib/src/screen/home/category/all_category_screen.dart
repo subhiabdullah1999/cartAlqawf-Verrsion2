@@ -46,10 +46,9 @@ class _AllCategoryState extends State<AllCategory> {
             Icons.arrow_back,
             color: Colors.black,
           ),
-
           onPressed: () {
             Get.back();
-          }, 
+          },
         ),
         centerTitle: true,
         title: Text(
@@ -97,7 +96,7 @@ class _AllCategoryState extends State<AllCategory> {
     return Container(
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: const Color(0xffFFFFFF),
+        color: Color.fromARGB(255, 243, 11, 11),
         borderRadius: const BorderRadius.all(
           Radius.circular(10),
         ),

@@ -124,7 +124,8 @@ class HomeProductCard extends StatelessWidget {
                         style: isMobile(context)
                             ? AppThemeData.todayDealDiscountPriceStyle
                                 .copyWith(color: Colors.black, fontSize: 20)
-                            : AppThemeData.todayDealDiscountPriceStyleTab,
+                            : AppThemeData.todayDealDiscountPriceStyleTab
+                                .copyWith(color: Colors.black, fontSize: 22),
                       ),
                       SizedBox(height: 5.h),
                       Padding(

@@ -2888,13 +2888,16 @@
 // //////////////////////////////////////////////////////////////////
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:yoori_ecommerce/src/_route/routes.dart';
 import 'package:yoori_ecommerce/src/controllers/category_content_controller.dart';
 import 'package:yoori_ecommerce/src/utils/app_theme_data.dart';
 import 'package:flutter/material.dart';
 
 import 'package:yoori_ecommerce/src/utils/app_tags.dart';
+import 'package:yoori_ecommerce/src/utils/images.dart';
 import 'package:yoori_ecommerce/src/utils/responsive.dart';
 import '../../widgets/loader/shimmer_category_content.dart';
 import '../home/category/product_by_category_screen.dart';
@@ -3063,15 +3066,97 @@ class CategoryScreen extends StatelessWidget {
     // }
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        toolbarHeight: 60.h,
+        leadingWidth: 40.w,
+        // leading: Builder(
+        //   builder: (BuildContext context) {
+        //     return IconButton(
+        //       icon: SvgPicture.asset(
+        //         Images.menuBar,
+        //         height: 20.h,
+        //       ),
+        //       tooltip: MaterialLocalizations.of(context)
+        //           .openAppDrawerTooltip,
+        //       onPressed: () {
+        //         Scaffold.of(context).openDrawer();
+        //         homeScreenContentController
+        //             .isVisibleUpdate(false);
+        //       },
+        //     );
+        //   },
+        // ),
+        title: InkWell(
+          onTap: () {
+            Get.toNamed(Routes.searchProduct);
+          },
+          child: Container(
+              height: isMobile(context) ? 35.h : 35.h,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6.r),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: AppThemeData.boxShadowColor.withOpacity(0.10),
+                    spreadRadius: 0,
+                    blurRadius: 5.r,
+                    offset: const Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    child: SvgPicture.asset(
+                      Images.searchBar,
+                      color: AppThemeData.searchIconColor,
+                      width: 18.w,
+                      height: 18.h,
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
+                    child: const VerticalDivider(
+                      thickness: 2,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.w),
+                    child: Text(AppTags.searchProduct.tr,
+                        style: AppThemeData.hintTextStyle_10Tab),
+                  )
+                ],
+              )),
+        ),
+        actions: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 18.w),
+            child: IconButton(
+              icon: SvgPicture.asset(
+                Images.notification,
+                height: 22.h,
+                width: 19.w,
+              ),
+              onPressed: () {
+                Get.toNamed(Routes.notificationContent);
+              },
+            ),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: SizedBox(
           height: size.height,
           width: size.width,
           child: Padding(
-            padding: EdgeInsets.only(top: 8.h),
+            padding: EdgeInsets.only(top: 12.h),
             child: Padding(
               padding: EdgeInsets.only(
-                left: 15.0.w,
+                left: 7.5.w,
                 right: 7.5.w,
               ),
               child: _catController.isMoreDataLoading.value
