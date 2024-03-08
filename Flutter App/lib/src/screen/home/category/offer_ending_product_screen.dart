@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pagination_view/pagination_view.dart';
 import 'package:yoori_ecommerce/src/controllers/home_screen_controller.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import 'package:yoori_ecommerce/src/utils/app_tags.dart';
 import '../../../models/offer_ending_product_model.dart';
 import '../../../utils/app_theme_data.dart';
@@ -14,11 +15,13 @@ class OfferEndingProductsView extends StatefulWidget {
   const OfferEndingProductsView({Key? key}) : super(key: key);
 
   @override
-  State<OfferEndingProductsView> createState() => _OfferEndingProductsViewState();
+  State<OfferEndingProductsView> createState() =>
+      _OfferEndingProductsViewState();
 }
 
 class _OfferEndingProductsViewState extends State<OfferEndingProductsView> {
   final homeScreenContentController = Get.put(HomeScreenController());
+  final storage = Get.put(StorageService());
 
   int page = 0;
   PaginationViewType paginationViewType = PaginationViewType.gridView;
@@ -54,7 +57,10 @@ class _OfferEndingProductsViewState extends State<OfferEndingProductsView> {
         centerTitle: true,
         title: Text(
           AppTags.offerEndingProduct.tr,
-          style: AppThemeData.headerTextStyle_16,
+          style: AppThemeData.headerTextStyle_16.copyWith(
+              fontFamily: storage.languageCode == "ar"
+                  ? "Cairo Medium"
+                  : "Poppins Medium"),
         ),
       ),
       body: PaginationView<Data>(

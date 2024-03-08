@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pagination_view/pagination_view.dart';
 import 'package:yoori_ecommerce/src/controllers/home_screen_controller.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../../models/flash_sale_model.dart';
 import '../../../utils/app_tags.dart';
 import '../../../utils/app_theme_data.dart';
@@ -25,6 +26,7 @@ class _FlashSalesState extends State<FlashSales> {
   int page = 0;
   PaginationViewType paginationViewType = PaginationViewType.gridView;
   GlobalKey<PaginationViewState> key = GlobalKey<PaginationViewState>();
+  final storage = Get.put(StorageService());
 
   Future<List<Data>> getData(int offset) async {
     //page = (offset / 1).round();
@@ -40,53 +42,60 @@ class _FlashSalesState extends State<FlashSales> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: isMobile(context)? AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
+      appBar: isMobile(context)
+          ? AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: IconButton(
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                ),
 
-          ),
+                onPressed: () {
+                  Get.back();
+                }, // null disables the button
+              ),
+              centerTitle: true,
+              title: Text(
+                AppTags.flashSale.tr,
+                style: AppThemeData.headerTextStyle_16.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
+              ),
+            )
+          : AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              toolbarHeight: 60.h,
+              leadingWidth: 40.w,
+              leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                  size: 25.r,
+                ),
 
-          onPressed: () {
-            Get.back();
-          }, // null disables the button
-        ),
-        centerTitle: true,
-        title: Text(
-          AppTags.flashSale.tr,
-          style: AppThemeData.headerTextStyle_16,
-        ),
-      ):AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        toolbarHeight: 60.h,
-        leadingWidth: 40.w,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-            size: 25.r,
-          ),
-
-          onPressed: () {
-            Get.back();
-          }, // null disables the button
-        ),
-        centerTitle: true,
-        title: Text(
-          AppTags.flashSale.tr,
-          style: AppThemeData.headerTextStyle_14,
-        ),
-      ),
+                onPressed: () {
+                  Get.back();
+                }, // null disables the button
+              ),
+              centerTitle: true,
+              title: Text(
+                AppTags.flashSale.tr,
+                style: AppThemeData.headerTextStyle_14.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
+              ),
+            ),
       body: PaginationView<Data>(
         key: key,
         paginationViewType: paginationViewType,
         pageFetch: getData,
         pullToRefresh: false,
-        onError: (dynamic error) =>  Center(
+        onError: (dynamic error) => Center(
           child: Text(AppTags.someErrorOccurred.tr),
         ),
         onEmpty: Center(
@@ -95,10 +104,10 @@ class _FlashSalesState extends State<FlashSales> {
         bottomLoader: const ShimmerLoadData(),
         initialLoader: const ShimmerProducts(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: isMobile(context)? 2:3,
+          crossAxisCount: isMobile(context) ? 2 : 3,
           childAspectRatio: 0.68,
-          mainAxisSpacing: isMobile(context)? 15:20,
-          crossAxisSpacing: isMobile(context)? 15:20,
+          mainAxisSpacing: isMobile(context) ? 15 : 20,
+          crossAxisSpacing: isMobile(context) ? 15 : 20,
         ),
         itemBuilder: (BuildContext context, Data product, int index) {
           return CategoryProductCard(

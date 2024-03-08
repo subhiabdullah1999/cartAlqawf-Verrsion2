@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../../../utils/app_theme_data.dart';
 import '../../../../controllers/shop_screen_controller.dart';
 import '../../../../utils/app_tags.dart';
@@ -14,6 +15,7 @@ import 'store_screen.dart';
 class ShopScreen extends StatelessWidget {
   ShopScreen({Key? key}) : super(key: key);
   final shopId = Get.parameters['shopId'];
+  final storage = Get.put(StorageService());
 
   final ShopScreenController shopScreenController =
       Get.put(ShopScreenController());
@@ -40,8 +42,14 @@ class ShopScreen extends StatelessWidget {
                           .visitShopModel.value.data!.shop!.shopName
                           .toString(),
                       style: isMobile(context)
-                          ? AppThemeData.headerTextStyle_16
-                          : AppThemeData.headerTextStyleTab,
+                          ? AppThemeData.headerTextStyle_16.copyWith(
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium")
+                          : AppThemeData.headerTextStyleTab.copyWith(
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium"),
                     ),
                   )
                 : AppBar(
@@ -65,8 +73,14 @@ class ShopScreen extends StatelessWidget {
                           .visitShopModel.value.data!.shop!.shopName
                           .toString(),
                       style: isMobile(context)
-                          ? AppThemeData.headerTextStyle_14
-                          : AppThemeData.titleTextStyle_11Tab,
+                          ? AppThemeData.headerTextStyle_14.copyWith(
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium")
+                          : AppThemeData.titleTextStyle_11Tab.copyWith(
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium"),
                     ),
                   ),
             body: Column(
@@ -106,10 +120,12 @@ class ShopScreen extends StatelessWidget {
                                         .data!.shop!.shopName
                                         .toString(),
                                     style: TextStyle(
-                                      fontSize:
-                                          isMobile(context) ? 13.sp : 10.sp,
-                                      color: Colors.white,
-                                    ),
+                                        fontSize:
+                                            isMobile(context) ? 13.sp : 10.sp,
+                                        color: Colors.white,
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium"),
                                   ),
                                 ),
                                 SizedBox(
@@ -138,8 +154,20 @@ class ShopScreen extends StatelessWidget {
                                         "(${shopScreenController.visitShopModel.value.data!.shop!.reviewsCount!.toString()})",
                                         style: isMobile(context)
                                             ? AppThemeData.hintTextStyle_10Tab
+                                                .copyWith(
+                                                    fontFamily:
+                                                        storage.languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium")
                                             : AppThemeData.hintTextStyle_10Tab
-                                                .copyWith(fontSize: 8.sp)),
+                                                .copyWith(
+                                                    fontSize: 8.sp,
+                                                    fontFamily: storage
+                                                                .languageCode ==
+                                                            "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium")),
                                   ],
                                 ),
                               ],
@@ -194,7 +222,9 @@ class ShopScreen extends StatelessWidget {
                             indicatorPadding: EdgeInsets.zero,
                             labelPadding: EdgeInsets.zero,
                             labelStyle: TextStyle(
-                              fontFamily: "Poppins Medium",
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium",
                               fontSize: isMobile(context) ? 13.sp : 10.sp,
                             ),
                             tabs: [

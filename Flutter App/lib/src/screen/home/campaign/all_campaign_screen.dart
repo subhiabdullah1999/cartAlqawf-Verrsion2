@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pagination_view/pagination_view.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../../models/all_campaign_model.dart';
 import '../../../utils/app_theme_data.dart';
 import '../../../servers/repository.dart';
@@ -21,6 +22,7 @@ class _AllCampaignState extends State<AllCampaign> {
   int page = 0;
   PaginationViewType paginationViewType = PaginationViewType.gridView;
   GlobalKey<PaginationViewState> key = GlobalKey<PaginationViewState>();
+  final storage = Get.put(StorageService());
 
   Future<List<Data>> getData(int offset) async {
     //page = (offset / 1).round();
@@ -36,47 +38,55 @@ class _AllCampaignState extends State<AllCampaign> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: isMobile(context) ?  AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: IconButton(
-            icon:  Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-              size: isMobile(context) ? 15.r:20.r,
-            ),
+        appBar: isMobile(context)
+            ? AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                leading: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Colors.black,
+                    size: isMobile(context) ? 15.r : 20.r,
+                  ),
 
-            onPressed: () {
-              Get.back();
-            }, // null disables the button
-          ),
-          centerTitle: true,
-          title: Text(
-            AppTags.allCampaign.tr,
-            style: AppThemeData.headerTextStyle_16,
-          ),
-        ):AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          toolbarHeight: 60.h,
-          leadingWidth: 40.w,
-          leading: IconButton(
-            icon:  Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-              size: 25.r,
-            ),
+                  onPressed: () {
+                    Get.back();
+                  }, // null disables the button
+                ),
+                centerTitle: true,
+                title: Text(
+                  AppTags.allCampaign.tr,
+                  style: AppThemeData.headerTextStyle_16.copyWith(
+                      fontFamily: storage.languageCode == "ar"
+                          ? "Cairo Medium"
+                          : "Poppins Medium"),
+                ),
+              )
+            : AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                toolbarHeight: 60.h,
+                leadingWidth: 40.w,
+                leading: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Colors.black,
+                    size: 25.r,
+                  ),
 
-            onPressed: () {
-              Get.back();
-            }, // null disables the button
-          ),
-          centerTitle: true,
-          title: Text(
-            AppTags.allCampaign.tr,
-            style: AppThemeData.headerTextStyleTab,
-          ),
-        ),
+                  onPressed: () {
+                    Get.back();
+                  }, // null disables the button
+                ),
+                centerTitle: true,
+                title: Text(
+                  AppTags.allCampaign.tr,
+                  style: AppThemeData.headerTextStyleTab.copyWith(
+                      fontFamily: storage.languageCode == "ar"
+                          ? "Cairo Medium"
+                          : "Poppins Medium"),
+                ),
+              ),
         body: PaginationView<Data>(
           key: key,
           paginationViewType: paginationViewType,
@@ -95,8 +105,8 @@ class _AllCampaignState extends State<AllCampaign> {
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: isMobile(context) ? 2 : 3,
             childAspectRatio: 1.6,
-            mainAxisSpacing:isMobile(context)? 15:20,
-            crossAxisSpacing:isMobile(context)? 15:20,
+            mainAxisSpacing: isMobile(context) ? 15 : 20,
+            crossAxisSpacing: isMobile(context) ? 15 : 20,
           ),
           itemBuilder: (BuildContext context, Data campaign, int index) {
             return InkWell(

@@ -124,7 +124,12 @@ class HomeScreenContent extends StatelessWidget {
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 8.w),
                                   child: Text(AppTags.searchProduct.tr,
-                                      style: AppThemeData.hintTextStyle_13),
+                                      style: AppThemeData.hintTextStyle_13
+                                          .copyWith(
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium")),
                                 )
                               ],
                             )),
@@ -207,7 +212,12 @@ class HomeScreenContent extends StatelessWidget {
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 8.w),
                                   child: Text(AppTags.searchProduct.tr,
-                                      style: AppThemeData.hintTextStyle_10Tab),
+                                      style: AppThemeData.hintTextStyle_10Tab
+                                          .copyWith(
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium")),
                                 )
                               ],
                             )),
@@ -267,8 +277,10 @@ class HomeScreenContent extends StatelessWidget {
                                         : homeScreenContentController
                                             .userAdress!,
                                     style: TextStyle(
-                                      color: Colors.black54,
-                                    ),
+                                        color: Colors.black54,
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium"),
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ],
@@ -416,7 +428,10 @@ class HomeScreenContent extends StatelessWidget {
                             maxLines: 1,
                             textAlign: TextAlign.center,
                             overflow: TextOverflow.ellipsis,
-                            style: AppThemeData.todayDealTitleStyle,
+                            style: AppThemeData.todayDealTitleStyle.copyWith(
+                                fontFamily: storage.languageCode == "ar"
+                                    ? "Cairo Medium"
+                                    : "Poppins Medium"),
                           ),
                         ),
                       ],
@@ -447,8 +462,14 @@ class HomeScreenContent extends StatelessWidget {
               child: Text(
                 AppTags.popularCategories.tr,
                 style: isMobile(context)
-                    ? AppThemeData.headerTextStyle
-                    : AppThemeData.headerTextStyleTab,
+                    ? AppThemeData.headerTextStyle.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                    : AppThemeData.headerTextStyleTab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
               ),
             ),
             InkWell(
@@ -557,8 +578,14 @@ class HomeScreenContent extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.center,
                               style: isMobile(context)
-                                  ? AppThemeData.titleTextStyle_13
-                                  : AppThemeData.titleTextStyleTab,
+                                  ? AppThemeData.titleTextStyle_13.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium")
+                                  : AppThemeData.titleTextStyleTab.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium"),
                             ),
                           ),
                         ],
@@ -673,8 +700,20 @@ class HomeScreenContent extends StatelessWidget {
                                           .toString(),
                                       style: isMobile(context)
                                           ? AppThemeData.categoryTextStyle_14
+                                              .copyWith(
+                                                  fontFamily:
+                                                      storage.languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium")
                                           : AppThemeData
-                                              .categoryTitleTextStyle_12,
+                                              .categoryTitleTextStyle_12
+                                              .copyWith(
+                                                  fontFamily:
+                                                      storage.languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium"),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       textAlign: TextAlign.center,
@@ -742,8 +781,14 @@ class HomeScreenContent extends StatelessWidget {
               child: Text(
                 AppTags.popularBrands.tr,
                 style: isMobile(context)
-                    ? AppThemeData.headerTextStyle
-                    : AppThemeData.headerTextStyleTab,
+                    ? AppThemeData.headerTextStyle.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                    : AppThemeData.headerTextStyleTab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
               ),
             ),
             InkWell(
@@ -828,7 +873,11 @@ class HomeScreenContent extends StatelessWidget {
                               homeScreenContentController.homeDataModel.value
                                   .data![brandIndex].popularBrands![index].title
                                   .toString(),
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                             ),
                           ),
                         )
@@ -1186,8 +1235,14 @@ class HomeScreenContent extends StatelessWidget {
               child: Text(
                 AppTags.campaign.tr,
                 style: isMobile(context)
-                    ? AppThemeData.headerTextStyle
-                    : AppThemeData.headerTextStyleTab,
+                    ? AppThemeData.headerTextStyle.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                    : AppThemeData.headerTextStyleTab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
               ),
             ),
             InkWell(
@@ -1269,8 +1324,14 @@ class HomeScreenContent extends StatelessWidget {
               child: Text(
                 AppTags.featuredShop.tr,
                 style: isMobile(context)
-                    ? AppThemeData.headerTextStyle
-                    : AppThemeData.headerTextStyleTab,
+                    ? AppThemeData.headerTextStyle.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                    : AppThemeData.headerTextStyleTab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
               ),
             ),
             InkWell(
@@ -1335,8 +1396,14 @@ class HomeScreenContent extends StatelessWidget {
               child: Text(
                 AppTags.expressShop.tr,
                 style: isMobile(context)
-                    ? AppThemeData.headerTextStyle
-                    : AppThemeData.headerTextStyleTab,
+                    ? AppThemeData.headerTextStyle.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                    : AppThemeData.headerTextStyleTab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
               ),
             ),
             InkWell(
@@ -1401,8 +1468,14 @@ class HomeScreenContent extends StatelessWidget {
               child: Text(
                 AppTags.bestShop.tr,
                 style: isMobile(context)
-                    ? AppThemeData.headerTextStyle
-                    : AppThemeData.headerTextStyleTab,
+                    ? AppThemeData.headerTextStyle.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                    : AppThemeData.headerTextStyleTab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
               ),
             ),
             InkWell(
@@ -1468,8 +1541,14 @@ class HomeScreenContent extends StatelessWidget {
               child: Text(
                 AppTags.topShop.tr,
                 style: isMobile(context)
-                    ? AppThemeData.headerTextStyle
-                    : AppThemeData.headerTextStyleTab,
+                    ? AppThemeData.headerTextStyle.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                    : AppThemeData.headerTextStyleTab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
               ),
             ),
             InkWell(
@@ -1538,8 +1617,14 @@ class HomeScreenContent extends StatelessWidget {
                 child: Text(
                   AppTags.latestNews.tr,
                   style: isMobile(context)
-                      ? AppThemeData.headerTextStyle
-                      : AppThemeData.headerTextStyleTab,
+                      ? AppThemeData.headerTextStyle.copyWith(
+                          fontFamily: storage.languageCode == "ar"
+                              ? "Cairo Medium"
+                              : "Poppins Medium")
+                      : AppThemeData.headerTextStyleTab.copyWith(
+                          fontFamily: storage.languageCode == "ar"
+                              ? "Cairo Medium"
+                              : "Poppins Medium"),
                 ),
               ),
               Padding(
@@ -1637,7 +1722,19 @@ class HomeScreenContent extends StatelessWidget {
                                           .title!,
                                       style: isMobile(context)
                                           ? AppThemeData.titleTextStyle_14
-                                          : AppThemeData.titleTextStyle_11Tab,
+                                              .copyWith(
+                                                  fontFamily:
+                                                      storage.languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium")
+                                          : AppThemeData.titleTextStyle_11Tab
+                                              .copyWith(
+                                                  fontFamily:
+                                                      storage.languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium"),
                                       maxLines: 1,
                                     ),
                                     SizedBox(
@@ -1652,7 +1749,19 @@ class HomeScreenContent extends StatelessWidget {
                                           .shortDescription!,
                                       style: isMobile(context)
                                           ? AppThemeData.qsTextStyle_12
-                                          : AppThemeData.qsTextStyle_9Tab,
+                                              .copyWith(
+                                                  fontFamily: storage
+                                                              .languageCode ==
+                                                          "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium")
+                                          : AppThemeData.qsTextStyle_9Tab
+                                              .copyWith(
+                                                  fontFamily:
+                                                      storage.languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium"),
                                       maxLines: 2,
                                     ),
                                   ],
@@ -1692,8 +1801,14 @@ class HomeScreenContent extends StatelessWidget {
                   child: Text(
                     AppTags.todayDeal.tr,
                     style: isMobile(context)
-                        ? AppThemeData.headerTextStyle
-                        : AppThemeData.headerTextStyleTab,
+                        ? AppThemeData.headerTextStyle.copyWith(
+                            fontFamily: storage.languageCode == "ar"
+                                ? "Cairo Medium"
+                                : "Poppins Medium")
+                        : AppThemeData.headerTextStyleTab.copyWith(
+                            fontFamily: storage.languageCode == "ar"
+                                ? "Cairo Medium"
+                                : "Poppins Medium"),
                   ),
                 ),
                 SizedBox(
@@ -1710,8 +1825,14 @@ class HomeScreenContent extends StatelessWidget {
                         child: Text(
                           'Over',
                           style: isMobile(context)
-                              ? AppThemeData.timeDateTextStyle_12
-                              : AppThemeData.timeDateTextStyleTab,
+                              ? AppThemeData.timeDateTextStyle_12.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.timeDateTextStyleTab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                         ),
                       );
                     } else {
@@ -1742,7 +1863,17 @@ class HomeScreenContent extends StatelessWidget {
                                 "${time.hours ?? 0}".padLeft(2, '0'),
                                 style: isMobile(context)
                                     ? AppThemeData.timeDateTextStyle_12
-                                    : AppThemeData.timeDateTextStyleTab,
+                                        .copyWith(
+                                            fontFamily:
+                                                storage.languageCode == "ar"
+                                                    ? "Cairo Medium"
+                                                    : "Poppins Medium")
+                                    : AppThemeData.timeDateTextStyleTab
+                                        .copyWith(
+                                            fontFamily:
+                                                storage.languageCode == "ar"
+                                                    ? "Cairo Medium"
+                                                    : "Poppins Medium"),
                               ),
                             ),
                           ),
@@ -1772,7 +1903,17 @@ class HomeScreenContent extends StatelessWidget {
                                 "${time.min ?? 0}".padLeft(2, '0'),
                                 style: isMobile(context)
                                     ? AppThemeData.timeDateTextStyle_12
-                                    : AppThemeData.timeDateTextStyleTab,
+                                        .copyWith(
+                                            fontFamily:
+                                                storage.languageCode == "ar"
+                                                    ? "Cairo Medium"
+                                                    : "Poppins Medium")
+                                    : AppThemeData.timeDateTextStyleTab
+                                        .copyWith(
+                                            fontFamily:
+                                                storage.languageCode == "ar"
+                                                    ? "Cairo Medium"
+                                                    : "Poppins Medium"),
                               ),
                             ),
                           ),
@@ -1802,7 +1943,17 @@ class HomeScreenContent extends StatelessWidget {
                                 "${time.sec ?? 0}".padLeft(2, '0'),
                                 style: isMobile(context)
                                     ? AppThemeData.timeDateTextStyle_12
-                                    : AppThemeData.timeDateTextStyleTab,
+                                        .copyWith(
+                                            fontFamily:
+                                                storage.languageCode == "ar"
+                                                    ? "Cairo Medium"
+                                                    : "Poppins Medium")
+                                    : AppThemeData.timeDateTextStyleTab
+                                        .copyWith(
+                                            fontFamily:
+                                                storage.languageCode == "ar"
+                                                    ? "Cairo Medium"
+                                                    : "Poppins Medium"),
                               ),
                             ),
                           ),
@@ -1870,8 +2021,14 @@ class HomeScreenContent extends StatelessWidget {
               child: Text(
                 AppTags.offerEnding.tr,
                 style: isMobile(context)
-                    ? AppThemeData.headerTextStyle
-                    : AppThemeData.headerTextStyleTab,
+                    ? AppThemeData.headerTextStyle.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                    : AppThemeData.headerTextStyleTab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
               ),
             ),
             InkWell(
@@ -1929,8 +2086,14 @@ class HomeScreenContent extends StatelessWidget {
               child: Text(
                 AppTags.flashSale.tr,
                 style: isMobile(context)
-                    ? AppThemeData.headerTextStyle
-                    : AppThemeData.headerTextStyleTab,
+                    ? AppThemeData.headerTextStyle.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                    : AppThemeData.headerTextStyleTab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
               ),
             ),
             InkWell(
@@ -1993,8 +2156,14 @@ class HomeScreenContent extends StatelessWidget {
               child: Text(
                 AppTags.recentView.tr,
                 style: isMobile(context)
-                    ? AppThemeData.headerTextStyle
-                    : AppThemeData.headerTextStyleTab,
+                    ? AppThemeData.headerTextStyle.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                    : AppThemeData.headerTextStyleTab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
               ),
             ),
             InkWell(
@@ -2053,8 +2222,14 @@ class HomeScreenContent extends StatelessWidget {
               child: Text(
                 AppTags.customProduct.tr,
                 style: isMobile(context)
-                    ? AppThemeData.headerTextStyle
-                    : AppThemeData.headerTextStyleTab,
+                    ? AppThemeData.headerTextStyle.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                    : AppThemeData.headerTextStyleTab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
               ),
             ),
             InkWell(
@@ -2115,8 +2290,14 @@ class HomeScreenContent extends StatelessWidget {
                 child: Text(
                   AppTags.latestProducts.tr,
                   style: isMobile(context)
-                      ? AppThemeData.headerTextStyle
-                      : AppThemeData.headerTextStyleTab,
+                      ? AppThemeData.headerTextStyle.copyWith(
+                          fontFamily: storage.languageCode == "ar"
+                              ? "Cairo Medium"
+                              : "Poppins Medium")
+                      : AppThemeData.headerTextStyleTab.copyWith(
+                          fontFamily: storage.languageCode == "ar"
+                              ? "Cairo Medium"
+                              : "Poppins Medium"),
                 ),
               ),
               InkWell(
@@ -2179,8 +2360,14 @@ class HomeScreenContent extends StatelessWidget {
               child: Text(
                 AppTags.bestSellingProducts.tr,
                 style: isMobile(context)
-                    ? AppThemeData.headerTextStyle
-                    : AppThemeData.headerTextStyleTab,
+                    ? AppThemeData.headerTextStyle.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                    : AppThemeData.headerTextStyleTab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
               ),
             ),
             InkWell(
@@ -2307,8 +2494,14 @@ class HomeScreenContent extends StatelessWidget {
               child: Text(
                 AppTags.videoShopping.tr,
                 style: isMobile(context)
-                    ? AppThemeData.headerTextStyle
-                    : AppThemeData.headerTextStyleTab,
+                    ? AppThemeData.headerTextStyle.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                    : AppThemeData.headerTextStyleTab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
               ),
             ),
             InkWell(
@@ -2387,8 +2580,14 @@ class HomeScreenContent extends StatelessWidget {
                             child: Text(
                               "LIVE",
                               style: isMobile(context)
-                                  ? AppThemeData.todayDealNewStyle
-                                  : AppThemeData.todayDealNewStyleTab,
+                                  ? AppThemeData.todayDealNewStyle.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium")
+                                  : AppThemeData.todayDealNewStyleTab.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium"),
                             ),
                           ),
                           Positioned(
@@ -2404,8 +2603,14 @@ class HomeScreenContent extends StatelessWidget {
                                   .title
                                   .toString(),
                               style: isMobile(context)
-                                  ? AppThemeData.timeDateTextStyle_12
-                                  : AppThemeData.timeDateTextStyleTab,
+                                  ? AppThemeData.timeDateTextStyle_12.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium")
+                                  : AppThemeData.timeDateTextStyleTab.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium"),
                               overflow: TextOverflow.ellipsis,
                             ),
                           )

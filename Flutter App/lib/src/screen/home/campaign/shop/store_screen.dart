@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../../../_route/routes.dart';
 import '../../../../controllers/home_screen_controller.dart';
 import '../../../../utils/app_theme_data.dart';
@@ -16,6 +17,7 @@ class StoreScreen extends StatelessWidget {
   StoreScreen({Key? key, this.visitShopModel}) : super(key: key);
   final homeScreenContentController = Get.put(HomeScreenController());
   final VisitShopModel? visitShopModel;
+  final storage = Get.put(StorageService());
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +39,14 @@ class StoreScreen extends StatelessWidget {
             child: Text(
               AppTags.noStoreFound.tr,
               style: isMobile(context)
-                  ? AppThemeData.headerTextStyle_16
-                  : AppThemeData.headerTextStyleTab,
+                  ? AppThemeData.headerTextStyle_16.copyWith(
+                      fontFamily: storage.languageCode == "ar"
+                          ? "Cairo Medium"
+                          : "Poppins Medium")
+                  : AppThemeData.headerTextStyleTab.copyWith(
+                      fontFamily: storage.languageCode == "ar"
+                          ? "Cairo Medium"
+                          : "Poppins Medium"),
             ),
           );
   }
@@ -55,7 +63,9 @@ class StoreScreen extends StatelessWidget {
                 visitShopModel!.data!.store![itemIndex].title.toString(),
                 style: TextStyle(
                   fontSize: isMobile(context) ? 13.sp : 10.sp,
-                  fontFamily: "Poppins Medium",
+                  fontFamily: storage.languageCode == "ar"
+                      ? "Cairo Medium"
+                      : "Poppins Medium",
                 ),
               ),
             ),
@@ -97,7 +107,9 @@ class StoreScreen extends StatelessWidget {
                 visitShopModel!.data!.store![itemIndex].title.toString(),
                 style: TextStyle(
                   fontSize: isMobile(context) ? 13.sp : 10.sp,
-                  fontFamily: "Poppins Medium",
+                  fontFamily: storage.languageCode == "ar"
+                      ? "Cairo Medium"
+                      : "Poppins Medium",
                 ),
               ),
             ),
@@ -139,7 +151,9 @@ class StoreScreen extends StatelessWidget {
                 visitShopModel!.data!.store![itemIndex].title.toString(),
                 style: TextStyle(
                   fontSize: isMobile(context) ? 13.sp : 10.sp,
-                  fontFamily: "Poppins Medium",
+                  fontFamily: storage.languageCode == "ar"
+                      ? "Cairo Medium"
+                      : "Poppins Medium",
                 ),
               ),
             ),
@@ -181,7 +195,9 @@ class StoreScreen extends StatelessWidget {
                 visitShopModel!.data!.store![itemIndex].title.toString(),
                 style: TextStyle(
                   fontSize: isMobile(context) ? 13.sp : 10.sp,
-                  fontFamily: "Poppins Medium",
+                  fontFamily: storage.languageCode == "ar"
+                      ? "Cairo Medium"
+                      : "Poppins Medium",
                 ),
               ),
             ),
@@ -223,7 +239,9 @@ class StoreScreen extends StatelessWidget {
                 visitShopModel!.data!.store![itemIndex].title.toString(),
                 style: TextStyle(
                   fontSize: isMobile(context) ? 13.sp : 10.sp,
-                  fontFamily: "Poppins Medium",
+                  fontFamily: storage.languageCode == "ar"
+                      ? "Cairo Medium"
+                      : "Poppins Medium",
                 ),
               ),
             ),
@@ -266,7 +284,9 @@ class StoreScreen extends StatelessWidget {
                 visitShopModel!.data!.store![brandIndex].title.toString(),
                 style: TextStyle(
                   fontSize: isMobile(context) ? 13.sp : 10.sp,
-                  fontFamily: "Poppins Medium",
+                  fontFamily: storage.languageCode == "ar"
+                      ? "Cairo Medium"
+                      : "Poppins Medium",
                 ),
               ),
             ),

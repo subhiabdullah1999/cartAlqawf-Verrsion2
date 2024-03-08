@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pagination_view/pagination_view.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import 'package:yoori_ecommerce/src/utils/app_tags.dart';
 import '../../../models/product_by_brand_model.dart';
 import '../../../utils/app_theme_data.dart';
@@ -27,6 +28,7 @@ class _ProductByBrandState extends State<ProductByBrand> {
   int page = 0;
   PaginationViewType paginationViewType = PaginationViewType.gridView;
   GlobalKey<PaginationViewState> key = GlobalKey<PaginationViewState>();
+  final storage = Get.put(StorageService());
 
   Future<List<Data>> getData(int offset) async {
     //page = (offset / 1).round();
@@ -52,7 +54,10 @@ class _ProductByBrandState extends State<ProductByBrand> {
         centerTitle: true,
         title: Text(
           widget.title.toString(),
-          style: AppThemeData.headerTextStyle_16,
+          style: AppThemeData.headerTextStyle_16.copyWith(
+              fontFamily: storage.languageCode == "ar"
+                  ? "Cairo Medium"
+                  : "Poppins Medium"),
         ),
       ),
       body: PaginationView<Data>(
@@ -60,7 +65,7 @@ class _ProductByBrandState extends State<ProductByBrand> {
         paginationViewType: paginationViewType,
         pageFetch: getData,
         pullToRefresh: true,
-        onError: (dynamic error) =>  Center(
+        onError: (dynamic error) => Center(
           child: Text(AppTags.someErrorOccurred.tr),
         ),
         onEmpty: Center(

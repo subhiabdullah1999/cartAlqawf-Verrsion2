@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import 'package:yoori_ecommerce/src/widgets/loader/shimmer_products.dart';
 import '../../../controllers/home_screen_controller.dart';
 import '../../../models/product_by_shop_model.dart';
@@ -21,6 +22,7 @@ class ProductByShop extends StatefulWidget {
 class _ProductByShopState extends State<ProductByShop> {
   ProductByShopModel productByShopModel = ProductByShopModel();
   final homeController = Get.put(HomeScreenController());
+  final storage = Get.put(StorageService());
 
   Future getTodayDealData() async {
     printLog(widget.id);
@@ -54,7 +56,10 @@ class _ProductByShopState extends State<ProductByShop> {
               centerTitle: true,
               title: Text(
                 widget.shopName.toString(),
-                style: AppThemeData.headerTextStyle_16,
+                style: AppThemeData.headerTextStyle_16.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
               ),
             ),
             body: GridView.builder(

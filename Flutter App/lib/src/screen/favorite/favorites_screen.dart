@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../controllers/favourite_controller.dart';
 import 'package:yoori_ecommerce/src/utils/app_tags.dart';
 import '../../utils/app_theme_data.dart';
@@ -12,6 +13,7 @@ import 'favorite_store.dart';
 class FavoritesScreen extends StatelessWidget {
   FavoritesScreen({Key? key}) : super(key: key);
   final controller = Get.put(FavouriteController());
+  final storage = Get.put(StorageService());
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,10 @@ class FavoritesScreen extends StatelessWidget {
         centerTitle: true,
         title: Text(
           AppTags.favorites.tr,
-          style: AppThemeData.headerTextStyle_16,
+          style: AppThemeData.headerTextStyle_16.copyWith(
+              fontFamily: storage.languageCode == "ar"
+                  ? "Cairo Medium"
+                  : "Poppins Medium"),
         ),
       ),
       body: Obx(
@@ -49,7 +54,9 @@ class FavoritesScreen extends StatelessWidget {
                               indicatorPadding: EdgeInsets.zero,
                               labelPadding: EdgeInsets.zero,
                               labelStyle: TextStyle(
-                                fontFamily: "Poppins Medium",
+                                fontFamily: storage.languageCode == "ar"
+                                    ? "Cairo Medium"
+                                    : "Poppins Medium",
                                 fontSize: isMobile(context) ? 13.sp : 10.sp,
                               ),
                               tabs: [

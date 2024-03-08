@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pagination_view/pagination_view.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../../models/all_brand_model.dart';
 import '../../../utils/app_tags.dart';
 import '../../../utils/app_theme_data.dart';
@@ -21,6 +22,7 @@ class _AllBrandState extends State<AllBrand> {
   int page = 0;
   PaginationViewType paginationViewType = PaginationViewType.gridView;
   GlobalKey<PaginationViewState> key = GlobalKey<PaginationViewState>();
+  final storage = Get.put(StorageService());
 
   @override
   void initState() {
@@ -36,45 +38,53 @@ class _AllBrandState extends State<AllBrand> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: isMobile(context)? AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Get.back();
-          },
-        ),
-        centerTitle: true,
-        title: Text(
-         AppTags.allBrand.tr,
-          style: AppThemeData.headerTextStyle_16,
-        ),
-      ): AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        toolbarHeight: 60.h,
-        leadingWidth: 40.w,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-            size: 25.r,
-          ),
+      appBar: isMobile(context)
+          ? AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: IconButton(
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  Get.back();
+                },
+              ),
+              centerTitle: true,
+              title: Text(
+                AppTags.allBrand.tr,
+                style: AppThemeData.headerTextStyle_16.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
+              ),
+            )
+          : AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              toolbarHeight: 60.h,
+              leadingWidth: 40.w,
+              leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                  size: 25.r,
+                ),
 
-          onPressed: () {
-            Get.back();
-          }, // null disables the button
-        ),
-        centerTitle: true,
-        title: Text(
-          AppTags.allBrand.tr,
-          style: AppThemeData.headerTextStyle_14,
-        ),
-      ),
+                onPressed: () {
+                  Get.back();
+                }, // null disables the button
+              ),
+              centerTitle: true,
+              title: Text(
+                AppTags.allBrand.tr,
+                style: AppThemeData.headerTextStyle_14.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
+              ),
+            ),
       body: PaginationView<Brand>(
         key: key,
         paginationViewType: paginationViewType,
@@ -83,7 +93,7 @@ class _AllBrandState extends State<AllBrand> {
         onError: (dynamic error) => Center(
           child: Text(AppTags.someErrorOccurred.tr),
         ),
-        onEmpty:  Center(
+        onEmpty: Center(
           child: Text(AppTags.noBrand.tr),
         ),
         bottomLoader: const Center(
@@ -92,8 +102,8 @@ class _AllBrandState extends State<AllBrand> {
         initialLoader: const ShimmerAllBrand(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: isMobile(context) ? 3 : 5,
-          crossAxisSpacing: isMobile(context) ? 15:20,
-          mainAxisSpacing:isMobile(context) ? 15:20,
+          crossAxisSpacing: isMobile(context) ? 15 : 20,
+          mainAxisSpacing: isMobile(context) ? 15 : 20,
           childAspectRatio: 1,
         ),
         padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
@@ -126,7 +136,7 @@ class _AllBrandState extends State<AllBrand> {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: const Color(0xffFFFFFF),
-          borderRadius:  BorderRadius.all(
+          borderRadius: BorderRadius.all(
             Radius.circular(10.r),
           ),
           boxShadow: [

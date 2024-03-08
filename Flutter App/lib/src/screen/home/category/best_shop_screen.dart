@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pagination_view/pagination_view.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import 'package:yoori_ecommerce/src/models/best_shop_model.dart';
 import '../../../utils/app_tags.dart';
 import '../../../utils/app_theme_data.dart';
@@ -22,6 +23,7 @@ class _BestShopState extends State<BestShop> {
   int page = 0;
   PaginationViewType paginationViewType = PaginationViewType.gridView;
   GlobalKey<PaginationViewState> key = GlobalKey<PaginationViewState>();
+  final storage = Get.put(StorageService());
 
   Future<List<BestShopModelData>> getData(int offset) async {
     //page = (offset / 1).round();
@@ -53,7 +55,10 @@ class _BestShopState extends State<BestShop> {
                 centerTitle: true,
                 title: Text(
                   AppTags.bestShop.tr,
-                  style: AppThemeData.headerTextStyle_16,
+                  style: AppThemeData.headerTextStyle_16.copyWith(
+                      fontFamily: storage.languageCode == "ar"
+                          ? "Cairo Medium"
+                          : "Poppins Medium"),
                 ),
               )
             : AppBar(
@@ -75,7 +80,10 @@ class _BestShopState extends State<BestShop> {
                 centerTitle: true,
                 title: Text(
                   AppTags.bestShop.tr,
-                  style: AppThemeData.headerTextStyle_14,
+                  style: AppThemeData.headerTextStyle_14.copyWith(
+                      fontFamily: storage.languageCode == "ar"
+                          ? "Cairo Medium"
+                          : "Poppins Medium"),
                 ),
               ),
         body: PaginationView<BestShopModelData>(
@@ -94,7 +102,8 @@ class _BestShopState extends State<BestShop> {
             mainAxisSpacing: isMobile(context) ? 15 : 20,
             crossAxisSpacing: isMobile(context) ? 15 : 20,
           ),
-          itemBuilder: (BuildContext context, BestShopModelData shop, int index) {
+          itemBuilder:
+              (BuildContext context, BestShopModelData shop, int index) {
             return ShopCard(shop: shop);
           },
           padding: EdgeInsets.symmetric(

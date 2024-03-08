@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../../controllers/details_screen_controller.dart';
 import '../../../utils/app_theme_data.dart';
 import 'package:yoori_ecommerce/src/utils/responsive.dart';
@@ -12,6 +13,7 @@ class DescriptionImageViewScreen extends StatelessWidget {
   DescriptionImageViewScreen({Key? key, this.descriptionImage})
       : super(key: key);
   final detailsController = Get.put(DetailsPageController());
+  final storage = Get.put(StorageService());
 
   @override
   Widget build(BuildContext context) {
@@ -102,11 +104,15 @@ class DescriptionImageViewScreen extends StatelessWidget {
                             ? AppThemeData.orderHistoryTextStyle_12.copyWith(
                                 color: Colors.white,
                                 fontSize: 14.sp,
-                                fontFamily: "Poppins Medium")
+                                fontFamily: storage.languageCode == "ar"
+                                    ? "Cairo Medium"
+                                    : "Poppins Medium")
                             : AppThemeData.orderHistoryTextStyle_9Tab.copyWith(
                                 color: Colors.white,
                                 fontSize: 11.sp,
-                                fontFamily: "Poppins Medium"),
+                                fontFamily: storage.languageCode == "ar"
+                                    ? "Cairo Medium"
+                                    : "Poppins Medium"),
                       ),
                     ),
                   ),

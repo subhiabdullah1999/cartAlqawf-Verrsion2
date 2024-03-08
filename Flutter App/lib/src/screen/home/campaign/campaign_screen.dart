@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../../utils/app_tags.dart';
 import '../../../utils/app_theme_data.dart';
 import '../../../widgets/error_message_widget.dart';
@@ -27,6 +28,8 @@ class CampaignContentScreen extends StatefulWidget {
 }
 
 class _CampaignContentScreenState extends State<CampaignContentScreen> {
+  final storage = Get.put(StorageService());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +49,10 @@ class _CampaignContentScreenState extends State<CampaignContentScreen> {
               centerTitle: true,
               title: Text(
                 widget.title.toString(),
-                style: AppThemeData.headerTextStyle_16,
+                style: AppThemeData.headerTextStyle_16.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
               ),
             )
           : AppBar(
@@ -67,7 +73,10 @@ class _CampaignContentScreenState extends State<CampaignContentScreen> {
               centerTitle: true,
               title: Text(
                 widget.title.toString(),
-                style: AppThemeData.headerTextStyle_14,
+                style: AppThemeData.headerTextStyle_14.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
               ),
             ),
       body: FutureBuilder<CampaignDetailsModel?>(
@@ -112,7 +121,10 @@ class _CampaignContentScreenState extends State<CampaignContentScreen> {
                 return Center(
                   child: Text(
                     AppTags.campaignOver.tr,
-                    style: AppThemeData.timeDateTextStyle_12,
+                    style: AppThemeData.timeDateTextStyle_12.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                   ),
                 );
               } else {
@@ -142,8 +154,14 @@ class _CampaignContentScreenState extends State<CampaignContentScreen> {
                         child: Text(
                           "${time.days ?? 0}".padLeft(2, '0'),
                           style: isMobile(context)
-                              ? AppThemeData.timeDateTextStyle_12
-                              : AppThemeData.timeDateTextStyleTab,
+                              ? AppThemeData.timeDateTextStyle_12.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.timeDateTextStyleTab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                         ),
                       ),
                     ),
@@ -172,8 +190,14 @@ class _CampaignContentScreenState extends State<CampaignContentScreen> {
                         child: Text(
                           "${time.hours ?? 0}".padLeft(2, '0'),
                           style: isMobile(context)
-                              ? AppThemeData.timeDateTextStyle_12
-                              : AppThemeData.timeDateTextStyleTab,
+                              ? AppThemeData.timeDateTextStyle_12.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.timeDateTextStyleTab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                         ),
                       ),
                     ),
@@ -202,8 +226,14 @@ class _CampaignContentScreenState extends State<CampaignContentScreen> {
                         child: Text(
                           "${time.min ?? 0}".padLeft(2, '0'),
                           style: isMobile(context)
-                              ? AppThemeData.timeDateTextStyle_12
-                              : AppThemeData.timeDateTextStyleTab,
+                              ? AppThemeData.timeDateTextStyle_12.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.timeDateTextStyleTab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                         ),
                       ),
                     ),
@@ -232,8 +262,14 @@ class _CampaignContentScreenState extends State<CampaignContentScreen> {
                         child: Text(
                           "${time.sec ?? 0}".padLeft(2, '0'),
                           style: isMobile(context)
-                              ? AppThemeData.timeDateTextStyle_12
-                              : AppThemeData.timeDateTextStyleTab,
+                              ? AppThemeData.timeDateTextStyle_12.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.timeDateTextStyleTab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                         ),
                       ),
                     ),
@@ -265,7 +301,9 @@ class _CampaignContentScreenState extends State<CampaignContentScreen> {
                     indicatorPadding: EdgeInsets.zero,
                     labelPadding: EdgeInsets.zero,
                     labelStyle: TextStyle(
-                      fontFamily: "Poppins Medium",
+                      fontFamily: storage.languageCode == "ar"
+                          ? "Cairo Medium"
+                          : "Poppins Medium",
                       fontSize: 13.r,
                     ),
                     tabs: [

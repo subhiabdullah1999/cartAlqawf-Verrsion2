@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:get/get.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../../models/all_category_product_model.dart';
 import '../../../utils/app_tags.dart';
 import '../../../utils/app_theme_data.dart';
@@ -22,6 +23,7 @@ class _AllCategoryState extends State<AllCategory> {
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
   final GlobalKey refreshKey = GlobalKey();
+  final storage = Get.put(StorageService());
 
   Future getAllCategory() async {
     allCategoryModel = await Repository().getAllCategoryContent(page: page);
@@ -53,7 +55,10 @@ class _AllCategoryState extends State<AllCategory> {
         centerTitle: true,
         title: Text(
           AppTags.allCategory.tr,
-          style: AppThemeData.headerTextStyle_16,
+          style: AppThemeData.headerTextStyle_16.copyWith(
+              fontFamily: storage.languageCode == "ar"
+                  ? "Cairo Medium"
+                  : "Poppins Medium"),
         ),
       ),
       body: allCategoryModel!.data != null
@@ -121,7 +126,10 @@ class _AllCategoryState extends State<AllCategory> {
                 child: Center(
                     child: Text(
               tittle,
-              style: AppThemeData.categoryTitleTextStyle_12,
+              style: AppThemeData.categoryTitleTextStyle_12.copyWith(
+                  fontFamily: storage.languageCode == "ar"
+                      ? "Cairo Medium"
+                      : "Poppins Medium"),
               maxLines: 2,
               textAlign: TextAlign.center,
             ))),

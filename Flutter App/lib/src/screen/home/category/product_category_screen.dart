@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import 'package:yoori_ecommerce/src/servers/repository.dart';
 import '../../../models/all_category_product_model.dart';
 import '../../../utils/app_theme_data.dart';
@@ -22,6 +23,7 @@ class _ProductCategoryState extends State<ProductCategory> {
   int _index = 0;
   bool _featuredIndex = true;
   bool isLoading = false;
+  final storage = Get.put(StorageService());
 
   @override
   void initState() {
@@ -57,7 +59,10 @@ class _ProductCategoryState extends State<ProductCategory> {
               centerTitle: true,
               title: Text(
                 AppTags.allCategory.tr,
-                style: AppThemeData.headerTextStyle_16,
+                style: AppThemeData.headerTextStyle_16.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
               ),
             ),
             body: SafeArea(
@@ -120,7 +125,13 @@ class _ProductCategoryState extends State<ProductCategory> {
                                                       .replaceAll(
                                                           "Category", ""),
                                                   style: AppThemeData
-                                                      .categoryTitleTextStyle_12,
+                                                      .categoryTitleTextStyle_12
+                                                      .copyWith(
+                                                          fontFamily: storage
+                                                                      .languageCode ==
+                                                                  "ar"
+                                                              ? "Cairo Medium"
+                                                              : "Poppins Medium"),
                                                 )
                                               ],
                                             ),
@@ -181,7 +192,12 @@ class _ProductCategoryState extends State<ProductCategory> {
                                     children: [
                                       Text(
                                         AppTags.featuredCategories.tr,
-                                        style: AppThemeData.priceTextStyle_14,
+                                        style: AppThemeData.priceTextStyle_14
+                                            .copyWith(
+                                                fontFamily:
+                                                    storage.languageCode == "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium"),
                                       ),
                                     ],
                                   ),
@@ -280,7 +296,13 @@ class _ProductCategoryState extends State<ProductCategory> {
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: AppThemeData
-                                                          .categoryTitleTextStyle_12,
+                                                          .categoryTitleTextStyle_12
+                                                          .copyWith(
+                                                              fontFamily: storage
+                                                                          .languageCode ==
+                                                                      "ar"
+                                                                  ? "Cairo Medium"
+                                                                  : "Poppins Medium"),
                                                     ),
                                                   ),
                                                 ],
@@ -385,7 +407,13 @@ class _ProductCategoryState extends State<ProductCategory> {
                                                           .title
                                                           .toString(),
                                                       style: AppThemeData
-                                                          .priceTextStyle_14,
+                                                          .priceTextStyle_14
+                                                          .copyWith(
+                                                              fontFamily: storage
+                                                                          .languageCode ==
+                                                                      "ar"
+                                                                  ? "Cairo Medium"
+                                                                  : "Poppins Medium"),
                                                     ),
                                                     SizedBox(height: 10.h),
                                                     GridView.builder(
@@ -526,7 +554,9 @@ class _ProductCategoryState extends State<ProductCategory> {
                                                                           TextOverflow
                                                                               .ellipsis,
                                                                       style: AppThemeData
-                                                                          .categoryTitleTextStyle_12,
+                                                                          .categoryTitleTextStyle_12
+                                                                          .copyWith(
+                                                                              fontFamily: storage.languageCode == "ar" ? "Cairo Medium" : "Poppins Medium"),
                                                                     ),
                                                                   ),
                                                                 ],
@@ -631,17 +661,23 @@ class _ProductCategoryState extends State<ProductCategory> {
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w600,
-                                                                    fontFamily:
-                                                                        "Poppins Medium_Medium"),
+                                                                    fontFamily: storage.languageCode ==
+                                                                            "ar"
+                                                                        ? "Cairo Medium"
+                                                                        : "Poppins Medium"),
                                                               ),
                                                               Text(
                                                                   "${AppTags.totalProduct.tr}: ${allCategoryProductModel!.data!.categories![_index].subCategories![subCtIndex].childCategories!.length}",
                                                                   style: isMobile(
                                                                           context)
-                                                                      ? AppThemeData
-                                                                          .walletTextStyle_12
+                                                                      ? AppThemeData.walletTextStyle_12.copyWith(
+                                                                          fontFamily: storage.languageCode == "ar"
+                                                                              ? "Cairo Medium"
+                                                                              : "Poppins Medium")
                                                                       : AppThemeData
-                                                                          .walletTextStyle_10Tab),
+                                                                          .walletTextStyle_10Tab
+                                                                          .copyWith(
+                                                                              fontFamily: storage.languageCode == "ar" ? "Cairo Medium" : "Poppins Medium")),
                                                             ],
                                                           ),
                                                         ),
@@ -695,7 +731,10 @@ class _ProductCategoryState extends State<ProductCategory> {
             SizedBox(height: 5.h),
             Text(
               data.data!.categories![index].title.toString(),
-              style: AppThemeData.categoryTitleTextStyle_12,
+              style: AppThemeData.categoryTitleTextStyle_12.copyWith(
+                  fontFamily: storage.languageCode == "ar"
+                      ? "Cairo Medium"
+                      : "Poppins Medium"),
             )
           ],
         ),

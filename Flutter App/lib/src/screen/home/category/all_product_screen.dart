@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pagination_view/pagination_view.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../../controllers/home_screen_controller.dart';
 import '../../../models/all_product_model.dart';
 import '../../../utils/app_tags.dart';
@@ -21,6 +22,7 @@ class AllProductView extends StatefulWidget {
 
 class _AllProductViewState extends State<AllProductView> {
   final homeScreenContentController = Get.put(HomeScreenController());
+  final storage = Get.put(StorageService());
 
   int page = 0;
   PaginationViewType paginationViewType = PaginationViewType.gridView;
@@ -40,45 +42,53 @@ class _AllProductViewState extends State<AllProductView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: isMobile(context)? AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              Get.back();
-            }, // null disables the button
-          ),
-          centerTitle: true,
-          title: Text(
-            AppTags.allProduct.tr,
-            style: AppThemeData.headerTextStyle_16,
-          ),
-        ): AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          toolbarHeight: 60.h,
-          leadingWidth: 40.w,
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-              size: 25.r,
-            ),
+        appBar: isMobile(context)
+            ? AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                leading: IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    Get.back();
+                  }, // null disables the button
+                ),
+                centerTitle: true,
+                title: Text(
+                  AppTags.allProduct.tr,
+                  style: AppThemeData.headerTextStyle_16.copyWith(
+                      fontFamily: storage.languageCode == "ar"
+                          ? "Cairo Medium"
+                          : "Poppins Medium"),
+                ),
+              )
+            : AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                toolbarHeight: 60.h,
+                leadingWidth: 40.w,
+                leading: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Colors.black,
+                    size: 25.r,
+                  ),
 
-            onPressed: () {
-              Get.back();
-            }, // null disables the button
-          ),
-          centerTitle: true,
-          title: Text(
-            AppTags.allProduct.tr,
-            style: AppThemeData.headerTextStyle_14,
-          ),
-        ),
+                  onPressed: () {
+                    Get.back();
+                  }, // null disables the button
+                ),
+                centerTitle: true,
+                title: Text(
+                  AppTags.allProduct.tr,
+                  style: AppThemeData.headerTextStyle_14.copyWith(
+                      fontFamily: storage.languageCode == "ar"
+                          ? "Cairo Medium"
+                          : "Poppins Medium"),
+                ),
+              ),
         body: PaginationView<Data>(
           key: key,
           paginationViewType: paginationViewType,
@@ -87,13 +97,13 @@ class _AllProductViewState extends State<AllProductView> {
           onError: (dynamic error) => Center(
             child: Text(AppTags.someErrorOccurred.tr),
           ),
-          onEmpty:  Center(
+          onEmpty: Center(
             child: Text(AppTags.noProduct.tr),
           ),
           bottomLoader: const ShimmerLoadData(),
           initialLoader: const ShimmerProducts(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: isMobile(context)? 2:3,
+            crossAxisCount: isMobile(context) ? 2 : 3,
             childAspectRatio: 0.68,
             mainAxisSpacing: 15,
             crossAxisSpacing: 15,

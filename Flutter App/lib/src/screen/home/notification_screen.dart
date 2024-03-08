@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:pagination_view/pagination_view.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../controllers/all_notifications_controller.dart';
 import '../../models/all_notifications.dart';
 import '../../servers/repository.dart';
@@ -22,6 +23,7 @@ class NotificationContent extends StatefulWidget {
 class _NotificationContentState extends State<NotificationContent> {
   final controller = Get.put(AllNotificationsController());
   GlobalKey<PaginationViewState> key = GlobalKey<PaginationViewState>();
+  final storage = Get.put(StorageService());
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,10 @@ class _NotificationContentState extends State<NotificationContent> {
               centerTitle: true,
               title: Text(
                 AppTags.notification.tr,
-                style: AppThemeData.headerTextStyle_16,
+                style: AppThemeData.headerTextStyle_16.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
               ),
             )
           : AppBar(
@@ -65,7 +70,10 @@ class _NotificationContentState extends State<NotificationContent> {
               centerTitle: true,
               title: Text(
                 AppTags.notification.tr,
-                style: AppThemeData.headerTextStyle_14,
+                style: AppThemeData.headerTextStyle_14.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
               ),
             ),
       body: Obx(
@@ -111,7 +119,8 @@ class _NotificationContentState extends State<NotificationContent> {
         style: TextStyle(
           fontSize: isMobile(context) ? 14.sp : 11.sp,
           color: const Color(0xFF666666),
-          fontFamily: "Poppins Medium",
+          fontFamily:
+              storage.languageCode == "ar" ? "Cairo Medium" : "Poppins Medium",
         ),
       ),
     );
@@ -128,7 +137,9 @@ class _NotificationContentState extends State<NotificationContent> {
               style: TextStyle(
                 fontSize: isMobile(context) ? 14.sp : 11.sp,
                 color: Colors.black,
-                fontFamily: "Poppins Medium",
+                fontFamily: storage.languageCode == "ar"
+                    ? "Cairo Medium"
+                    : "Poppins Medium",
               ),
             ),
             Text(
@@ -136,7 +147,9 @@ class _NotificationContentState extends State<NotificationContent> {
               style: TextStyle(
                 fontSize: isMobile(context) ? 12.sp : 9.sp,
                 color: const Color(0xFF999999),
-                fontFamily: "Poppins Medium",
+                fontFamily: storage.languageCode == "ar"
+                    ? "Cairo Medium"
+                    : "Poppins Medium",
               ),
             ),
           ],
@@ -169,7 +182,9 @@ class _NotificationContentState extends State<NotificationContent> {
               style: TextStyle(
                 fontSize: isMobile(context) ? 14.sp : 11.sp,
                 color: Colors.black,
-                fontFamily: "Poppins Medium",
+                fontFamily: storage.languageCode == "ar"
+                    ? "Cairo Medium"
+                    : "Poppins Medium",
               ),
             ),
             TextButton(
@@ -181,7 +196,9 @@ class _NotificationContentState extends State<NotificationContent> {
                 style: TextStyle(
                   fontSize: isMobile(context) ? 12.sp : 9.sp,
                   color: const Color(0xFF999999),
-                  fontFamily: "Poppins Medium",
+                  fontFamily: storage.languageCode == "ar"
+                      ? "Cairo Medium"
+                      : "Poppins Medium",
                 ),
               ),
             ),

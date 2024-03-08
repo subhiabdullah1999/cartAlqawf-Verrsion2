@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pagination_view/pagination_view.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import 'package:yoori_ecommerce/src/widgets/shop_card.dart';
 import '../../../models/all_shop_model.dart';
 import '../../../utils/app_tags.dart';
@@ -22,6 +23,7 @@ class _AllShopState extends State<AllShop> {
   int page = 0;
   PaginationViewType paginationViewType = PaginationViewType.gridView;
   GlobalKey<PaginationViewState> key = GlobalKey<PaginationViewState>();
+  final storage = Get.put(StorageService());
 
   Future<List<Data>> getData(int offset) async {
     //page = (offset / 1).round();
@@ -37,44 +39,48 @@ class _AllShopState extends State<AllShop> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: isMobile(context)? AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              Get.back();
-            }, // null disables the button
-          ),
-          centerTitle: true,
-          title: Text(
-            AppTags.allShop.tr,
-            style: AppThemeData.headerTextStyle_16,
-          ),
-        ):AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          toolbarHeight: 60.h,
-          leadingWidth: 40.w,
-          leading: IconButton(
-            icon: Icon(
-                Icons.arrow_back,
-                color: Colors.black,
-                size: 25.r
-            ),
-            onPressed: () {
-              Get.back();
-            }, // null disables the button
-          ),
-          centerTitle: true,
-          title: Text(
-            AppTags.allShop.tr,
-            style:  AppThemeData.headerTextStyleTab,
-          ),
-        ),
+        appBar: isMobile(context)
+            ? AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                leading: IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    Get.back();
+                  }, // null disables the button
+                ),
+                centerTitle: true,
+                title: Text(
+                  AppTags.allShop.tr,
+                  style: AppThemeData.headerTextStyle_16.copyWith(
+                      fontFamily: storage.languageCode == "ar"
+                          ? "Cairo Medium"
+                          : "Poppins Medium"),
+                ),
+              )
+            : AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                toolbarHeight: 60.h,
+                leadingWidth: 40.w,
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back, color: Colors.black, size: 25.r),
+                  onPressed: () {
+                    Get.back();
+                  }, // null disables the button
+                ),
+                centerTitle: true,
+                title: Text(
+                  AppTags.allShop.tr,
+                  style: AppThemeData.headerTextStyleTab.copyWith(
+                      fontFamily: storage.languageCode == "ar"
+                          ? "Cairo Medium"
+                          : "Poppins Medium"),
+                ),
+              ),
         body: PaginationView<Data>(
           key: key,
           paginationViewType: paginationViewType,
@@ -86,7 +92,7 @@ class _AllShopState extends State<AllShop> {
           bottomLoader: const ShimmerShopLoad(),
           initialLoader: const ShimmerShop(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: isMobile(context)?3:4,
+            crossAxisCount: isMobile(context) ? 3 : 4,
             childAspectRatio: 0.72,
             mainAxisSpacing: 15,
             crossAxisSpacing: 15,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../../../models/visit_shop_model.dart';
 import '../../../../utils/app_theme_data.dart';
 import '../../../../utils/app_tags.dart';
@@ -16,6 +17,8 @@ class CouponScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final storage = Get.put(StorageService());
+
     return visitShopModel!.data!.coupons!.isNotEmpty
         ? Padding(
             padding: EdgeInsets.only(top: 20.h),
@@ -51,7 +54,8 @@ class CouponScreen extends StatelessWidget {
                               onPressed: () {
                                 Clipboard.setData(
                                   ClipboardData(
-                                      text: visitShopModel!.data!.coupons![index].code!),
+                                      text: visitShopModel!
+                                          .data!.coupons![index].code!),
                                 ).then(
                                   (value) => ScaffoldMessenger.of(context)
                                       .showSnackBar(
@@ -73,14 +77,15 @@ class CouponScreen extends StatelessWidget {
                               child: Text(
                                 AppTags.copy.tr,
                                 style: TextStyle(
-                                  fontSize: isMobile(context)? 12.sp:9.sp,
-                                  color: Colors.black,
-                                ),
+                                    fontSize: isMobile(context) ? 12.sp : 9.sp,
+                                    color: Colors.black,
+                                    fontFamily: storage.languageCode == "ar"
+                                        ? "Cairo Medium"
+                                        : "Poppins Medium"),
                               ),
                             ),
                           ),
                         ),
-
                       ],
                     ),
                   ),
@@ -89,10 +94,16 @@ class CouponScreen extends StatelessWidget {
             ),
           )
         : Center(
-            child: Text(
-              AppTags.noCouponAvailable.tr,
-              style: isMobile(context)? AppThemeData.headerTextStyle_16:AppThemeData.headerTextStyleTab
-            ),
+            child: Text(AppTags.noCouponAvailable.tr,
+                style: isMobile(context)
+                    ? AppThemeData.headerTextStyle_16.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                    : AppThemeData.headerTextStyleTab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")),
           );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pagination_view/pagination_view.dart';
 import 'package:yoori_ecommerce/src/controllers/category_content_controller.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../../controllers/home_screen_controller.dart';
 import '../../../models/product_by_category_model.dart';
 import '../../../utils/app_theme_data.dart';
@@ -29,6 +30,7 @@ class ProductByCategory extends StatefulWidget {
 class _ProductByCategoryState extends State<ProductByCategory> {
   final homeController = Get.put(HomeScreenController());
   final _catController = Get.put(CategoryContentController());
+  final storage = Get.put(StorageService());
 
   int page = 0;
   GlobalKey<PaginationViewState> key = GlobalKey<PaginationViewState>();
@@ -60,7 +62,10 @@ class _ProductByCategoryState extends State<ProductByCategory> {
               centerTitle: true,
               title: Text(
                 widget.title.toString(),
-                style: AppThemeData.headerTextStyle_16,
+                style: AppThemeData.headerTextStyle_16.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
               ),
             )
           : AppBar(
@@ -82,7 +87,10 @@ class _ProductByCategoryState extends State<ProductByCategory> {
               centerTitle: true,
               title: Text(
                 widget.title.toString(),
-                style: AppThemeData.headerTextStyle_14,
+                style: AppThemeData.headerTextStyle_14.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
               ),
             ),
       body: ListView(
@@ -160,8 +168,14 @@ class _ProductByCategoryState extends State<ProductByCategory> {
                                 .title
                                 .toString(),
                             style: isMobile(context)
-                                ? AppThemeData.priceTextStyle_14
-                                : AppThemeData.titleTextStyle_11Tab,
+                                ? AppThemeData.priceTextStyle_14.copyWith(
+                                    fontFamily: storage.languageCode == "ar"
+                                        ? "Cairo Medium"
+                                        : "Poppins Medium")
+                                : AppThemeData.titleTextStyle_11Tab.copyWith(
+                                    fontFamily: storage.languageCode == "ar"
+                                        ? "Cairo Medium"
+                                        : "Poppins Medium"),
                           ),
                         ),
                       ),
