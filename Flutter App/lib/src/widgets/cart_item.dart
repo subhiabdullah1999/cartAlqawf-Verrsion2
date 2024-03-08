@@ -4,6 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:yoori_ecommerce/src/controllers/cart_content_controller.dart';
 import 'package:yoori_ecommerce/src/controllers/currency_converter_controller.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../models/add_to_cart_list_model.dart';
 import '../utils/app_tags.dart';
 import '../utils/app_theme_data.dart';
@@ -12,6 +13,7 @@ import '../utils/responsive.dart';
 class CartItem extends StatelessWidget {
   final _cartController = Get.find<CartContentController>();
   final currencyConverterController = Get.find<CurrencyConverterController>();
+  final storage = Get.put(StorageService());
   late final AddToCartListModel cartList;
   late final Carts cart;
   // ignore: prefer_const_constructors_in_immutables
@@ -81,24 +83,43 @@ class CartItem extends StatelessWidget {
                         Text(
                           cart.productName.toString(),
                           style: isMobile(context)
-                              ? AppThemeData.labelTextStyle_16
-                                  .copyWith(fontSize: 14.sp)
-                              : AppThemeData.todayDealDiscountPriceStyle,
+                              ? AppThemeData.labelTextStyle_16.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium",
+                                  fontSize: 14.sp)
+                              : AppThemeData.todayDealDiscountPriceStyle
+                                  .copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium"),
                           textScaleFactor: 1.0,
                           maxLines: 2,
                         ),
                         Text(
                           cart.variant.toString(),
                           style: isMobile(context)
-                              ? AppThemeData.hintTextStyle_13
-                              : AppThemeData.hintTextStyle_10Tab,
+                              ? AppThemeData.hintTextStyle_13.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.hintTextStyle_10Tab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                         ),
                         Text(
                           currencyConverterController
                               .convertCurrency(cart.formattedPrice.toString()),
                           style: isMobile(context)
-                              ? AppThemeData.priceTextStyle_14
-                              : AppThemeData.titleTextStyle_11Tab,
+                              ? AppThemeData.priceTextStyle_14.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.titleTextStyle_11Tab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                         ),
                       ],
                     ),
@@ -167,8 +188,14 @@ class CartItem extends StatelessWidget {
                         child: Text(
                           cart.quantity.toString(),
                           style: isMobile(context)
-                              ? AppThemeData.priceTextStyle_14
-                              : AppThemeData.titleTextStyle_11Tab,
+                              ? AppThemeData.priceTextStyle_14.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.titleTextStyle_11Tab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                         ),
                       ),
                       Obx(

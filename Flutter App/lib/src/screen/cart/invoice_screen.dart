@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../controllers/currency_converter_controller.dart';
 import '../../controllers/invoice_screen_controller.dart';
 import '../../servers/network_service.dart';
@@ -18,6 +19,7 @@ class InvoiceScreen extends StatelessWidget {
   final currencyConverterController = Get.find<CurrencyConverterController>();
   final InvoiceScreenController invoiceScreenController =
       Get.put(InvoiceScreenController());
+  final storage = Get.put(StorageService());
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,10 @@ class InvoiceScreen extends StatelessWidget {
                 centerTitle: true,
                 title: Text(
                   trackingId.toString(),
-                  style: AppThemeData.headerTextStyle_16,
+                  style: AppThemeData.headerTextStyle_16.copyWith(
+                      fontFamily: storage.languageCode == "ar"
+                          ? "Cairo Medium"
+                          : "Poppins Medium"),
                 ),
               )
             : AppBar(
@@ -59,7 +64,10 @@ class InvoiceScreen extends StatelessWidget {
                 centerTitle: true,
                 title: Text(
                   trackingId.toString(),
-                  style: AppThemeData.headerTextStyle_14,
+                  style: AppThemeData.headerTextStyle_14.copyWith(
+                      fontFamily: storage.languageCode == "ar"
+                          ? "Cairo Medium"
+                          : "Poppins Medium"),
                 ),
               ),
         body: Obx(
@@ -90,7 +98,9 @@ class InvoiceScreen extends StatelessWidget {
                                       style: TextStyle(
                                         fontSize:
                                             isMobile(context) ? 14.sp : 11.sp,
-                                        fontFamily: "Poppins Medium",
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium",
                                       ),
                                     ),
                                   ),
@@ -100,7 +110,9 @@ class InvoiceScreen extends StatelessWidget {
                                       style: TextStyle(
                                         fontSize:
                                             isMobile(context) ? 14.sp : 11.sp,
-                                        fontFamily: "Poppins Medium",
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium",
                                       ),
                                     ),
                                   ),
@@ -110,7 +122,9 @@ class InvoiceScreen extends StatelessWidget {
                                       style: TextStyle(
                                         fontSize:
                                             isMobile(context) ? 14.sp : 11.sp,
-                                        fontFamily: "Poppins Medium",
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium",
                                       ),
                                     ),
                                   ),
@@ -120,7 +134,9 @@ class InvoiceScreen extends StatelessWidget {
                                       style: TextStyle(
                                         fontSize:
                                             isMobile(context) ? 14.sp : 11.sp,
-                                        fontFamily: "Poppins Medium",
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium",
                                       ),
                                     ),
                                   ),
@@ -139,11 +155,15 @@ class InvoiceScreen extends StatelessWidget {
                                                   .toString()
                                                   .padLeft(2, "0"),
                                               style: TextStyle(
-                                                fontSize: isMobile(context)
-                                                    ? 13.sp
-                                                    : 10.sp,
-                                                color: Colors.black,
-                                              ),
+                                                  fontSize: isMobile(context)
+                                                      ? 13.sp
+                                                      : 10.sp,
+                                                  color: Colors.black,
+                                                  fontFamily:
+                                                      storage.languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium"),
                                             ),
                                           ),
                                           DataCell(
@@ -153,11 +173,15 @@ class InvoiceScreen extends StatelessWidget {
                                               child: Text(
                                                 invoice.productName!.toString(),
                                                 style: TextStyle(
-                                                  fontSize: isMobile(context)
-                                                      ? 13.sp
-                                                      : 10.sp,
-                                                  color: Colors.black,
-                                                ),
+                                                    fontSize: isMobile(context)
+                                                        ? 13.sp
+                                                        : 10.sp,
+                                                    color: Colors.black,
+                                                    fontFamily:
+                                                        storage.languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium"),
                                                 maxLines: 2,
                                                 overflow: TextOverflow.ellipsis,
                                               ),
@@ -169,11 +193,15 @@ class InvoiceScreen extends StatelessWidget {
                                                   .toString()
                                                   .padLeft(2, "0"),
                                               style: TextStyle(
-                                                fontSize: isMobile(context)
-                                                    ? 13.sp
-                                                    : 10.sp,
-                                                color: Colors.black,
-                                              ),
+                                                  fontSize: isMobile(context)
+                                                      ? 13.sp
+                                                      : 10.sp,
+                                                  color: Colors.black,
+                                                  fontFamily:
+                                                      storage.languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium"),
                                               textAlign: TextAlign.start,
                                             ),
                                           ),
@@ -184,11 +212,15 @@ class InvoiceScreen extends StatelessWidget {
                                                       .formattedTotalPayable!
                                                       .toString()),
                                               style: TextStyle(
-                                                fontSize: isMobile(context)
-                                                    ? 13.sp
-                                                    : 10.sp,
-                                                color: Colors.black,
-                                              ),
+                                                  fontSize: isMobile(context)
+                                                      ? 13.sp
+                                                      : 10.sp,
+                                                  color: Colors.black,
+                                                  fontFamily:
+                                                      storage.languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium"),
                                             ),
                                           ),
                                         ],
@@ -235,7 +267,9 @@ class InvoiceScreen extends StatelessWidget {
                                       style: TextStyle(
                                         fontSize:
                                             isMobile(context) ? 14.sp : 11.sp,
-                                        fontFamily: "Poppins Medium",
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium",
                                       ),
                                     ),
                                     Row(
@@ -248,7 +282,10 @@ class InvoiceScreen extends StatelessWidget {
                                             fontSize: isMobile(context)
                                                 ? 13.sp
                                                 : 10.sp,
-                                            fontFamily: "Poppins Medium",
+                                            fontFamily:
+                                                storage.languageCode == "ar"
+                                                    ? "Cairo Medium"
+                                                    : "Poppins Medium",
                                           ),
                                         ),
                                         Text(
@@ -260,10 +297,13 @@ class InvoiceScreen extends StatelessWidget {
                                               .name!
                                               .toString(),
                                           style: TextStyle(
-                                            fontSize: isMobile(context)
-                                                ? 13.sp
-                                                : 10.sp,
-                                          ),
+                                              fontSize: isMobile(context)
+                                                  ? 13.sp
+                                                  : 10.sp,
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium"),
                                         ),
                                       ],
                                     ),
@@ -277,7 +317,10 @@ class InvoiceScreen extends StatelessWidget {
                                             fontSize: isMobile(context)
                                                 ? 13.sp
                                                 : 10.sp,
-                                            fontFamily: "Poppins Medium",
+                                            fontFamily:
+                                                storage.languageCode == "ar"
+                                                    ? "Cairo Medium"
+                                                    : "Poppins Medium",
                                           ),
                                         ),
                                         Text(
@@ -289,10 +332,13 @@ class InvoiceScreen extends StatelessWidget {
                                               .email!
                                               .toString(),
                                           style: TextStyle(
-                                            fontSize: isMobile(context)
-                                                ? 13.sp
-                                                : 10.sp,
-                                          ),
+                                              fontSize: isMobile(context)
+                                                  ? 13.sp
+                                                  : 10.sp,
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium"),
                                         ),
                                       ],
                                     ),
@@ -308,7 +354,10 @@ class InvoiceScreen extends StatelessWidget {
                                                 fontSize: isMobile(context)
                                                     ? 13.sp
                                                     : 10.sp,
-                                                fontFamily: "Poppins Medium",
+                                                fontFamily:
+                                                    storage.languageCode == "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium",
                                               ),
                                             ),
                                           ],
@@ -326,10 +375,14 @@ class InvoiceScreen extends StatelessWidget {
                                                     .address
                                                     .toString(),
                                                 style: TextStyle(
-                                                  fontSize: isMobile(context)
-                                                      ? 13.sp
-                                                      : 10.sp,
-                                                ),
+                                                    fontSize: isMobile(context)
+                                                        ? 13.sp
+                                                        : 10.sp,
+                                                    fontFamily:
+                                                        storage.languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium"),
                                                 maxLines: 2,
                                                 textAlign: TextAlign.end,
                                               ),
@@ -348,7 +401,10 @@ class InvoiceScreen extends StatelessWidget {
                                             fontSize: isMobile(context)
                                                 ? 13.sp
                                                 : 10.sp,
-                                            fontFamily: "Poppins Medium",
+                                            fontFamily:
+                                                storage.languageCode == "ar"
+                                                    ? "Cairo Medium"
+                                                    : "Poppins Medium",
                                           ),
                                         ),
                                         Text(
@@ -359,10 +415,13 @@ class InvoiceScreen extends StatelessWidget {
                                               .date!
                                               .toString(),
                                           style: TextStyle(
-                                            fontSize: isMobile(context)
-                                                ? 13.sp
-                                                : 10.sp,
-                                          ),
+                                              fontSize: isMobile(context)
+                                                  ? 13.sp
+                                                  : 10.sp,
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium"),
                                         ),
                                       ],
                                     ),
@@ -376,7 +435,10 @@ class InvoiceScreen extends StatelessWidget {
                                             fontSize: isMobile(context)
                                                 ? 13.sp
                                                 : 10.sp,
-                                            fontFamily: "Poppins Medium",
+                                            fontFamily:
+                                                storage.languageCode == "ar"
+                                                    ? "Cairo Medium"
+                                                    : "Poppins Medium",
                                           ),
                                         ),
                                         Text(
@@ -387,10 +449,13 @@ class InvoiceScreen extends StatelessWidget {
                                               .paymentStatus!
                                               .toString(),
                                           style: TextStyle(
-                                            fontSize: isMobile(context)
-                                                ? 13.sp
-                                                : 10.sp,
-                                          ),
+                                              fontSize: isMobile(context)
+                                                  ? 13.sp
+                                                  : 10.sp,
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium"),
                                         ),
                                       ],
                                     ),
@@ -404,7 +469,10 @@ class InvoiceScreen extends StatelessWidget {
                                             fontSize: isMobile(context)
                                                 ? 13.sp
                                                 : 10.sp,
-                                            fontFamily: "Poppins Medium",
+                                            fontFamily:
+                                                storage.languageCode == "ar"
+                                                    ? "Cairo Medium"
+                                                    : "Poppins Medium",
                                           ),
                                         ),
                                         Text(
@@ -415,10 +483,13 @@ class InvoiceScreen extends StatelessWidget {
                                               .orderStatus
                                               .toString(),
                                           style: TextStyle(
-                                            fontSize: isMobile(context)
-                                                ? 13.sp
-                                                : 10.sp,
-                                          ),
+                                              fontSize: isMobile(context)
+                                                  ? 13.sp
+                                                  : 10.sp,
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium"),
                                         ),
                                       ],
                                     ),
@@ -460,9 +531,11 @@ class InvoiceScreen extends StatelessWidget {
                                   Text(
                                     AppTags.subtotal.tr,
                                     style: TextStyle(
-                                      fontSize:
-                                          isMobile(context) ? 13.sp : 10.sp,
-                                    ),
+                                        fontSize:
+                                            isMobile(context) ? 13.sp : 10.sp,
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium"),
                                   ),
                                   Text(
                                     currencyConverterController.convertCurrency(
@@ -473,9 +546,11 @@ class InvoiceScreen extends StatelessWidget {
                                             .formattedSubTotal
                                             .toString()),
                                     style: TextStyle(
-                                      fontSize:
-                                          isMobile(context) ? 13.sp : 10.sp,
-                                    ),
+                                        fontSize:
+                                            isMobile(context) ? 13.sp : 10.sp,
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium"),
                                   ),
                                 ],
                               ),
@@ -486,9 +561,11 @@ class InvoiceScreen extends StatelessWidget {
                                   Text(
                                     AppTags.discountOffer.tr,
                                     style: TextStyle(
-                                      fontSize:
-                                          isMobile(context) ? 13.sp : 10.sp,
-                                    ),
+                                        fontSize:
+                                            isMobile(context) ? 13.sp : 10.sp,
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium"),
                                   ),
                                   Text(
                                     currencyConverterController.convertCurrency(
@@ -499,9 +576,11 @@ class InvoiceScreen extends StatelessWidget {
                                             .formattedDiscount
                                             .toString()),
                                     style: TextStyle(
-                                      fontSize:
-                                          isMobile(context) ? 13.sp : 10.sp,
-                                    ),
+                                        fontSize:
+                                            isMobile(context) ? 13.sp : 10.sp,
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium"),
                                   ),
                                 ],
                               ),
@@ -512,9 +591,11 @@ class InvoiceScreen extends StatelessWidget {
                                   Text(
                                     AppTags.deliveryCharge.tr,
                                     style: TextStyle(
-                                      fontSize:
-                                          isMobile(context) ? 13.sp : 10.sp,
-                                    ),
+                                        fontSize:
+                                            isMobile(context) ? 13.sp : 10.sp,
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium"),
                                   ),
                                   Text(
                                     currencyConverterController.convertCurrency(
@@ -525,9 +606,11 @@ class InvoiceScreen extends StatelessWidget {
                                             .formattedShippingCost
                                             .toString()),
                                     style: TextStyle(
-                                      fontSize:
-                                          isMobile(context) ? 13.sp : 10.sp,
-                                    ),
+                                        fontSize:
+                                            isMobile(context) ? 13.sp : 10.sp,
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium"),
                                   ),
                                 ],
                               ),
@@ -538,9 +621,11 @@ class InvoiceScreen extends StatelessWidget {
                                   Text(
                                     AppTags.tax.tr,
                                     style: TextStyle(
-                                      fontSize:
-                                          isMobile(context) ? 13.sp : 10.sp,
-                                    ),
+                                        fontSize:
+                                            isMobile(context) ? 13.sp : 10.sp,
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium"),
                                   ),
                                   Text(
                                     currencyConverterController.convertCurrency(
@@ -551,9 +636,11 @@ class InvoiceScreen extends StatelessWidget {
                                             .formattedTax
                                             .toString()),
                                     style: TextStyle(
-                                      fontSize:
-                                          isMobile(context) ? 13.sp : 10.sp,
-                                    ),
+                                        fontSize:
+                                            isMobile(context) ? 13.sp : 10.sp,
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium"),
                                   ),
                                 ],
                               ),
@@ -568,10 +655,12 @@ class InvoiceScreen extends StatelessWidget {
                                   Text(
                                     AppTags.totalCost.tr,
                                     style: TextStyle(
-                                      fontSize:
-                                          isMobile(context) ? 13.sp : 10.sp,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                                        fontSize:
+                                            isMobile(context) ? 13.sp : 10.sp,
+                                        fontWeight: FontWeight.w600,
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium"),
                                   ),
                                   Text(
                                     currencyConverterController.convertCurrency(
@@ -582,10 +671,12 @@ class InvoiceScreen extends StatelessWidget {
                                             .formattedTotalPayable
                                             .toString()),
                                     style: TextStyle(
-                                      fontSize:
-                                          isMobile(context) ? 13.sp : 10.sp,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                                        fontSize:
+                                            isMobile(context) ? 13.sp : 10.sp,
+                                        fontWeight: FontWeight.w600,
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium"),
                                   ),
                                 ],
                               ),
@@ -622,8 +713,14 @@ class InvoiceScreen extends StatelessWidget {
                             child: Text(
                               AppTags.downloadInvoice.tr,
                               style: isMobile(context)
-                                  ? AppThemeData.buttonTextStyle_14
-                                  : AppThemeData.buttonTextStyle_11Tab,
+                                  ? AppThemeData.buttonTextStyle_14.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium")
+                                  : AppThemeData.buttonTextStyle_11Tab.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium"),
                             ),
                           ),
                         ),

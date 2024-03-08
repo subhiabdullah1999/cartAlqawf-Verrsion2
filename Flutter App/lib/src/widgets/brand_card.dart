@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ribbon_widget/ribbon_widget.dart';
 import 'package:yoori_ecommerce/src/controllers/currency_converter_controller.dart';
 import 'package:yoori_ecommerce/src/controllers/home_screen_controller.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../models/product_by_brand_model.dart';
 import '../utils/app_theme_data.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class BrandCard extends StatelessWidget {
   final Data data;
 
   final currencyConverterController = Get.find<CurrencyConverterController>();
+  final storage = Get.put(StorageService());
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +29,10 @@ class BrandCard extends StatelessWidget {
       farLength: data.isNew! ? 20 : 1,
       nearLength: data.isNew! ? 40 : 1,
       title: AppTags.neW.tr,
-      titleStyle: const TextStyle(
+      titleStyle: TextStyle(
         fontSize: 10,
-        fontFamily: 'Poppins Medium',
+        fontFamily:
+            storage.languageCode == "ar" ? "Cairo Medium" : "Poppins Medium",
       ),
       color: AppThemeData.productBoxDecorationColor,
       location: RibbonLocation.topEnd,
@@ -83,7 +86,12 @@ class BrandCard extends StatelessWidget {
                                     child: Center(
                                       child: Text(
                                         "${currencyConverterController.convertCurrency(homeController.removeTrailingZeros(data.specialDiscount.toString()))} OFF",
-                                        style: AppThemeData.todayDealNewStyle,
+                                        style: AppThemeData.todayDealNewStyle
+                                            .copyWith(
+                                                fontFamily:
+                                                    storage.languageCode == "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium"),
                                       ),
                                     ),
                                   )
@@ -105,8 +113,14 @@ class BrandCard extends StatelessWidget {
                                           child: Text(
                                             "${currencyConverterController.convertCurrency(homeController.removeTrailingZeros(data.specialDiscount.toString()))}% OFF",
                                             textAlign: TextAlign.center,
-                                            style:
-                                                AppThemeData.todayDealNewStyle,
+                                            style: AppThemeData
+                                                .todayDealNewStyle
+                                                .copyWith(
+                                                    fontFamily:
+                                                        storage.languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium"),
                                           ),
                                         ),
                                       )
@@ -129,7 +143,10 @@ class BrandCard extends StatelessWidget {
                             child: Center(
                               child: Text(
                                 AppTags.stockOut.tr,
-                                style: AppThemeData.todayDealNewStyle,
+                                style: AppThemeData.todayDealNewStyle.copyWith(
+                                    fontFamily: storage.languageCode == "ar"
+                                        ? "Cairo Medium"
+                                        : "Poppins Medium"),
                               ),
                             ),
                           )
@@ -156,7 +173,10 @@ class BrandCard extends StatelessWidget {
                   data.title!,
                   maxLines: 1,
                   textAlign: TextAlign.center,
-                  style: AppThemeData.todayDealTitleStyle,
+                  style: AppThemeData.todayDealTitleStyle.copyWith(
+                      fontFamily: storage.languageCode == "ar"
+                          ? "Cairo Medium"
+                          : "Poppins Medium"),
                 ),
               ),
               SizedBox(height: 5.h),
@@ -169,7 +189,11 @@ class BrandCard extends StatelessWidget {
                           children: [
                             Text(
                               "${currencyConverterController.convertCurrency(data.price!.toString())}",
-                              style: AppThemeData.todayDealDiscountPriceStyle,
+                              style: AppThemeData.todayDealDiscountPriceStyle
+                                  .copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium"),
                             ),
                           ],
                         )
@@ -178,12 +202,20 @@ class BrandCard extends StatelessWidget {
                           children: [
                             Text(
                               "${currencyConverterController.convertCurrency(data.price!)}",
-                              style: AppThemeData.todayDealOriginalPriceStyle,
+                              style: AppThemeData.todayDealOriginalPriceStyle
+                                  .copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium"),
                             ),
                             SizedBox(width: 15.w),
                             Text(
                               "${currencyConverterController.convertCurrency(data.discountPrice!.toString())}",
-                              style: AppThemeData.todayDealDiscountPriceStyle,
+                              style: AppThemeData.todayDealDiscountPriceStyle
+                                  .copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium"),
                             ),
                           ],
                         ),

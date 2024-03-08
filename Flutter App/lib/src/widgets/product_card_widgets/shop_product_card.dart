@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ribbon_widget/ribbon_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:yoori_ecommerce/config.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../_route/routes.dart';
 import '../../controllers/cart_content_controller.dart';
 import '../../controllers/currency_converter_controller.dart';
@@ -21,6 +22,7 @@ class ShopProductCard extends StatelessWidget {
   final int index;
   final currencyConverterController = Get.find<CurrencyConverterController>();
   final _cartController = Get.find<CartContentController>();
+  final storage = Get.put(StorageService());
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,8 @@ class ShopProductCard extends StatelessWidget {
       title: dataModel[index].isNew! ? AppTags.neW.tr : "",
       titleStyle: TextStyle(
         fontSize: isMobile(context) ? 10.sp : 7.sp,
-        fontFamily: 'Poppins Medium',
+        fontFamily:
+            storage.languageCode == "ar" ? "Cairo Medium" : "Poppins Medium",
       ),
       color: AppThemeData.productBannerColor,
       location: RibbonLocation.topEnd,
@@ -97,8 +100,20 @@ class ShopProductCard extends StatelessWidget {
                                             "${currencyConverterController.convertCurrency(dataModel[index].specialDiscount)} OFF",
                                             style: isMobile(context)
                                                 ? AppThemeData.todayDealNewStyle
+                                                    .copyWith(
+                                                        fontFamily: storage
+                                                                    .languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium")
                                                 : AppThemeData
-                                                    .todayDealNewStyleTab,
+                                                    .todayDealNewStyleTab
+                                                    .copyWith(
+                                                        fontFamily: storage
+                                                                    .languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium"),
                                           ),
                                         ),
                                       )
@@ -125,8 +140,20 @@ class ShopProductCard extends StatelessWidget {
                                                 style: isMobile(context)
                                                     ? AppThemeData
                                                         .todayDealNewStyle
+                                                        .copyWith(
+                                                            fontFamily: storage
+                                                                        .languageCode ==
+                                                                    "ar"
+                                                                ? "Cairo Medium"
+                                                                : "Poppins Medium")
                                                     : AppThemeData
-                                                        .todayDealNewStyleTab,
+                                                        .todayDealNewStyleTab
+                                                        .copyWith(
+                                                            fontFamily: storage
+                                                                        .languageCode ==
+                                                                    "ar"
+                                                                ? "Cairo Medium"
+                                                                : "Poppins Medium"),
                                               ),
                                             ),
                                           )
@@ -150,7 +177,17 @@ class ShopProductCard extends StatelessWidget {
                                     AppTags.stockOut.tr,
                                     style: isMobile(context)
                                         ? AppThemeData.todayDealNewStyle
-                                        : AppThemeData.todayDealNewStyleTab,
+                                            .copyWith(
+                                                fontFamily:
+                                                    storage.languageCode == "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium")
+                                        : AppThemeData.todayDealNewStyleTab
+                                            .copyWith(
+                                                fontFamily:
+                                                    storage.languageCode == "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium"),
                                   ),
                                 ),
                               )
@@ -178,8 +215,14 @@ class ShopProductCard extends StatelessWidget {
                       maxLines: 1,
                       textAlign: TextAlign.center,
                       style: isMobile(context)
-                          ? AppThemeData.todayDealTitleStyle
-                          : AppThemeData.todayDealTitleStyleTab,
+                          ? AppThemeData.todayDealTitleStyle.copyWith(
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium")
+                          : AppThemeData.todayDealTitleStyleTab.copyWith(
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium"),
                     ),
                   ),
                   SizedBox(height: 5.h),
@@ -196,8 +239,18 @@ class ShopProductCard extends StatelessWidget {
                                       .convertCurrency(dataModel[index].price!),
                                   style: isMobile(context)
                                       ? AppThemeData.todayDealDiscountPriceStyle
+                                          .copyWith(
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium")
                                       : AppThemeData
-                                          .todayDealDiscountPriceStyleTab,
+                                          .todayDealDiscountPriceStyleTab
+                                          .copyWith(
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium"),
                                 ),
                               ],
                             )
@@ -209,16 +262,36 @@ class ShopProductCard extends StatelessWidget {
                                       .convertCurrency(dataModel[index].price!),
                                   style: isMobile(context)
                                       ? AppThemeData.todayDealOriginalPriceStyle
+                                          .copyWith(
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium")
                                       : AppThemeData
-                                          .todayDealOriginalPriceStyleTab,
+                                          .todayDealOriginalPriceStyleTab
+                                          .copyWith(
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium"),
                                 ),
                                 Text(
                                   currencyConverterController.convertCurrency(
                                       dataModel[index].discountPrice!),
                                   style: isMobile(context)
                                       ? AppThemeData.todayDealDiscountPriceStyle
+                                          .copyWith(
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium")
                                       : AppThemeData
-                                          .todayDealDiscountPriceStyleTab,
+                                          .todayDealDiscountPriceStyleTab
+                                          .copyWith(
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium"),
                                 ),
                               ],
                             ),
@@ -408,8 +481,20 @@ class ShopProductCard extends StatelessWidget {
                                                   style: isMobile(context)
                                                       ? AppThemeData
                                                           .priceTextStyle_14
+                                                          .copyWith(
+                                                              fontFamily: storage
+                                                                          .languageCode ==
+                                                                      "ar"
+                                                                  ? "Cairo Medium"
+                                                                  : "Poppins Medium")
                                                       : AppThemeData
-                                                          .titleTextStyle_11Tab,
+                                                          .titleTextStyle_11Tab
+                                                          .copyWith(
+                                                              fontFamily: storage
+                                                                          .languageCode ==
+                                                                      "ar"
+                                                                  ? "Cairo Medium"
+                                                                  : "Poppins Medium"),
                                                 ),
                                               ),
                                             ),

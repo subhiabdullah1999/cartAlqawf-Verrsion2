@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 
 import '../../controllers/currency_converter_controller.dart';
 import '../../controllers/voucher_controller.dart';
@@ -19,6 +20,7 @@ class VoucherList extends StatefulWidget {
 
 class _VoucherListState extends State<VoucherList> {
   final voucherController = Get.put(VoucherController());
+  final storage = Get.put(StorageService());
 
   final currencyConverterController = Get.find<CurrencyConverterController>();
   @override
@@ -41,7 +43,10 @@ class _VoucherListState extends State<VoucherList> {
                 centerTitle: true,
                 title: Text(
                   AppTags.voucherList.tr,
-                  style: AppThemeData.headerTextStyle_16,
+                  style: AppThemeData.headerTextStyle_16.copyWith(
+                      fontFamily: storage.languageCode == "ar"
+                          ? "Cairo Medium"
+                          : "Poppins Medium"),
                 ),
               )
             : AppBar(
@@ -63,7 +68,10 @@ class _VoucherListState extends State<VoucherList> {
                 centerTitle: true,
                 title: Text(
                   AppTags.voucherList.tr,
-                  style: AppThemeData.headerTextStyle_14,
+                  style: AppThemeData.headerTextStyle_14.copyWith(
+                      fontFamily: storage.languageCode == "ar"
+                          ? "Cairo Medium"
+                          : "Poppins Medium"),
                 ),
               ),
         body: Obx(
@@ -128,7 +136,10 @@ class _VoucherListState extends State<VoucherList> {
                                                       AppThemeData
                                                           .voucherMultipleColor
                                                           .length],
-                                              fontFamily: "Poppins Medium",
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium",
                                               fontSize: isMobile(context)
                                                   ? 14.sp
                                                   : 10.sp,
@@ -143,7 +154,10 @@ class _VoucherListState extends State<VoucherList> {
                                                 .toString(),
                                             style: TextStyle(
                                               color: const Color(0xFF666666),
-                                              fontFamily: "Poppins Medium",
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium",
                                               fontSize: isMobile(context)
                                                   ? 13.sp
                                                   : 9.sp,
@@ -211,8 +225,11 @@ class _VoucherListState extends State<VoucherList> {
                                                         style: TextStyle(
                                                           color: const Color(
                                                               0xFFFFFFFF),
-                                                          fontFamily:
-                                                              "Poppins Medium",
+                                                          fontFamily: storage
+                                                                      .languageCode ==
+                                                                  "ar"
+                                                              ? "Cairo Medium"
+                                                              : "Poppins Medium",
                                                           fontSize:
                                                               isMobile(context)
                                                                   ? 12.sp
@@ -247,7 +264,10 @@ class _VoucherListState extends State<VoucherList> {
                                                                   .voucherMultipleColor
                                                                   .length],
                                                       fontFamily:
-                                                          "Poppins Medium",
+                                                          storage.languageCode ==
+                                                                  "ar"
+                                                              ? "Cairo Medium"
+                                                              : "Poppins Medium",
                                                       fontSize:
                                                           isMobile(context)
                                                               ? 14.sp
@@ -298,7 +318,11 @@ class _VoucherListState extends State<VoucherList> {
                                                           AppThemeData
                                                               .voucherMultipleColor
                                                               .length],
-                                                  fontFamily: "Poppins Medium",
+                                                  fontFamily:
+                                                      storage.languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium",
                                                   fontSize: isMobile(context)
                                                       ? 18.sp
                                                       : 13.sp,
@@ -323,7 +347,10 @@ class _VoucherListState extends State<VoucherList> {
                                                                 .voucherMultipleColor
                                                                 .length],
                                                     fontFamily:
-                                                        "Poppins Medium",
+                                                        storage.languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium",
                                                     fontSize: isMobile(context)
                                                         ? 18.sp
                                                         : 13.sp),
@@ -339,7 +366,10 @@ class _VoucherListState extends State<VoucherList> {
                                                       AppThemeData
                                                           .voucherMultipleColor
                                                           .length],
-                                              fontFamily: "Poppins Medium",
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium",
                                               fontSize: isMobile(context)
                                                   ? 14.sp
                                                   : 11.sp),

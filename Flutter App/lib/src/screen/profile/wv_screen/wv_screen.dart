@@ -4,10 +4,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../../controllers/wv_screen_controller.dart';
 import '../../../utils/app_theme_data.dart';
 import '../../../widgets/loader/loader_widget.dart';
-
 
 class WVScreen extends StatelessWidget {
   WVScreen({
@@ -20,6 +20,7 @@ class WVScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final storage = Get.put(StorageService());
     print("here is url:$url");
     return Obx(
       () => Scaffold(
@@ -37,8 +38,11 @@ class WVScreen extends StatelessWidget {
           ),
           centerTitle: true,
           title: Text(
-          title,
-            style: AppThemeData.headerTextStyle_16,
+            title,
+            style: AppThemeData.headerTextStyle_16.copyWith(
+                fontFamily: storage.languageCode == "ar"
+                    ? "Cairo Medium"
+                    : "Poppins Medium"),
           ),
         ),
         body: WillPopScope(

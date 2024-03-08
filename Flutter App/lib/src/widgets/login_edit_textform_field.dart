@@ -1,4 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import 'package:yoori_ecommerce/src/utils/app_theme_data.dart';
 import 'package:flutter/material.dart';
 
@@ -31,6 +33,7 @@ class LoginEditTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final storage = Get.put(StorageService());
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
       child: Container(
@@ -50,7 +53,15 @@ class LoginEditTextField extends StatelessWidget {
           ],
         ),
         child: TextFormField(
-          style: isMobile(context)? AppThemeData.titleTextStyle_13:AppThemeData.titleTextStyleTab,
+          style: isMobile(context)
+              ? AppThemeData.titleTextStyle_13.copyWith(
+                  fontFamily: storage.languageCode == "ar"
+                      ? "Cairo Medium"
+                      : "Poppins Medium")
+              : AppThemeData.titleTextStyleTab.copyWith(
+                  fontFamily: storage.languageCode == "ar"
+                      ? "Cairo Medium"
+                      : "Poppins Medium"),
           readOnly: isReadonly,
           obscureText: myObscureText!,
           validator: myValidate,
@@ -61,7 +72,15 @@ class LoginEditTextField extends StatelessWidget {
             suffixIcon: suffixIcon,
             suffixIconColor: AppThemeData.textFieldSuffixIconColor,
             hintText: hintText,
-            hintStyle: isMobile(context)? AppThemeData.hintTextStyle_13:AppThemeData.hintTextStyle_10Tab,
+            hintStyle: isMobile(context)
+                ? AppThemeData.hintTextStyle_13.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium")
+                : AppThemeData.hintTextStyle_10Tab.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
             contentPadding: EdgeInsets.only(
               left: 8.w,
               right: 8.w,
@@ -70,7 +89,7 @@ class LoginEditTextField extends StatelessWidget {
             prefixIcon: Icon(
               fieldIcon,
               color: AppThemeData.textFieldSuffixIconColor,
-              size: isMobile(context)? 17.r:20.r,
+              size: isMobile(context) ? 17.r : 20.r,
             ),
             border: InputBorder.none,
             filled: false,

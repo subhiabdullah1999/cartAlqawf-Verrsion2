@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import 'package:yoori_ecommerce/src/utils/images.dart';
 
 import '../../_route/routes.dart';
@@ -14,6 +15,7 @@ class ProfileWithoutLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final storage = Get.put(StorageService());
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -24,8 +26,14 @@ class ProfileWithoutLoginScreen extends StatelessWidget {
         title: Text(
           AppTags.profile.tr,
           style: isMobile(context)
-              ? AppThemeData.headerTextStyle_16
-              : AppThemeData.headerTextStyleTab,
+              ? AppThemeData.headerTextStyle_16.copyWith(
+                  fontFamily: storage.languageCode == "ar"
+                      ? "Cairo Medium"
+                      : "Poppins Medium")
+              : AppThemeData.headerTextStyleTab.copyWith(
+                  fontFamily: storage.languageCode == "ar"
+                      ? "Cairo Medium"
+                      : "Poppins Medium"),
         ),
         actions: [
           Padding(
@@ -76,7 +84,9 @@ class ProfileWithoutLoginScreen extends StatelessWidget {
               AppTags.notLoggedIn.tr,
               style: TextStyle(
                 fontSize: isMobile(context) ? 16.sp : 12.sp,
-                fontFamily: "Poppins Medium",
+                fontFamily: storage.languageCode == "ar"
+                    ? "Cairo Medium"
+                    : "Poppins Medium",
                 color: Colors.black,
               ),
             ),
@@ -88,8 +98,14 @@ class ProfileWithoutLoginScreen extends StatelessWidget {
               child: Text(
                 AppTags.noContent.tr,
                 style: isMobile(context)
-                    ? AppThemeData.orderHistoryTextStyle_12
-                    : AppThemeData.orderHistoryTextStyle_9Tab,
+                    ? AppThemeData.orderHistoryTextStyle_12.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                    : AppThemeData.orderHistoryTextStyle_9Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -118,7 +134,9 @@ class ProfileWithoutLoginScreen extends StatelessWidget {
                       AppTags.signIn.tr,
                       style: TextStyle(
                         fontSize: isMobile(context) ? 14.sp : 11.sp,
-                        fontFamily: "Poppins Medium",
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium",
                         color: AppThemeData.lightBackgroundColor,
                       ),
                     ),
@@ -146,7 +164,9 @@ class ProfileWithoutLoginScreen extends StatelessWidget {
                       AppTags.signUp.tr,
                       style: TextStyle(
                         fontSize: isMobile(context) ? 14.sp : 11.sp,
-                        fontFamily: "Poppins Medium",
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium",
                         color: AppThemeData.lightBackgroundColor,
                       ),
                     ),
@@ -181,8 +201,15 @@ class ProfileWithoutLoginScreen extends StatelessWidget {
                         Text(
                           AppTags.backToShopping.tr,
                           style: isMobile(context)
-                              ? AppThemeData.backToHomeTextStyle_12
-                              : AppThemeData.categoryTitleTextStyle_9Tab,
+                              ? AppThemeData.backToHomeTextStyle_12.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.categoryTitleTextStyle_9Tab
+                                  .copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium"),
                         ),
                       ],
                     ),

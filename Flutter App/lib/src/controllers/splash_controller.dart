@@ -155,12 +155,14 @@ class SplashController extends GetxController {
             Row(
               children: [
                 whatsNew != null
-                    ? const Text(
+                    ? Text(
                         "What's New",
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                        ),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                            fontFamily: storage.languageCode == "ar"
+                                ? "Cairo Medium"
+                                : "Poppins Medium"),
                       )
                     : const SizedBox(),
               ],
@@ -173,9 +175,11 @@ class SplashController extends GetxController {
                 whatsNew != null
                     ? Text(
                         whatsNew!,
-                        style: const TextStyle(
-                          fontSize: 12,
-                        ),
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: storage.languageCode == "ar"
+                                ? "Cairo Medium"
+                                : "Poppins Medium"),
                       )
                     : const SizedBox(),
               ],
@@ -250,12 +254,14 @@ class SplashController extends GetxController {
               Row(
                 children: [
                   whatsNew != null
-                      ? const Text(
+                      ? Text(
                           "What's New",
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14,
-                          ),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium"),
                         )
                       : const SizedBox(),
                 ],
@@ -268,9 +274,11 @@ class SplashController extends GetxController {
                   whatsNew != null
                       ? Text(
                           whatsNew!,
-                          style: const TextStyle(
-                            fontSize: 12,
-                          ),
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium"),
                         )
                       : const SizedBox(),
                 ],

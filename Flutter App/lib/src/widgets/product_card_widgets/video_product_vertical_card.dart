@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../controllers/currency_converter_controller.dart';
 import '../../utils/app_theme_data.dart';
 import 'package:yoori_ecommerce/src/utils/responsive.dart';
-
 
 class VideoProductVerticalCard extends StatelessWidget {
   VideoProductVerticalCard({
@@ -15,6 +15,7 @@ class VideoProductVerticalCard extends StatelessWidget {
   final dynamic dataModel;
   final int index;
   final currencyConverterController = Get.find<CurrencyConverterController>();
+  final storage = Get.put(StorageService());
 
   @override
   Widget build(BuildContext context) {
@@ -55,35 +56,86 @@ class VideoProductVerticalCard extends StatelessWidget {
                   children: [
                     Text(
                       dataModel[index].title.toString(),
-                      style: isMobile(context)? AppThemeData.voucherTitle:AppThemeData.voucherTitle.copyWith(fontSize: 11.sp),
+                      style: isMobile(context)
+                          ? AppThemeData.voucherTitle.copyWith(
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium")
+                          : AppThemeData.voucherTitle.copyWith(
+                              fontSize: 11.sp,
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium"),
                       maxLines: 3,
                     ),
                     SizedBox(
                       height: 5.h,
                     ),
-                    num.parse(dataModel![index].specialDiscount) == 0.0 ?
-                    Row(
-                      children: [
-                        Text(
-                          currencyConverterController
-                              .convertCurrency(dataModel![index].price!),
-                          style: isMobile(context)? AppThemeData.priceVideoTextStyle_14:AppThemeData.priceVideoTextStyle_14.copyWith(fontSize: 11.sp),
-                        ),
-                      ],
-                    ):Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(currencyConverterController.convertCurrency(
-                            dataModel![index].price.toString()),
-                          style: isMobile(context)? AppThemeData.todayDealOriginalPriceStyle:AppThemeData.todayDealOriginalPriceStyleTab,
-                        ),
-                        SizedBox(width: isMobile(context)? 8.w:4.w),
-                        Text(currencyConverterController.convertCurrency(
-                              dataModel![index].discountPrice.toString()),
-                          style: isMobile(context)? AppThemeData.todayDealDiscountPriceStyle:AppThemeData.todayDealDiscountPriceStyleTab,
-                        ),
-                      ],
-                    ),
+                    num.parse(dataModel![index].specialDiscount) == 0.0
+                        ? Row(
+                            children: [
+                              Text(
+                                currencyConverterController
+                                    .convertCurrency(dataModel![index].price!),
+                                style: isMobile(context)
+                                    ? AppThemeData.priceVideoTextStyle_14
+                                        .copyWith(
+                                            fontFamily:
+                                                storage.languageCode == "ar"
+                                                    ? "Cairo Medium"
+                                                    : "Poppins Medium")
+                                    : AppThemeData.priceVideoTextStyle_14
+                                        .copyWith(
+                                            fontSize: 11.sp,
+                                            fontFamily:
+                                                storage.languageCode == "ar"
+                                                    ? "Cairo Medium"
+                                                    : "Poppins Medium"),
+                              ),
+                            ],
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                currencyConverterController.convertCurrency(
+                                    dataModel![index].price.toString()),
+                                style: isMobile(context)
+                                    ? AppThemeData.todayDealOriginalPriceStyle
+                                        .copyWith(
+                                            fontFamily:
+                                                storage.languageCode == "ar"
+                                                    ? "Cairo Medium"
+                                                    : "Poppins Medium")
+                                    : AppThemeData
+                                        .todayDealOriginalPriceStyleTab
+                                        .copyWith(
+                                            fontFamily:
+                                                storage.languageCode == "ar"
+                                                    ? "Cairo Medium"
+                                                    : "Poppins Medium"),
+                              ),
+                              SizedBox(width: isMobile(context) ? 8.w : 4.w),
+                              Text(
+                                currencyConverterController.convertCurrency(
+                                    dataModel![index].discountPrice.toString()),
+                                style: isMobile(context)
+                                    ? AppThemeData.todayDealDiscountPriceStyle
+                                        .copyWith(
+                                            fontFamily:
+                                                storage.languageCode == "ar"
+                                                    ? "Cairo Medium"
+                                                    : "Poppins Medium")
+                                    : AppThemeData
+                                        .todayDealDiscountPriceStyleTab
+                                        .copyWith(
+                                            fontFamily:
+                                                storage.languageCode == "ar"
+                                                    ? "Cairo Medium"
+                                                    : "Poppins Medium"),
+                              ),
+                            ],
+                          ),
                   ],
                 ),
               ),

@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 
 import '../../../controllers/currency_converter_controller.dart';
 import '../../../data/local_data_helper.dart';
@@ -19,7 +20,6 @@ import '../../../utils/app_theme_data.dart';
 import '../../../utils/constants.dart';
 import 'package:yoori_ecommerce/src/utils/responsive.dart';
 import '../../../widgets/loader/loader_widget.dart';
-
 
 class Addresses extends StatefulWidget {
   const Addresses({
@@ -39,6 +39,7 @@ class _AddressesState extends State<Addresses> {
   final postalCodeController = TextEditingController();
   final addressController = TextEditingController();
   final currencyConverterController = Get.find<CurrencyConverterController>();
+  final storage = Get.put(StorageService());
   int? shippingIndex = 0;
   String? token = LocalDataHelper().getUserToken();
   void onShippingTapped(int? index) {
@@ -113,104 +114,130 @@ class _AddressesState extends State<Addresses> {
     Size size = MediaQuery.of(context).size;
     return shippingAddressModel.data != null
         ? Scaffold(
-      key: scaffoldKey,
-      appBar: isMobile(context)? AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Get.back();
-          }, // null disables the button
-        ),
-        centerTitle: true,
-        title: Text(
-          AppTags.addAddress.tr,
-          style: AppThemeData.headerTextStyle_16,
-        ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 10.w),
-            child: TextButton(
-              child: Text(
-                "+ ${AppTags.add.tr}",
-                style: isMobile(context)? AppThemeData.addAddressTextStyle_13:AppThemeData.addAddressTextStyle_10Tab,
-              ),
-              onPressed: () {
-                if (token != null) {
-                  createAddress();
-                } else {
-                  Get.snackbar(
-                    AppTags.login.tr,
-                    AppTags.pleaseLoginFirst.tr,
-                    snackPosition: SnackPosition.BOTTOM,
-                    duration: const Duration(seconds: 3),
-                    colorText: Colors.white,
-                    backgroundColor: Colors.black,
-                    forwardAnimationCurve: Curves.decelerate,
-                    shouldIconPulse: false,
-                  );
-                }
-              },
+            key: scaffoldKey,
+            appBar: isMobile(context)
+                ? AppBar(
+                    backgroundColor: Colors.white,
+                    elevation: 0,
+                    leading: IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        Get.back();
+                      }, // null disables the button
+                    ),
+                    centerTitle: true,
+                    title: Text(
+                      AppTags.addAddress.tr,
+                      style: AppThemeData.headerTextStyle_16.copyWith(
+                          fontFamily: storage.languageCode == "ar"
+                              ? "Cairo Medium"
+                              : "Poppins Medium"),
+                    ),
+                    actions: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 10.w),
+                        child: TextButton(
+                          child: Text(
+                            "+ ${AppTags.add.tr}",
+                            style: isMobile(context)
+                                ? AppThemeData.addAddressTextStyle_13.copyWith(
+                                    fontFamily: storage.languageCode == "ar"
+                                        ? "Cairo Medium"
+                                        : "Poppins Medium")
+                                : AppThemeData.addAddressTextStyle_10Tab
+                                    .copyWith(
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium"),
+                          ),
+                          onPressed: () {
+                            if (token != null) {
+                              createAddress();
+                            } else {
+                              Get.snackbar(
+                                AppTags.login.tr,
+                                AppTags.pleaseLoginFirst.tr,
+                                snackPosition: SnackPosition.BOTTOM,
+                                duration: const Duration(seconds: 3),
+                                colorText: Colors.white,
+                                backgroundColor: Colors.black,
+                                forwardAnimationCurve: Curves.decelerate,
+                                shouldIconPulse: false,
+                              );
+                            }
+                          },
+                        ),
+                      )
+                    ],
+                  )
+                : AppBar(
+                    backgroundColor: Colors.white,
+                    elevation: 0,
+                    toolbarHeight: 60.h,
+                    leadingWidth: 40.w,
+                    leading: IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        Get.back();
+                      }, // null disables the button
+                    ),
+                    centerTitle: true,
+                    title: Text(
+                      AppTags.addAddress.tr,
+                      style: AppThemeData.headerTextStyle_14.copyWith(
+                          fontFamily: storage.languageCode == "ar"
+                              ? "Cairo Medium"
+                              : "Poppins Medium"),
+                    ),
+                    actions: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 10.h),
+                        child: TextButton(
+                          child: Text(
+                            "+ ${AppTags.add.tr}",
+                            style: isMobile(context)
+                                ? AppThemeData.addAddressTextStyle_13.copyWith(
+                                    fontFamily: storage.languageCode == "ar"
+                                        ? "Cairo Medium"
+                                        : "Poppins Medium")
+                                : AppThemeData.addAddressTextStyle_10Tab
+                                    .copyWith(
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium"),
+                          ),
+                          onPressed: () {
+                            if (token != null) {
+                              createAddress();
+                            } else {
+                              Get.snackbar(
+                                AppTags.login.tr,
+                                AppTags.pleaseLoginFirst.tr,
+                                snackPosition: SnackPosition.BOTTOM,
+                                duration: const Duration(seconds: 3),
+                                colorText: Colors.white,
+                                backgroundColor: Colors.black,
+                                forwardAnimationCurve: Curves.decelerate,
+                                shouldIconPulse: false,
+                              );
+                            }
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+            body: SizedBox(
+              height: size.height,
+              width: size.width,
+              child: token != null ? shippingAddress() : const SizedBox(),
             ),
           )
-        ],
-      ):AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        toolbarHeight: 60.h,
-        leadingWidth: 40.w,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Get.back();
-          }, // null disables the button
-        ),
-        centerTitle: true,
-        title: Text(
-          AppTags.addAddress.tr,
-          style: AppThemeData.headerTextStyle_14,
-        ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 10.h),
-            child: TextButton(
-              child: Text(
-                "+ ${AppTags.add.tr}",
-                style: isMobile(context)? AppThemeData.addAddressTextStyle_13:AppThemeData.addAddressTextStyle_10Tab,
-              ),
-              onPressed: () {
-                if (token != null) {
-                  createAddress();
-                } else {
-                  Get.snackbar(
-                    AppTags.login.tr,
-                    AppTags.pleaseLoginFirst.tr,
-                    snackPosition: SnackPosition.BOTTOM,
-                    duration: const Duration(seconds: 3),
-                    colorText: Colors.white,
-                    backgroundColor: Colors.black,
-                    forwardAnimationCurve: Curves.decelerate,
-                    shouldIconPulse: false,
-                  );
-                }
-              },
-            ),
-          )
-        ],
-      ),
-      body: SizedBox(
-        height: size.height,
-        width: size.width,
-        child: token != null ? shippingAddress() : const SizedBox(),
-      ),
-    )
         : const Scaffold(body: Center(child: LoaderWidget()));
   }
 
@@ -222,8 +249,7 @@ class _AddressesState extends State<Addresses> {
         itemCount: shippingAddressModel.data!.addresses!.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding:
-            EdgeInsets.symmetric(horizontal: 15.w, vertical: 7.5.h),
+            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 7.5.h),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -249,7 +275,15 @@ class _AddressesState extends State<Addresses> {
                       children: [
                         Text(
                           AppTags.home_.tr,
-                          style: isMobile(context)? AppThemeData.headerTextStyle_14:AppThemeData.titleTextStyle_11Tab,
+                          style: isMobile(context)
+                              ? AppThemeData.headerTextStyle_14.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.titleTextStyle_11Tab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                         ),
                         InkWell(
                             onTap: () {
@@ -257,57 +291,123 @@ class _AddressesState extends State<Addresses> {
                               setState(() {});
                             },
                             child: shippingAddressModel.data!.addresses![index]
-                                .defaultBilling !=
-                                0 ||
-                                shippingAddressModel.data!.addresses![index]
-                                    .defaultShipping !=
-                                    0
+                                            .defaultBilling !=
+                                        0 ||
+                                    shippingAddressModel.data!.addresses![index]
+                                            .defaultShipping !=
+                                        0
                                 ? Container(
-                                height: 20.h,
-                                width: 100.w,
-                                alignment: Alignment.center,
-                                decoration: const BoxDecoration(
-                                  color: AppThemeData.addressBoxBorderColor,
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                                ),
-                                child: Text(
-                                  AppTags.defaultAddress.tr,
-                                  style:isMobile(context)? AppThemeData.addressDefaultTextStyle_10:AppThemeData.addressDefaultTextStyle_10.copyWith(fontSize: 8.sp
-                                  ),
-                                ))
+                                    height: 20.h,
+                                    width: 100.w,
+                                    alignment: Alignment.center,
+                                    decoration: const BoxDecoration(
+                                      color: AppThemeData.addressBoxBorderColor,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(5)),
+                                    ),
+                                    child: Text(
+                                      AppTags.defaultAddress.tr,
+                                      style: isMobile(context)
+                                          ? AppThemeData
+                                              .addressDefaultTextStyle_10
+                                              .copyWith(
+                                                  fontFamily:
+                                                      storage.languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium")
+                                          : AppThemeData
+                                              .addressDefaultTextStyle_10
+                                              .copyWith(
+                                                  fontFamily:
+                                                      storage.languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium",
+                                                  fontSize: 8.sp),
+                                    ))
                                 : const SizedBox()),
                       ],
                     ),
                     SizedBox(height: 10.h),
                     Text(
                       "${AppTags.name.tr}: ${shippingAddressModel.data!.addresses![index].name.toString()}",
-                      style: isMobile(context)? AppThemeData.profileTextStyle_13:AppThemeData.profileTextStyle_10Tab,
+                      style: isMobile(context)
+                          ? AppThemeData.profileTextStyle_13.copyWith(
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium")
+                          : AppThemeData.profileTextStyle_10Tab.copyWith(
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium"),
                     ),
                     SizedBox(height: 8.h),
                     Text(
                         "${AppTags.email.tr}: ${shippingAddressModel.data!.addresses![index].email.toString()}",
-                        style: isMobile(context)? AppThemeData.profileTextStyle_13:AppThemeData.profileTextStyle_10Tab),
+                        style: isMobile(context)
+                            ? AppThemeData.profileTextStyle_13.copyWith(
+                                fontFamily: storage.languageCode == "ar"
+                                    ? "Cairo Medium"
+                                    : "Poppins Medium")
+                            : AppThemeData.profileTextStyle_10Tab.copyWith(
+                                fontFamily: storage.languageCode == "ar"
+                                    ? "Cairo Medium"
+                                    : "Poppins Medium")),
                     SizedBox(height: 8.h),
                     Text(
                         "${AppTags.phone.tr}: ${shippingAddressModel.data!.addresses![index].phoneNo.toString()}",
-                        style: isMobile(context)? AppThemeData.profileTextStyle_13:AppThemeData.profileTextStyle_10Tab),
+                        style: isMobile(context)
+                            ? AppThemeData.profileTextStyle_13.copyWith(
+                                fontFamily: storage.languageCode == "ar"
+                                    ? "Cairo Medium"
+                                    : "Poppins Medium")
+                            : AppThemeData.profileTextStyle_10Tab.copyWith(
+                                fontFamily: storage.languageCode == "ar"
+                                    ? "Cairo Medium"
+                                    : "Poppins Medium")),
                     SizedBox(height: 8.h),
                     Text(
                         "${AppTags.country.tr}: ${shippingAddressModel.data!.addresses![index].country.toString()}",
-                        style:isMobile(context)? AppThemeData.profileTextStyle_13:AppThemeData.profileTextStyle_10Tab),
+                        style: isMobile(context)
+                            ? AppThemeData.profileTextStyle_13.copyWith(
+                                fontFamily: storage.languageCode == "ar"
+                                    ? "Cairo Medium"
+                                    : "Poppins Medium")
+                            : AppThemeData.profileTextStyle_10Tab.copyWith(
+                                fontFamily: storage.languageCode == "ar"
+                                    ? "Cairo Medium"
+                                    : "Poppins Medium")),
                     SizedBox(height: 8.h),
                     Text(
                         "${AppTags.state.tr}: ${shippingAddressModel.data!.addresses![index].state.toString()}",
-                        style: isMobile(context)? AppThemeData.profileTextStyle_13:AppThemeData.profileTextStyle_10Tab),
+                        style: isMobile(context)
+                            ? AppThemeData.profileTextStyle_13.copyWith(
+                                fontFamily: storage.languageCode == "ar"
+                                    ? "Cairo Medium"
+                                    : "Poppins Medium")
+                            : AppThemeData.profileTextStyle_10Tab.copyWith(
+                                fontFamily: storage.languageCode == "ar"
+                                    ? "Cairo Medium"
+                                    : "Poppins Medium")),
                     SizedBox(height: 8.h),
                     Text(
                         "${AppTags.city.tr}: ${shippingAddressModel.data!.addresses![index].city.toString()}",
-                        style: isMobile(context)? AppThemeData.profileTextStyle_13:AppThemeData.profileTextStyle_10Tab),
+                        style: isMobile(context)
+                            ? AppThemeData.profileTextStyle_13
+                            : AppThemeData.profileTextStyle_10Tab),
                     SizedBox(height: 8.h),
                     Text(
                         "${AppTags.address.tr}: ${shippingAddressModel.data!.addresses![index].address.toString()}",
-                        style: isMobile(context)? AppThemeData.profileTextStyle_13:AppThemeData.profileTextStyle_10Tab),
+                        style: isMobile(context)
+                            ? AppThemeData.profileTextStyle_13.copyWith(
+                                fontFamily: storage.languageCode == "ar"
+                                    ? "Cairo Medium"
+                                    : "Poppins Medium")
+                            : AppThemeData.profileTextStyle_10Tab.copyWith(
+                                fontFamily: storage.languageCode == "ar"
+                                    ? "Cairo Medium"
+                                    : "Poppins Medium")),
                     SizedBox(height: 10.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -320,14 +420,14 @@ class _AddressesState extends State<Addresses> {
                                 return AlertDialog(
                                   title: Text(AppTags.confirmation.tr),
                                   content:
-                                  Text(AppTags.doYouWantToDeleteAddress.tr),
+                                      Text(AppTags.doYouWantToDeleteAddress.tr),
                                   actions: <Widget>[
                                     TextButton(
                                       onPressed: () {
                                         Navigator.of(context,
-                                            rootNavigator: true)
+                                                rootNavigator: true)
                                             .pop(
-                                            false); // dismisses only the dialog and returns false
+                                                false); // dismisses only the dialog and returns false
                                       },
                                       child: Text(AppTags.no.tr),
                                     ),
@@ -335,17 +435,17 @@ class _AddressesState extends State<Addresses> {
                                       onPressed: () async {
                                         await Repository()
                                             .deleteUserAddress(
-                                            addressId: shippingAddressModel
-                                                .data!.addresses![index].id
-                                                .toString())
+                                                addressId: shippingAddressModel
+                                                    .data!.addresses![index].id
+                                                    .toString())
                                             .then((value) =>
-                                            getShippingAddress());
+                                                getShippingAddress());
                                         setState(() {});
                                         if (!mounted) return;
                                         Navigator.of(context,
-                                            rootNavigator: true)
+                                                rootNavigator: true)
                                             .pop(
-                                            true); // dismisses only the dialog and returns true
+                                                true); // dismisses only the dialog and returns true
                                       },
                                       child: Text(AppTags.yes.tr),
                                     ),
@@ -360,15 +460,28 @@ class _AddressesState extends State<Addresses> {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               border: Border.all(
-                                  color: AppThemeData.addressBoxBorderColor, width: 1),
-                              borderRadius:  BorderRadius.all(
+                                  color: AppThemeData.addressBoxBorderColor,
+                                  width: 1),
+                              borderRadius: BorderRadius.all(
                                 Radius.circular(5.r),
                               ),
                             ),
                             child: Padding(
                               padding: EdgeInsets.symmetric(vertical: 8.h),
                               child: Text(AppTags.delete.tr,
-                                  style:isMobile(context)? AppThemeData.buttonDltTextStyle_13:AppThemeData.buttonDltTextStyle_10Tab),
+                                  style: isMobile(context)
+                                      ? AppThemeData.buttonDltTextStyle_13
+                                          .copyWith(
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium")
+                                      : AppThemeData.buttonDltTextStyle_10Tab
+                                          .copyWith(
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium")),
                             ),
                           ),
                         ),
@@ -378,11 +491,11 @@ class _AddressesState extends State<Addresses> {
                         InkWell(
                           onTap: () async {
                             await getEditViewAddress(shippingAddressModel
-                                .data!.addresses![index].id!)
+                                    .data!.addresses![index].id!)
                                 .then((value) => editAddress(
-                                shippingAddressModel
-                                    .data!.addresses![index].id,
-                                editViewModel));
+                                    shippingAddressModel
+                                        .data!.addresses![index].id,
+                                    editViewModel));
                           },
                           child: Container(
                             width: 80.w,
@@ -391,7 +504,8 @@ class _AddressesState extends State<Addresses> {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               border: Border.all(
-                                  color: AppThemeData.addressBoxBorderColor, width: 1),
+                                  color: AppThemeData.addressBoxBorderColor,
+                                  width: 1),
                               borderRadius: BorderRadius.all(
                                 Radius.circular(5.r),
                               ),
@@ -399,7 +513,19 @@ class _AddressesState extends State<Addresses> {
                             child: Padding(
                               padding: EdgeInsets.symmetric(vertical: 8.h),
                               child: Text(AppTags.edit.tr,
-                                  style:isMobile(context)? AppThemeData.buttonTextStyle_13:AppThemeData.buttonTextStyle_10Tab),
+                                  style: isMobile(context)
+                                      ? AppThemeData.buttonTextStyle_13
+                                          .copyWith(
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium")
+                                      : AppThemeData.buttonTextStyle_10Tab
+                                          .copyWith(
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium")),
                             ),
                           ),
                         ),
@@ -433,7 +559,16 @@ class _AddressesState extends State<Addresses> {
                   children: [
                     Text(
                       AppTags.addAddress.tr,
-                      style: isMobile(context)? AppThemeData.priceTextStyle_14:AppThemeData.priceTextStyle_14.copyWith(fontSize: 11.sp),
+                      style: isMobile(context)
+                          ? AppThemeData.priceTextStyle_14.copyWith(
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium")
+                          : AppThemeData.priceTextStyle_14.copyWith(
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium",
+                              fontSize: 11.sp),
                     ),
                     InkWell(
                       onTap: () {
@@ -463,7 +598,7 @@ class _AddressesState extends State<Addresses> {
                 ),
                 content: SingleChildScrollView(
                   keyboardDismissBehavior:
-                  ScrollViewKeyboardDismissBehavior.onDrag,
+                      ScrollViewKeyboardDismissBehavior.onDrag,
                   padding: EdgeInsets.zero,
                   child: Form(
                     key: formKey,
@@ -473,7 +608,15 @@ class _AddressesState extends State<Addresses> {
                       children: [
                         Text(
                           AppTags.name.tr,
-                          style: isMobile(context)? AppThemeData.titleTextStyle_13:AppThemeData.titleTextStyleTab,
+                          style: isMobile(context)
+                              ? AppThemeData.titleTextStyle_13.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.titleTextStyleTab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                         ),
                         SizedBox(height: 8.h),
                         Container(
@@ -482,7 +625,8 @@ class _AddressesState extends State<Addresses> {
                           padding: EdgeInsets.symmetric(horizontal: 4.w),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            border: Border.all(color: AppThemeData.addressBoxBorderColor),
+                            border: Border.all(
+                                color: AppThemeData.addressBoxBorderColor),
                             borderRadius: BorderRadius.all(
                               Radius.circular(5.r),
                             ),
@@ -499,7 +643,15 @@ class _AddressesState extends State<Addresses> {
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: AppTags.name.tr,
-                              hintStyle: isMobile(context)? AppThemeData.hintTextStyle_13:AppThemeData.hintTextStyle_10Tab,
+                              hintStyle: isMobile(context)
+                                  ? AppThemeData.hintTextStyle_13.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium")
+                                  : AppThemeData.hintTextStyle_10Tab.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium"),
                               contentPadding: EdgeInsets.only(
                                 left: 8.w,
                                 right: 8.w,
@@ -511,7 +663,15 @@ class _AddressesState extends State<Addresses> {
                         SizedBox(height: 10.h),
                         Text(
                           AppTags.email.tr,
-                          style: isMobile(context)? AppThemeData.titleTextStyle_13:AppThemeData.titleTextStyleTab,
+                          style: isMobile(context)
+                              ? AppThemeData.titleTextStyle_13.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.titleTextStyleTab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                         ),
                         SizedBox(height: 8.h),
                         Container(
@@ -520,7 +680,8 @@ class _AddressesState extends State<Addresses> {
                           padding: EdgeInsets.symmetric(horizontal: 4.w),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            border: Border.all(color: AppThemeData.addressBoxBorderColor),
+                            border: Border.all(
+                                color: AppThemeData.addressBoxBorderColor),
                             borderRadius: BorderRadius.all(
                               Radius.circular(5.r),
                             ),
@@ -537,7 +698,15 @@ class _AddressesState extends State<Addresses> {
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: AppTags.email.tr,
-                              hintStyle: isMobile(context)? AppThemeData.hintTextStyle_13:AppThemeData.hintTextStyle_10Tab,
+                              hintStyle: isMobile(context)
+                                  ? AppThemeData.hintTextStyle_13.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium")
+                                  : AppThemeData.hintTextStyle_10Tab.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium"),
                               contentPadding: EdgeInsets.only(
                                 left: 8.w,
                                 right: 8.w,
@@ -549,7 +718,15 @@ class _AddressesState extends State<Addresses> {
                         SizedBox(height: 10.h),
                         Text(
                           AppTags.phone.tr,
-                          style: isMobile(context)? AppThemeData.titleTextStyle_13:AppThemeData.titleTextStyleTab,
+                          style: isMobile(context)
+                              ? AppThemeData.titleTextStyle_13.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.titleTextStyleTab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                         ),
                         SizedBox(
                           height: 8.h,
@@ -560,7 +737,8 @@ class _AddressesState extends State<Addresses> {
                           padding: EdgeInsets.only(left: 12.w, right: 4.w),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            border: Border.all(color: AppThemeData.addressBoxBorderColor),
+                            border: Border.all(
+                                color: AppThemeData.addressBoxBorderColor),
                             borderRadius: BorderRadius.all(
                               Radius.circular(5.r),
                             ),
@@ -572,7 +750,8 @@ class _AddressesState extends State<Addresses> {
                               Expanded(
                                 flex: 7,
                                 child: CountryPickerDropdown(
-                                  isFirstDefaultIfInitialValueNotProvided: false,
+                                  isFirstDefaultIfInitialValueNotProvided:
+                                      false,
                                   initialValue: 'BD',
                                   isExpanded: true,
                                   itemBuilder: (Country country) => Row(
@@ -586,7 +765,6 @@ class _AddressesState extends State<Addresses> {
                                     setState(() {
                                       phoneCode = country.phoneCode;
                                     });
-
                                   },
                                 ),
                               ),
@@ -607,7 +785,19 @@ class _AddressesState extends State<Addresses> {
                                     ),
                                     border: InputBorder.none,
                                     hintText: AppTags.phone.tr,
-                                    hintStyle: isMobile(context)? AppThemeData.hintTextStyle_13:AppThemeData.hintTextStyle_10Tab,
+                                    hintStyle: isMobile(context)
+                                        ? AppThemeData.hintTextStyle_13
+                                            .copyWith(
+                                                fontFamily:
+                                                    storage.languageCode == "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium")
+                                        : AppThemeData.hintTextStyle_10Tab
+                                            .copyWith(
+                                                fontFamily:
+                                                    storage.languageCode == "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium"),
                                   ),
                                   onChanged: (value) {},
                                 ),
@@ -618,7 +808,15 @@ class _AddressesState extends State<Addresses> {
                         SizedBox(height: 10.h),
                         Text(
                           AppTags.country.tr,
-                          style: isMobile(context)? AppThemeData.titleTextStyle_13:AppThemeData.titleTextStyleTab,
+                          style: isMobile(context)
+                              ? AppThemeData.titleTextStyle_13.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.titleTextStyleTab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                         ),
                         SizedBox(height: 8.h),
                         Container(
@@ -627,7 +825,8 @@ class _AddressesState extends State<Addresses> {
                           padding: EdgeInsets.only(left: 12.w, right: 4.w),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            border: Border.all(color: AppThemeData.addressBoxBorderColor),
+                            border: Border.all(
+                                color: AppThemeData.addressBoxBorderColor),
                             borderRadius: BorderRadius.all(
                               Radius.circular(5.r),
                             ),
@@ -637,7 +836,15 @@ class _AddressesState extends State<Addresses> {
                               isExpanded: true,
                               hint: Text(
                                 AppTags.selectCountry.tr,
-                                style: isMobile(context)? AppThemeData.hintTextStyle_13:AppThemeData.hintTextStyle_10Tab,
+                                style: isMobile(context)
+                                    ? AppThemeData.hintTextStyle_13.copyWith(
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium")
+                                    : AppThemeData.hintTextStyle_10Tab.copyWith(
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium"),
                               ),
                               value: _selectedCountry,
                               onChanged: (newValue) {
@@ -662,160 +869,238 @@ class _AddressesState extends State<Addresses> {
                         SizedBox(height: 16.h),
                         Text(
                           AppTags.state.tr,
-                          style: isMobile(context)? AppThemeData.titleTextStyle_13:AppThemeData.titleTextStyleTab,
+                          style: isMobile(context)
+                              ? AppThemeData.titleTextStyle_13.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.titleTextStyleTab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                         ),
                         SizedBox(
                           height: 8.h,
                         ),
                         stateListModel.data != null
                             ? Container(
-                          height: 42.h,
-                          alignment: Alignment.center,
-                          padding:
-                          EdgeInsets.only(left: 12.w, right: 4.w),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                                color: AppThemeData.addressBoxBorderColor),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(5.r),
-                            ),
-                          ),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton(
-                              isExpanded: true,
-                              hint: Text(
-                                AppTags.selectState.tr,
-                                style: isMobile(context)? AppThemeData.hintTextStyle_13:AppThemeData.hintTextStyle_10Tab,
-                              ),
-                              value: _selectedState,
-                              onChanged: (newValue) {
-                                setState(
-                                      () {
-                                    _selectedState = newValue!;
-                                  },
-                                );
-                              },
-                              items: stateListModel.data!.states!
-                                  .map((state) {
-                                return DropdownMenuItem(
-                                  onTap: () async {
-                                    await getCityList(state.id);
-                                    setState(() {});
-                                  },
-                                  value: state.id,
-                                  child: Text(state.name.toString()),
-                                );
-                              }).toList(),
-                            ),
-                          ),
-                        )
+                                height: 42.h,
+                                alignment: Alignment.center,
+                                padding:
+                                    EdgeInsets.only(left: 12.w, right: 4.w),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(
+                                      color:
+                                          AppThemeData.addressBoxBorderColor),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5.r),
+                                  ),
+                                ),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton(
+                                    isExpanded: true,
+                                    hint: Text(
+                                      AppTags.selectState.tr,
+                                      style: isMobile(context)
+                                          ? AppThemeData.hintTextStyle_13
+                                              .copyWith(
+                                                  fontFamily:
+                                                      storage.languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium")
+                                          : AppThemeData.hintTextStyle_10Tab
+                                              .copyWith(
+                                                  fontFamily:
+                                                      storage.languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium"),
+                                    ),
+                                    value: _selectedState,
+                                    onChanged: (newValue) {
+                                      setState(
+                                        () {
+                                          _selectedState = newValue!;
+                                        },
+                                      );
+                                    },
+                                    items: stateListModel.data!.states!
+                                        .map((state) {
+                                      return DropdownMenuItem(
+                                        onTap: () async {
+                                          await getCityList(state.id);
+                                          setState(() {});
+                                        },
+                                        value: state.id,
+                                        child: Text(state.name.toString()),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              )
                             : Container(
-                          height: 42.h,
-                          alignment: Alignment.center,
-                          padding:
-                          EdgeInsets.only(left: 12.w, right: 4.w),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                                color: AppThemeData.addressBoxBorderColor),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(5.r),
-                            ),
-                          ),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton(
-                              isExpanded: true,
-                              hint: Text(AppTags.selectState.tr,
-                                  style: isMobile(context)? AppThemeData.hintTextStyle_13:AppThemeData.hintTextStyle_10Tab),
-                              value: _selectedState,
-                              onChanged: (newValue) {
-                                setState(
-                                      () {
-                                    _selectedState = newValue!;
-                                  },
-                                );
-                              },
-                              items: null,
-                            ),
-                          ),
-                        ),
+                                height: 42.h,
+                                alignment: Alignment.center,
+                                padding:
+                                    EdgeInsets.only(left: 12.w, right: 4.w),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(
+                                      color:
+                                          AppThemeData.addressBoxBorderColor),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5.r),
+                                  ),
+                                ),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton(
+                                    isExpanded: true,
+                                    hint: Text(AppTags.selectState.tr,
+                                        style: isMobile(context)
+                                            ? AppThemeData.hintTextStyle_13
+                                                .copyWith(
+                                                    fontFamily:
+                                                        storage.languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium")
+                                            : AppThemeData.hintTextStyle_10Tab
+                                                .copyWith(
+                                                    fontFamily: storage
+                                                                .languageCode ==
+                                                            "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium")),
+                                    value: _selectedState,
+                                    onChanged: (newValue) {
+                                      setState(
+                                        () {
+                                          _selectedState = newValue!;
+                                        },
+                                      );
+                                    },
+                                    items: null,
+                                  ),
+                                ),
+                              ),
                         SizedBox(height: 16.r),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               AppTags.city.tr,
-                              style: isMobile(context)? AppThemeData.titleTextStyle_13:AppThemeData.titleTextStyleTab,
+                              style: isMobile(context)
+                                  ? AppThemeData.titleTextStyle_13.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium")
+                                  : AppThemeData.titleTextStyleTab.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium"),
                             ),
                             SizedBox(
                               height: 8.h,
                             ),
                             cityModel.data != null
                                 ? Container(
-                              height: 42.h,
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.only(
-                                  left: 12.w, right: 4.w),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                    color: AppThemeData.addressBoxBorderColor),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(5.r),
-                                ),
-                              ),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton(
-                                  isExpanded: true,
-                                  hint: Text(
-                                    AppTags.selectCity.tr,
-                                    style: isMobile(context)? AppThemeData.hintTextStyle_13:AppThemeData.hintTextStyle_10Tab,
-                                  ),
-                                  value: _selectedCity,
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      _selectedCity = newValue;
-                                    });
-                                  },
-                                  items:
-                                  cityModel.data!.cities!.map((city) {
-                                    return DropdownMenuItem(
-                                      onTap: () {},
-                                      value: city.id,
-                                      child: Text(city.name.toString()),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            )
+                                    height: 42.h,
+                                    alignment: Alignment.center,
+                                    padding:
+                                        EdgeInsets.only(left: 12.w, right: 4.w),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.all(
+                                          color: AppThemeData
+                                              .addressBoxBorderColor),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(5.r),
+                                      ),
+                                    ),
+                                    child: DropdownButtonHideUnderline(
+                                      child: DropdownButton(
+                                        isExpanded: true,
+                                        hint: Text(
+                                          AppTags.selectCity.tr,
+                                          style: isMobile(context)
+                                              ? AppThemeData.hintTextStyle_13
+                                                  .copyWith(
+                                                      fontFamily:
+                                                          storage.languageCode ==
+                                                                  "ar"
+                                                              ? "Cairo Medium"
+                                                              : "Poppins Medium")
+                                              : AppThemeData.hintTextStyle_10Tab
+                                                  .copyWith(
+                                                      fontFamily: storage
+                                                                  .languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium"),
+                                        ),
+                                        value: _selectedCity,
+                                        onChanged: (newValue) {
+                                          setState(() {
+                                            _selectedCity = newValue;
+                                          });
+                                        },
+                                        items:
+                                            cityModel.data!.cities!.map((city) {
+                                          return DropdownMenuItem(
+                                            onTap: () {},
+                                            value: city.id,
+                                            child: Text(city.name.toString()),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    ),
+                                  )
                                 : Container(
-                              height: 42.h,
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.only(
-                                  left: 12.w, right: 4.w),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                    color: AppThemeData.addressBoxBorderColor),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(5.r),
-                                ),
-                              ),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton(
-                                    isExpanded: true,
-                                    hint: Text(AppTags.selectCity.tr,
-                                        style: isMobile(context)? AppThemeData.hintTextStyle_13:AppThemeData.hintTextStyle_10Tab),
-                                    value: _selectedCity,
-                                    onChanged: (newValue) {
-                                      setState(() {
-                                        _selectedCity = newValue;
-                                      });
-                                    },
-                                    items: null),
-                              ),
-                            ),
+                                    height: 42.h,
+                                    alignment: Alignment.center,
+                                    padding:
+                                        EdgeInsets.only(left: 12.w, right: 4.w),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.all(
+                                          color: AppThemeData
+                                              .addressBoxBorderColor),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(5.r),
+                                      ),
+                                    ),
+                                    child: DropdownButtonHideUnderline(
+                                      child: DropdownButton(
+                                          isExpanded: true,
+                                          hint: Text(AppTags.selectCity.tr,
+                                              style: isMobile(context)
+                                                  ? AppThemeData
+                                                      .hintTextStyle_13
+                                                      .copyWith(
+                                                          fontFamily: storage
+                                                                      .languageCode ==
+                                                                  "ar"
+                                                              ? "Cairo Medium"
+                                                              : "Poppins Medium")
+                                                  : AppThemeData
+                                                      .hintTextStyle_10Tab
+                                                      .copyWith(
+                                                          fontFamily: storage
+                                                                      .languageCode ==
+                                                                  "ar"
+                                                              ? "Cairo Medium"
+                                                              : "Poppins Medium")),
+                                          value: _selectedCity,
+                                          onChanged: (newValue) {
+                                            setState(() {
+                                              _selectedCity = newValue;
+                                            });
+                                          },
+                                          items: null),
+                                    ),
+                                  ),
                           ],
                         ),
                         SizedBox(
@@ -823,7 +1108,15 @@ class _AddressesState extends State<Addresses> {
                         ),
                         Text(
                           AppTags.postalCode.tr,
-                          style: isMobile(context)? AppThemeData.titleTextStyle_13:AppThemeData.titleTextStyleTab,
+                          style: isMobile(context)
+                              ? AppThemeData.titleTextStyle_13.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.titleTextStyleTab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                         ),
                         SizedBox(
                           height: 8.h,
@@ -834,7 +1127,8 @@ class _AddressesState extends State<Addresses> {
                           padding: EdgeInsets.symmetric(horizontal: 4.h),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            border: Border.all(color: AppThemeData.addressBoxBorderColor),
+                            border: Border.all(
+                                color: AppThemeData.addressBoxBorderColor),
                             borderRadius: BorderRadius.all(
                               Radius.circular(5.r),
                             ),
@@ -851,8 +1145,16 @@ class _AddressesState extends State<Addresses> {
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: AppTags.postalCode.tr,
-                              hintStyle: isMobile(context)? AppThemeData.hintTextStyle_13:AppThemeData.hintTextStyle_10Tab,
-                              contentPadding:  EdgeInsets.only(
+                              hintStyle: isMobile(context)
+                                  ? AppThemeData.hintTextStyle_13.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium")
+                                  : AppThemeData.hintTextStyle_10Tab.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium"),
+                              contentPadding: EdgeInsets.only(
                                 left: 8.w,
                                 right: 8.w,
                                 bottom: 5.h,
@@ -865,7 +1167,15 @@ class _AddressesState extends State<Addresses> {
                         ),
                         Text(
                           AppTags.address.tr,
-                          style: isMobile(context)? AppThemeData.titleTextStyle_13:AppThemeData.titleTextStyleTab,
+                          style: isMobile(context)
+                              ? AppThemeData.titleTextStyle_13.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.titleTextStyleTab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                         ),
                         SizedBox(
                           height: 8.h,
@@ -876,7 +1186,8 @@ class _AddressesState extends State<Addresses> {
                           padding: EdgeInsets.symmetric(horizontal: 4.w),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            border: Border.all(color: AppThemeData.addressBoxBorderColor),
+                            border: Border.all(
+                                color: AppThemeData.addressBoxBorderColor),
                             borderRadius: BorderRadius.all(
                               Radius.circular(5.r),
                             ),
@@ -893,7 +1204,15 @@ class _AddressesState extends State<Addresses> {
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: AppTags.streetAddress.tr,
-                              hintStyle: isMobile(context)? AppThemeData.hintTextStyle_13:AppThemeData.hintTextStyle_10Tab,
+                              hintStyle: isMobile(context)
+                                  ? AppThemeData.hintTextStyle_13.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium")
+                                  : AppThemeData.hintTextStyle_10Tab.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium"),
                               contentPadding: EdgeInsets.only(
                                 left: 8.w,
                                 right: 8.w,
@@ -911,24 +1230,24 @@ class _AddressesState extends State<Addresses> {
                 ),
                 actions: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(
-                        left: 15.w, bottom: 15.h, right: 15.w),
+                    padding:
+                        EdgeInsets.only(left: 15.w, bottom: 15.h, right: 15.w),
                     child: InkWell(
                       onTap: () async {
                         if (formKey.currentState!.validate()) {
                           await Repository()
                               .postCreateAddress(
-                            name: nameController.text.toString(),
-                            email: emailController.text.toString(),
-                            phoneNo:
-                            "+$phoneCode ${phoneController.text.toString()}",
-                            countryId: _selectedCountry,
-                            stateId: _selectedState,
-                            cityId: _selectedCity,
-                            postalCode:
-                            postalCodeController.text.toString(),
-                            address: addressController.text.toString(),
-                          )
+                                name: nameController.text.toString(),
+                                email: emailController.text.toString(),
+                                phoneNo:
+                                    "+$phoneCode ${phoneController.text.toString()}",
+                                countryId: _selectedCountry,
+                                stateId: _selectedState,
+                                cityId: _selectedCity,
+                                postalCode:
+                                    postalCodeController.text.toString(),
+                                address: addressController.text.toString(),
+                              )
                               .then((value) => getShippingAddress());
                           Get.back();
                         }
@@ -939,7 +1258,8 @@ class _AddressesState extends State<Addresses> {
                         height: 42.h,
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          border: Border.all(color: AppThemeData.addressBoxBorderColor),
+                          border: Border.all(
+                              color: AppThemeData.addressBoxBorderColor),
                           borderRadius: BorderRadius.all(
                             Radius.circular(5.r),
                           ),
@@ -948,7 +1268,15 @@ class _AddressesState extends State<Addresses> {
                           alignment: Alignment.center,
                           child: Text(
                             AppTags.add.tr,
-                            style: isMobile(context)? AppThemeData.buttonTextStyle_13:AppThemeData.buttonTextStyle_10Tab,
+                            style: isMobile(context)
+                                ? AppThemeData.buttonTextStyle_13.copyWith(
+                                    fontFamily: storage.languageCode == "ar"
+                                        ? "Cairo Medium"
+                                        : "Poppins Medium")
+                                : AppThemeData.buttonTextStyle_10Tab.copyWith(
+                                    fontFamily: storage.languageCode == "ar"
+                                        ? "Cairo Medium"
+                                        : "Poppins Medium"),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -982,7 +1310,16 @@ class _AddressesState extends State<Addresses> {
                     children: [
                       Text(
                         AppTags.addAddress.tr,
-                        style: isMobile(context)? AppThemeData.priceTextStyle_14:AppThemeData.priceTextStyle_14.copyWith(fontSize: 11.sp),
+                        style: isMobile(context)
+                            ? AppThemeData.priceTextStyle_14.copyWith(
+                                fontFamily: storage.languageCode == "ar"
+                                    ? "Cairo Medium"
+                                    : "Poppins Medium")
+                            : AppThemeData.priceTextStyle_14.copyWith(
+                                fontFamily: storage.languageCode == "ar"
+                                    ? "Cairo Medium"
+                                    : "Poppins Medium",
+                                fontSize: 11.sp),
                       ),
                       InkWell(
                         onTap: () {
@@ -998,7 +1335,7 @@ class _AddressesState extends State<Addresses> {
                                 Radius.circular(5.r),
                               ),
                             ),
-                            child:  Padding(
+                            child: Padding(
                               padding: EdgeInsets.all(2.5.r),
                               child: Icon(
                                 Icons.clear,
@@ -1011,7 +1348,7 @@ class _AddressesState extends State<Addresses> {
                   ),
                   content: SingleChildScrollView(
                     keyboardDismissBehavior:
-                    ScrollViewKeyboardDismissBehavior.onDrag,
+                        ScrollViewKeyboardDismissBehavior.onDrag,
                     padding: EdgeInsets.zero,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -1019,7 +1356,15 @@ class _AddressesState extends State<Addresses> {
                       children: [
                         Text(
                           AppTags.name.tr,
-                          style: isMobile(context)? AppThemeData.titleTextStyle_13:AppThemeData.titleTextStyleTab,
+                          style: isMobile(context)
+                              ? AppThemeData.titleTextStyle_13.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.titleTextStyleTab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                         ),
                         SizedBox(
                           height: 8.h,
@@ -1030,7 +1375,8 @@ class _AddressesState extends State<Addresses> {
                           padding: EdgeInsets.symmetric(horizontal: 4.w),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            border: Border.all(color: AppThemeData.addressBoxBorderColor),
+                            border: Border.all(
+                                color: AppThemeData.addressBoxBorderColor),
                             borderRadius: BorderRadius.all(
                               Radius.circular(5.r),
                             ),
@@ -1044,8 +1390,16 @@ class _AddressesState extends State<Addresses> {
                               // label: Text(editViewModel.data!.address!.name.toString()),
                               border: InputBorder.none,
                               hintText:
-                              editViewModel.data!.address!.name.toString(),
-                              hintStyle: isMobile(context)? AppThemeData.hintTextStyle_13:AppThemeData.hintTextStyle_10Tab,
+                                  editViewModel.data!.address!.name.toString(),
+                              hintStyle: isMobile(context)
+                                  ? AppThemeData.hintTextStyle_13.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium")
+                                  : AppThemeData.hintTextStyle_10Tab.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium"),
                               contentPadding: EdgeInsets.only(
                                   left: 8.w, right: 8.w, bottom: 8.h),
                             ),
@@ -1054,7 +1408,15 @@ class _AddressesState extends State<Addresses> {
                         SizedBox(height: 16.h),
                         Text(
                           AppTags.email.tr,
-                          style: isMobile(context)? AppThemeData.titleTextStyle_13:AppThemeData.titleTextStyleTab,
+                          style: isMobile(context)
+                              ? AppThemeData.titleTextStyle_13.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.titleTextStyleTab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                         ),
                         SizedBox(
                           height: 8.h,
@@ -1065,7 +1427,8 @@ class _AddressesState extends State<Addresses> {
                           padding: EdgeInsets.symmetric(horizontal: 4.w),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            border: Border.all(color: AppThemeData.addressBoxBorderColor),
+                            border: Border.all(
+                                color: AppThemeData.addressBoxBorderColor),
                             borderRadius: BorderRadius.all(
                               Radius.circular(5.r),
                             ),
@@ -1078,8 +1441,16 @@ class _AddressesState extends State<Addresses> {
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText:
-                              editViewModel.data!.address!.email.toString(),
-                              hintStyle: isMobile(context)? AppThemeData.hintTextStyle_13:AppThemeData.hintTextStyle_10Tab,
+                                  editViewModel.data!.address!.email.toString(),
+                              hintStyle: isMobile(context)
+                                  ? AppThemeData.hintTextStyle_13.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium")
+                                  : AppThemeData.hintTextStyle_10Tab.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium"),
                               contentPadding: EdgeInsets.only(
                                   left: 8.w, right: 8.w, bottom: 8.h),
                             ),
@@ -1088,7 +1459,15 @@ class _AddressesState extends State<Addresses> {
                         SizedBox(height: 16.h),
                         Text(
                           AppTags.phone.tr,
-                          style: isMobile(context)? AppThemeData.titleTextStyle_13:AppThemeData.titleTextStyleTab,
+                          style: isMobile(context)
+                              ? AppThemeData.titleTextStyle_13.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.titleTextStyleTab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                         ),
                         SizedBox(
                           height: 8.h,
@@ -1099,7 +1478,8 @@ class _AddressesState extends State<Addresses> {
                           padding: EdgeInsets.symmetric(horizontal: 4.w),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            border: Border.all(color: AppThemeData.addressBoxBorderColor),
+                            border: Border.all(
+                                color: AppThemeData.addressBoxBorderColor),
                             borderRadius: const BorderRadius.all(
                               Radius.circular(5),
                             ),
@@ -1112,13 +1492,13 @@ class _AddressesState extends State<Addresses> {
                                 flex: 7,
                                 child: CountryPickerDropdown(
                                   isFirstDefaultIfInitialValueNotProvided:
-                                  false,
+                                      false,
                                   initialValue: 'BD',
                                   isExpanded: true,
                                   itemBuilder: _buildDropdownItem,
                                   onValuePicked: (Country country) {
                                     setState(() {
-                                      phoneCode=country.phoneCode;
+                                      phoneCode = country.phoneCode;
                                       printLog(country.phoneCode);
                                     });
                                   },
@@ -1144,7 +1524,15 @@ class _AddressesState extends State<Addresses> {
                         SizedBox(height: 16.h),
                         Text(
                           AppTags.country.tr,
-                          style: isMobile(context)? AppThemeData.titleTextStyle_13:AppThemeData.titleTextStyleTab,
+                          style: isMobile(context)
+                              ? AppThemeData.titleTextStyle_13.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.titleTextStyleTab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                         ),
                         SizedBox(
                           height: 8.h,
@@ -1155,7 +1543,8 @@ class _AddressesState extends State<Addresses> {
                           padding: EdgeInsets.symmetric(horizontal: 4.w),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            border: Border.all(color: AppThemeData.addressBoxBorderColor),
+                            border: Border.all(
+                                color: AppThemeData.addressBoxBorderColor),
                             borderRadius: BorderRadius.all(
                               Radius.circular(5.r),
                             ),
@@ -1168,7 +1557,18 @@ class _AddressesState extends State<Addresses> {
                                 child: Text(
                                   editViewModel.data!.address!.country!
                                       .toString(),
-                                  style: isMobile(context)? AppThemeData.hintTextStyle_13:AppThemeData.hintTextStyle_10Tab,
+                                  style: isMobile(context)
+                                      ? AppThemeData.hintTextStyle_13.copyWith(
+                                          fontFamily:
+                                              storage.languageCode == "ar"
+                                                  ? "Cairo Medium"
+                                                  : "Poppins Medium")
+                                      : AppThemeData.hintTextStyle_10Tab
+                                          .copyWith(
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium"),
                                 ),
                               ),
                               // Not necessary for Option 1
@@ -1195,95 +1595,131 @@ class _AddressesState extends State<Addresses> {
                         SizedBox(height: 16.h),
                         Text(
                           AppTags.state.tr,
-                          style: isMobile(context)? AppThemeData.titleTextStyle_13:AppThemeData.titleTextStyleTab,
+                          style: isMobile(context)
+                              ? AppThemeData.titleTextStyle_13.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.titleTextStyleTab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                         ),
                         SizedBox(
                           height: 8.h,
                         ),
                         stateListModel.data != null
                             ? Container(
-                          height: 42.h,
-                          alignment: Alignment.center,
-                          padding:
-                           EdgeInsets.symmetric(horizontal: 4.w),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                                color: AppThemeData.addressBoxBorderColor),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(5.r),
-                            ),
-                          ),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton(
-                              isExpanded: true,
-                              hint: Padding(
-                                padding: EdgeInsets.only(left: 6.w),
-                                child: Text(
-                                  editViewModel.data!.address!.state!
-                                      .toString(),
-                                  style: isMobile(context)? AppThemeData.hintTextStyle_13:AppThemeData.hintTextStyle_10Tab,
+                                height: 42.h,
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.symmetric(horizontal: 4.w),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(
+                                      color:
+                                          AppThemeData.addressBoxBorderColor),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5.r),
+                                  ),
                                 ),
-                              ),
-                              value: _selectedState,
-                              onChanged: (newValue) {
-                                setState(
-                                      () {
-                                    _selectedState = newValue!;
-                                  },
-                                );
-                              },
-                              items: stateListModel.data!.states!
-                                  .map((state) {
-                                return DropdownMenuItem(
-                                  onTap: () async {
-                                    await getCityList(state.id);
-                                    setState(() {});
-                                  },
-                                  value: state.id,
-                                  child: Text(state.name.toString()),
-                                );
-                              }).toList(),
-                            ),
-                          ),
-                        )
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton(
+                                    isExpanded: true,
+                                    hint: Padding(
+                                      padding: EdgeInsets.only(left: 6.w),
+                                      child: Text(
+                                        editViewModel.data!.address!.state!
+                                            .toString(),
+                                        style: isMobile(context)
+                                            ? AppThemeData.hintTextStyle_13
+                                                .copyWith(
+                                                    fontFamily:
+                                                        storage.languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium")
+                                            : AppThemeData.hintTextStyle_10Tab
+                                                .copyWith(
+                                                    fontFamily:
+                                                        storage.languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium"),
+                                      ),
+                                    ),
+                                    value: _selectedState,
+                                    onChanged: (newValue) {
+                                      setState(
+                                        () {
+                                          _selectedState = newValue!;
+                                        },
+                                      );
+                                    },
+                                    items: stateListModel.data!.states!
+                                        .map((state) {
+                                      return DropdownMenuItem(
+                                        onTap: () async {
+                                          await getCityList(state.id);
+                                          setState(() {});
+                                        },
+                                        value: state.id,
+                                        child: Text(state.name.toString()),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              )
                             : Container(
-                          height: 42.h,
-                          alignment: Alignment.center,
-                          padding:
-                           EdgeInsets.symmetric(horizontal: 4.w),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                                color: AppThemeData.addressBoxBorderColor),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(5.r),
-                            ),
-                          ),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton(
-                              isExpanded: true,
-                              hint: Padding(
-                                padding: EdgeInsets.only(left: 6.w),
-                                child: Text(
-                                  editViewModel.data!.address!.state!
-                                      .toString(),
-                                  style: isMobile(context)? AppThemeData.hintTextStyle_13:AppThemeData.hintTextStyle_10Tab,
+                                height: 42.h,
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.symmetric(horizontal: 4.w),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(
+                                      color:
+                                          AppThemeData.addressBoxBorderColor),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5.r),
+                                  ),
+                                ),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton(
+                                    isExpanded: true,
+                                    hint: Padding(
+                                      padding: EdgeInsets.only(left: 6.w),
+                                      child: Text(
+                                        editViewModel.data!.address!.state!
+                                            .toString(),
+                                        style: isMobile(context)
+                                            ? AppThemeData.hintTextStyle_13
+                                                .copyWith(
+                                                    fontFamily:
+                                                        storage.languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium")
+                                            : AppThemeData.hintTextStyle_10Tab
+                                                .copyWith(
+                                                    fontFamily:
+                                                        storage.languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium"),
+                                      ),
+                                    ),
+                                    // Not necessary for Option 1
+                                    value: _selectedState,
+                                    onChanged: (newValue) {
+                                      setState(
+                                        () {
+                                          _selectedState = newValue!;
+                                        },
+                                      );
+                                    },
+                                    items: null,
+                                  ),
                                 ),
                               ),
-                              // Not necessary for Option 1
-                              value: _selectedState,
-                              onChanged: (newValue) {
-                                setState(
-                                      () {
-                                    _selectedState = newValue!;
-                                  },
-                                );
-                              },
-                              items: null,
-                            ),
-                          ),
-                        ),
                         SizedBox(height: 16.h),
                         SizedBox(
                           height: 73.h,
@@ -1296,94 +1732,139 @@ class _AddressesState extends State<Addresses> {
                                   children: [
                                     Text(
                                       AppTags.city.tr,
-                                      style: isMobile(context)? AppThemeData.titleTextStyle_13:AppThemeData.titleTextStyleTab,
+                                      style: isMobile(context)
+                                          ? AppThemeData.titleTextStyle_13
+                                              .copyWith(
+                                                  fontFamily: storage
+                                                              .languageCode ==
+                                                          "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium")
+                                          : AppThemeData.titleTextStyleTab
+                                              .copyWith(
+                                                  fontFamily:
+                                                      storage.languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium"),
                                     ),
                                     SizedBox(
                                       height: 8.h,
                                     ),
                                     cityModel.data != null
                                         ? Container(
-                                      height: 42.h,
-                                      alignment: Alignment.center,
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 4.w),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        border: Border.all(
-                                            color:AppThemeData.addressBoxBorderColor),
-                                        borderRadius:
-                                        BorderRadius.all(
-                                          Radius.circular(5.r),
-                                        ),
-                                      ),
-                                      child: DropdownButtonHideUnderline(
-                                        child: DropdownButton(
-                                          isExpanded: true,
-                                          hint: Padding(
-                                            padding:
-                                             EdgeInsets.only(
-                                                left: 6.w),
-                                            child: Text(
-                                              editViewModel
-                                                  .data!.address!.city!
-                                                  .toString(),
-                                              style: isMobile(context)? AppThemeData.hintTextStyle_13:AppThemeData.hintTextStyle_10Tab,
-                                            ),
-                                          ),
-                                          value: _selectedCity,
-                                          onChanged: (newValue) {
-                                            setState(() {
-                                              _selectedCity = newValue;
-                                            });
-                                          },
-                                          items: cityModel.data!.cities!
-                                              .map((city) {
-                                            return DropdownMenuItem(
-                                              onTap: () {},
-                                              value: city.id,
-                                              child: Text(
-                                                  city.name.toString()),
-                                            );
-                                          }).toList(),
-                                        ),
-                                      ),
-                                    )
-                                        : Container(
-                                      height: 42.h,
-                                      alignment: Alignment.center,
-                                      padding:  EdgeInsets.symmetric(
-                                          horizontal: 4.w),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        border: Border.all(
-                                            color:AppThemeData.addressBoxBorderColor),
-                                        borderRadius:
-                                        BorderRadius.all(
-                                          Radius.circular(5.r),
-                                        ),
-                                      ),
-                                      child: DropdownButtonHideUnderline(
-                                        child: DropdownButton(
-                                            isExpanded: true,
-                                            hint: Padding(
-                                              padding: EdgeInsets.all(
-                                                  6.r),
-                                              child: Text(
-                                                editViewModel
-                                                    .data!.address!.city!
-                                                    .toString(),
-                                                style:isMobile(context)? AppThemeData.hintTextStyle_13:AppThemeData.hintTextStyle_10Tab,
+                                            height: 42.h,
+                                            alignment: Alignment.center,
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 4.w),
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              border: Border.all(
+                                                  color: AppThemeData
+                                                      .addressBoxBorderColor),
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(5.r),
                                               ),
                                             ),
-                                            value: _selectedCity,
-                                            onChanged: (newValue) {
-                                              setState(() {
-                                                _selectedCity = newValue;
-                                              });
-                                            },
-                                            items: null),
-                                      ),
-                                    ),
+                                            child: DropdownButtonHideUnderline(
+                                              child: DropdownButton(
+                                                isExpanded: true,
+                                                hint: Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 6.w),
+                                                  child: Text(
+                                                    editViewModel
+                                                        .data!.address!.city!
+                                                        .toString(),
+                                                    style: isMobile(context)
+                                                        ? AppThemeData
+                                                            .hintTextStyle_13
+                                                            .copyWith(
+                                                                fontFamily: storage
+                                                                            .languageCode ==
+                                                                        "ar"
+                                                                    ? "Cairo Medium"
+                                                                    : "Poppins Medium")
+                                                        : AppThemeData
+                                                            .hintTextStyle_10Tab
+                                                            .copyWith(
+                                                                fontFamily: storage
+                                                                            .languageCode ==
+                                                                        "ar"
+                                                                    ? "Cairo Medium"
+                                                                    : "Poppins Medium"),
+                                                  ),
+                                                ),
+                                                value: _selectedCity,
+                                                onChanged: (newValue) {
+                                                  setState(() {
+                                                    _selectedCity = newValue;
+                                                  });
+                                                },
+                                                items: cityModel.data!.cities!
+                                                    .map((city) {
+                                                  return DropdownMenuItem(
+                                                    onTap: () {},
+                                                    value: city.id,
+                                                    child: Text(
+                                                        city.name.toString()),
+                                                  );
+                                                }).toList(),
+                                              ),
+                                            ),
+                                          )
+                                        : Container(
+                                            height: 42.h,
+                                            alignment: Alignment.center,
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 4.w),
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              border: Border.all(
+                                                  color: AppThemeData
+                                                      .addressBoxBorderColor),
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(5.r),
+                                              ),
+                                            ),
+                                            child: DropdownButtonHideUnderline(
+                                              child: DropdownButton(
+                                                  isExpanded: true,
+                                                  hint: Padding(
+                                                    padding:
+                                                        EdgeInsets.all(6.r),
+                                                    child: Text(
+                                                      editViewModel
+                                                          .data!.address!.city!
+                                                          .toString(),
+                                                      style: isMobile(context)
+                                                          ? AppThemeData
+                                                              .hintTextStyle_13
+                                                              .copyWith(
+                                                                  fontFamily: storage
+                                                                              .languageCode ==
+                                                                          "ar"
+                                                                      ? "Cairo Medium"
+                                                                      : "Poppins Medium")
+                                                          : AppThemeData
+                                                              .hintTextStyle_10Tab
+                                                              .copyWith(
+                                                                  fontFamily: storage
+                                                                              .languageCode ==
+                                                                          "ar"
+                                                                      ? "Cairo Medium"
+                                                                      : "Poppins Medium"),
+                                                    ),
+                                                  ),
+                                                  value: _selectedCity,
+                                                  onChanged: (newValue) {
+                                                    setState(() {
+                                                      _selectedCity = newValue;
+                                                    });
+                                                  },
+                                                  items: null),
+                                            ),
+                                          ),
                                   ],
                                 ),
                               ),
@@ -1398,7 +1879,21 @@ class _AddressesState extends State<Addresses> {
                                   children: [
                                     Text(
                                       AppTags.postalCode.tr,
-                                      style: isMobile(context)? AppThemeData.titleTextStyle_13:AppThemeData.titleTextStyleTab,
+                                      style: isMobile(context)
+                                          ? AppThemeData.titleTextStyle_13
+                                              .copyWith(
+                                                  fontFamily: storage
+                                                              .languageCode ==
+                                                          "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium")
+                                          : AppThemeData.titleTextStyleTab
+                                              .copyWith(
+                                                  fontFamily:
+                                                      storage.languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium"),
                                     ),
                                     SizedBox(
                                       height: 8.h,
@@ -1406,12 +1901,13 @@ class _AddressesState extends State<Addresses> {
                                     Container(
                                       height: 42.h,
                                       alignment: Alignment.center,
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 4.w),
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 4.w),
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         border: Border.all(
-                                            color: AppThemeData.addressBoxBorderColor),
+                                            color: AppThemeData
+                                                .addressBoxBorderColor),
                                         borderRadius: BorderRadius.all(
                                           Radius.circular(5.r),
                                         ),
@@ -1426,8 +1922,21 @@ class _AddressesState extends State<Addresses> {
                                           hintText: editViewModel
                                               .data!.address!.postalCode!
                                               .toString(),
-                                          hintStyle:
-                                          isMobile(context)? AppThemeData.hintTextStyle_13:AppThemeData.hintTextStyle_10Tab,
+                                          hintStyle: isMobile(context)
+                                              ? AppThemeData.hintTextStyle_13
+                                                  .copyWith(
+                                                      fontFamily:
+                                                          storage.languageCode ==
+                                                                  "ar"
+                                                              ? "Cairo Medium"
+                                                              : "Poppins Medium")
+                                              : AppThemeData.hintTextStyle_10Tab
+                                                  .copyWith(
+                                                      fontFamily: storage
+                                                                  .languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium"),
                                           contentPadding: EdgeInsets.only(
                                               left: 8.w,
                                               right: 8.w,
@@ -1446,7 +1955,15 @@ class _AddressesState extends State<Addresses> {
                         ),
                         Text(
                           AppTags.address.tr,
-                          style: isMobile(context)? AppThemeData.titleTextStyle_13:AppThemeData.titleTextStyleTab,
+                          style: isMobile(context)
+                              ? AppThemeData.titleTextStyle_13.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.titleTextStyleTab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                         ),
                         SizedBox(
                           height: 8.h,
@@ -1458,7 +1975,8 @@ class _AddressesState extends State<Addresses> {
                               horizontal: 4.w, vertical: 4.h),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            border: Border.all(color: AppThemeData.addressBoxBorderColor),
+                            border: Border.all(
+                                color: AppThemeData.addressBoxBorderColor),
                             borderRadius: BorderRadius.all(
                               Radius.circular(5.r),
                             ),
@@ -1472,9 +1990,17 @@ class _AddressesState extends State<Addresses> {
                               border: InputBorder.none,
                               hintText: editViewModel.data!.address!.address!
                                   .toString(),
-                              hintStyle: isMobile(context)? AppThemeData.hintTextStyle_13:AppThemeData.hintTextStyle_10Tab,
+                              hintStyle: isMobile(context)
+                                  ? AppThemeData.hintTextStyle_13.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium")
+                                  : AppThemeData.hintTextStyle_10Tab.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium"),
                               contentPadding: EdgeInsets.only(
-                                  left: 8.w, right: 8.w, bottom: 8.h,top: 5.h),
+                                  left: 8.w, right: 8.w, bottom: 8.h, top: 5.h),
                             ),
                           ),
                         ),
@@ -1492,16 +2018,40 @@ class _AddressesState extends State<Addresses> {
                         onTap: () async {
                           await Repository()
                               .updateEditAddress(
-                            name: nameController.text.isNotEmpty?nameController.text.toString():editViewModel.data!.address!.name.toString(),
-                            email: emailController.text.isNotEmpty?emailController.text.toString():editViewModel.data!.address!.email.toString(),
-                            phoneNo: phoneController.text.isNotEmpty?"+$phoneCode ${phoneController.text.toString()}":editViewModel.data!.address!.phoneNo.toString(),
-                            countryId: _selectedCountry ?? int.parse(editViewModel.data!.address!.addressIds!.countryId.toString()),
-                            stateId: _selectedState ?? int.parse(editViewModel.data!.address!.addressIds!.stateId.toString()),
-                            cityId: _selectedCity ?? int.parse(editViewModel.data!.address!.addressIds!.cityId.toString()),
-                            postalCode: postalCodeController.text.isNotEmpty?postalCodeController.text.toString():editViewModel.data!.address!.postalCode.toString(),
-                            address: addressController.text.isNotEmpty?addressController.text.toString():editViewModel.data!.address!.address.toString(),
-                            addressId: addressId!,
-                          )
+                                name: nameController.text.isNotEmpty
+                                    ? nameController.text.toString()
+                                    : editViewModel.data!.address!.name
+                                        .toString(),
+                                email: emailController.text.isNotEmpty
+                                    ? emailController.text.toString()
+                                    : editViewModel.data!.address!.email
+                                        .toString(),
+                                phoneNo: phoneController.text.isNotEmpty
+                                    ? "+$phoneCode ${phoneController.text.toString()}"
+                                    : editViewModel.data!.address!.phoneNo
+                                        .toString(),
+                                countryId: _selectedCountry ??
+                                    int.parse(editViewModel
+                                        .data!.address!.addressIds!.countryId
+                                        .toString()),
+                                stateId: _selectedState ??
+                                    int.parse(editViewModel
+                                        .data!.address!.addressIds!.stateId
+                                        .toString()),
+                                cityId: _selectedCity ??
+                                    int.parse(editViewModel
+                                        .data!.address!.addressIds!.cityId
+                                        .toString()),
+                                postalCode: postalCodeController.text.isNotEmpty
+                                    ? postalCodeController.text.toString()
+                                    : editViewModel.data!.address!.postalCode
+                                        .toString(),
+                                address: addressController.text.isNotEmpty
+                                    ? addressController.text.toString()
+                                    : editViewModel.data!.address!.address
+                                        .toString(),
+                                addressId: addressId!,
+                              )
                               .then((value) => getShippingAddress());
                           Get.back();
                         },
@@ -1511,7 +2061,8 @@ class _AddressesState extends State<Addresses> {
                           height: 42.h,
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            border: Border.all(color: AppThemeData.addressBoxBorderColor),
+                            border: Border.all(
+                                color: AppThemeData.addressBoxBorderColor),
                             borderRadius: BorderRadius.all(
                               Radius.circular(5.r),
                             ),
@@ -1520,7 +2071,15 @@ class _AddressesState extends State<Addresses> {
                             alignment: Alignment.center,
                             child: Text(
                               AppTags.add.tr,
-                              style: isMobile(context)? AppThemeData.buttonTextStyle_13:AppThemeData.buttonTextStyle_10Tab,
+                              style: isMobile(context)
+                                  ? AppThemeData.buttonTextStyle_13.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium")
+                                  : AppThemeData.buttonTextStyle_10Tab.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium"),
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -1542,11 +2101,9 @@ class _AddressesState extends State<Addresses> {
   }
 
   Widget _buildDropdownItem(Country country) => Row(
-    children: <Widget>[
-      CountryPickerUtils.getDefaultFlagImage(country),
-      Text("+${country.phoneCode}"),
-    ],
-  );
+        children: <Widget>[
+          CountryPickerUtils.getDefaultFlagImage(country),
+          Text("+${country.phoneCode}"),
+        ],
+      );
 }
-
-

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:yoori_ecommerce/src/_route/routes.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../../controllers/currency_converter_controller.dart';
 import '../../../controllers/my_wallet_controller.dart';
 import '../../../data/local_data_helper.dart';
@@ -16,6 +17,7 @@ import '../../../widgets/loader/loader_widget.dart';
 class MyWalletScreen extends StatelessWidget {
   final MyWalletController myWalletController = Get.put(MyWalletController());
   final currencyConverterController = Get.find<CurrencyConverterController>();
+  final storage = Get.put(StorageService());
 
   final UserDataModel userDataModel;
   MyWalletScreen({Key? key, required this.userDataModel}) : super(key: key);
@@ -115,7 +117,17 @@ class MyWalletScreen extends StatelessWidget {
                                     "${userDataModel.data!.firstName!.toString()} ${userDataModel.data!.lastName!.toString()}",
                                     style: isMobile(context)
                                         ? AppThemeData.titleTextStyle_14
-                                        : AppThemeData.titleTextStyle_11Tab),
+                                            .copyWith(
+                                                fontFamily:
+                                                    storage.languageCode == "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium")
+                                        : AppThemeData.titleTextStyle_11Tab
+                                            .copyWith(
+                                                fontFamily:
+                                                    storage.languageCode == "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium")),
                               ],
                             ),
                           ),
@@ -151,8 +163,20 @@ class MyWalletScreen extends StatelessWidget {
                                           AppTags.balance.tr,
                                           style: isMobile(context)
                                               ? AppThemeData.profileTextStyle_13
+                                                  .copyWith(
+                                                      fontFamily:
+                                                          storage.languageCode ==
+                                                                  "ar"
+                                                              ? "Cairo Medium"
+                                                              : "Poppins Medium")
                                               : AppThemeData
-                                                  .profileTextStyle_10Tab,
+                                                  .profileTextStyle_10Tab
+                                                  .copyWith(
+                                                      fontFamily: storage
+                                                                  .languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium"),
                                         ),
                                         SizedBox(height: 5.h),
                                         Text(
@@ -175,8 +199,20 @@ class MyWalletScreen extends StatelessWidget {
                                                       : "0"),
                                           style: isMobile(context)
                                               ? AppThemeData.balanceTextStyle_16
+                                                  .copyWith(
+                                                      fontFamily:
+                                                          storage.languageCode ==
+                                                                  "ar"
+                                                              ? "Cairo Medium"
+                                                              : "Poppins Medium")
                                               : AppThemeData
-                                                  .buttonDltTextStyle_12,
+                                                  .buttonDltTextStyle_12
+                                                  .copyWith(
+                                                      fontFamily: storage
+                                                                  .languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium"),
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 2,
                                         ),
@@ -213,8 +249,20 @@ class MyWalletScreen extends StatelessWidget {
                                             style: isMobile(context)
                                                 ? AppThemeData
                                                     .profileTextStyle_13
+                                                    .copyWith(
+                                                        fontFamily: storage
+                                                                    .languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium")
                                                 : AppThemeData
-                                                    .profileTextStyle_10Tab,
+                                                    .profileTextStyle_10Tab
+                                                    .copyWith(
+                                                        fontFamily: storage
+                                                                    .languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium"),
                                           ),
                                           SizedBox(height: 5.h),
                                           SvgPicture.asset(
@@ -275,8 +323,20 @@ class MyWalletScreen extends StatelessWidget {
                                           AppTags.orderTotalAmount.tr,
                                           style: isMobile(context)
                                               ? AppThemeData.walletTextStyle_12
+                                                  .copyWith(
+                                                      fontFamily:
+                                                          storage.languageCode ==
+                                                                  "ar"
+                                                              ? "Cairo Medium"
+                                                              : "Poppins Medium")
                                               : AppThemeData
-                                                  .walletTextStyle_10Tab,
+                                                  .walletTextStyle_10Tab
+                                                  .copyWith(
+                                                      fontFamily: storage
+                                                                  .languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium"),
                                         ),
                                         Text(
                                           myWalletController
@@ -289,6 +349,10 @@ class MyWalletScreen extends StatelessWidget {
                                               ? "- ${currencyConverterController.convertCurrency(myWalletController.myWalletModel.value.data!.recharges![index].amount.toStringAsFixed(2))}"
                                               : " ${currencyConverterController.convertCurrency(myWalletController.myWalletModel.value.data!.recharges![index].amount.toStringAsFixed(2))}",
                                           style: TextStyle(
+                                            fontFamily:
+                                                storage.languageCode == "ar"
+                                                    ? "Cairo Medium"
+                                                    : "Poppins Medium",
                                             color: myWalletController
                                                         .myWalletModel
                                                         .value
@@ -308,7 +372,6 @@ class MyWalletScreen extends StatelessWidget {
                                                         AppThemeData
                                                             .walletMultipleColor
                                                             .length],
-                                            fontFamily: "Poppins Medium",
                                             fontSize: 16.sp,
                                             overflow: TextOverflow.clip,
                                           ),
@@ -319,7 +382,12 @@ class MyWalletScreen extends StatelessWidget {
                                       myWalletController.myWalletModel.value
                                           .data!.recharges![index].transactionId
                                           .toString(),
-                                      style: AppThemeData.walletTextStyle_12,
+                                      style: AppThemeData.walletTextStyle_12
+                                          .copyWith(
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium"),
                                     ),
                                     SizedBox(
                                       height: 4.h,
@@ -331,8 +399,13 @@ class MyWalletScreen extends StatelessWidget {
                                           myWalletController.myWalletModel.value
                                               .data!.recharges![index].date
                                               .toString(),
-                                          style:
-                                              AppThemeData.walletTextStyle_12,
+                                          style: AppThemeData.walletTextStyle_12
+                                              .copyWith(
+                                                  fontFamily:
+                                                      storage.languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium"),
                                         )),
                                         Container(
                                           height: 28.h,
@@ -355,7 +428,13 @@ class MyWalletScreen extends StatelessWidget {
                                                 .replaceAll("_", " ")
                                                 .capitalizeFirstOfEach,
                                             style: AppThemeData
-                                                .paymentTypeTextStyle_13,
+                                                .paymentTypeTextStyle_13
+                                                .copyWith(
+                                                    fontFamily:
+                                                        storage.languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium"),
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
@@ -383,8 +462,13 @@ class MyWalletScreen extends StatelessWidget {
                                                 style: isMobile(context)
                                                     ? AppThemeData
                                                         .paymentStatusTextStyle_13
+                                                        .copyWith(
+                                                            fontFamily: storage.languageCode == "ar"
+                                                                ? "Cairo Medium"
+                                                                : "Poppins Medium")
                                                     : AppThemeData
-                                                        .walletTextStyle_12)),
+                                                        .walletTextStyle_12
+                                                        .copyWith(fontFamily: storage.languageCode == "ar" ? "Cairo Medium" : "Poppins Medium"))),
                                       ],
                                     ),
                                   ],
@@ -433,8 +517,14 @@ class MyWalletScreen extends StatelessWidget {
             Text(
               AppTags.amount.tr,
               style: isMobile(context)
-                  ? AppThemeData.priceTextStyle_14
-                  : AppThemeData.todayDealDiscountPriceStyle,
+                  ? AppThemeData.priceTextStyle_14.copyWith(
+                      fontFamily: storage.languageCode == "ar"
+                          ? "Cairo Medium"
+                          : "Poppins Medium")
+                  : AppThemeData.todayDealDiscountPriceStyle.copyWith(
+                      fontFamily: storage.languageCode == "ar"
+                          ? "Cairo Medium"
+                          : "Poppins Medium"),
               textAlign: TextAlign.center,
             ),
             SizedBox(
@@ -458,8 +548,14 @@ class MyWalletScreen extends StatelessWidget {
                   border: InputBorder.none,
                   hintText: AppTags.enterYourAmount.tr,
                   hintStyle: isMobile(context)
-                      ? AppThemeData.hintTextStyle_13
-                      : AppThemeData.hintTextStyle_10Tab,
+                      ? AppThemeData.hintTextStyle_13.copyWith(
+                          fontFamily: storage.languageCode == "ar"
+                              ? "Cairo Medium"
+                              : "Poppins Medium")
+                      : AppThemeData.hintTextStyle_10Tab.copyWith(
+                          fontFamily: storage.languageCode == "ar"
+                              ? "Cairo Medium"
+                              : "Poppins Medium"),
                   contentPadding: EdgeInsets.only(
                     left: 8.w,
                     right: 8.w,
@@ -472,7 +568,10 @@ class MyWalletScreen extends StatelessWidget {
         ),
       ),
       btnOkText: AppTags.next.tr,
-      buttonsTextStyle: TextStyle(fontSize: 13.sp),
+      buttonsTextStyle: TextStyle(
+          fontFamily:
+              storage.languageCode == "ar" ? "Cairo Medium" : "Poppins Medium",
+          fontSize: 13.sp),
       buttonsBorderRadius: BorderRadius.circular(5),
       btnOkOnPress: () {
         final String? token = LocalDataHelper().getUserToken();

@@ -2,6 +2,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:yoori_ecommerce/src/_route/routes.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../../controllers/dashboard_controller.dart';
 import '../../../utils/app_tags.dart';
 import '../../../utils/app_theme_data.dart';
@@ -9,6 +10,7 @@ import '../../../utils/app_theme_data.dart';
 class RechargeConfirmationScreen extends StatelessWidget {
   RechargeConfirmationScreen({Key? key}) : super(key: key);
   final homeScreenController = Get.find<DashboardController>();
+  final storage = Get.put(StorageService());
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,10 @@ class RechargeConfirmationScreen extends StatelessWidget {
         centerTitle: true,
         title: Text(
           AppTags.confirmation.tr,
-          style: AppThemeData.headerTextStyle_16,
+          style: AppThemeData.headerTextStyle_16.copyWith(
+              fontFamily: storage.languageCode == "ar"
+                  ? "Cairo Medium"
+                  : "Poppins Medium"),
         ),
       ),
       body: SizedBox(
@@ -53,14 +58,20 @@ class RechargeConfirmationScreen extends StatelessWidget {
                   ),
                   Text(
                     AppTags.successfulPayment.tr,
-                    style: AppThemeData.seccessfulPayTextStyle_18,
+                    style: AppThemeData.seccessfulPayTextStyle_18.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                   ),
                   SizedBox(
                     height: 5.h,
                   ),
                   Text(
                     AppTags.thankYouForRecharge.tr,
-                    style: AppThemeData.titleTextStyle_14,
+                    style: AppThemeData.titleTextStyle_14.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                   ),
                   SizedBox(
                     height: 50.h,
@@ -93,7 +104,9 @@ class RechargeConfirmationScreen extends StatelessWidget {
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 13.sp,
-                            fontFamily: "Poppins Medium",
+                            fontFamily: storage.languageCode == "ar"
+                                ? "Cairo Medium"
+                                : "Poppins Medium",
                           ),
                         ),
                       ),

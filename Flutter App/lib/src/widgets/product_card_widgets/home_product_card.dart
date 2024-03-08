@@ -9,6 +9,7 @@ import 'package:yoori_ecommerce/config.dart';
 import 'package:yoori_ecommerce/src/controllers/dashboard_controller.dart';
 import 'package:yoori_ecommerce/src/controllers/details_screen_controller.dart';
 import 'package:yoori_ecommerce/src/controllers/favourite_controller.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import 'package:yoori_ecommerce/src/screen/dashboard/dashboard_screen.dart';
 import 'package:yoori_ecommerce/src/utils/constants.dart';
 import 'package:yoori_ecommerce/src/utils/images.dart';
@@ -40,6 +41,7 @@ class HomeProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     // final productId = Get.parameters['productId'];
     final homeScreenContentController = Get.find<HomeScreenController>();
+    final storage = Get.put(StorageService());
 
     return InkWell(
       onTap: () {
@@ -65,7 +67,8 @@ class HomeProductCard extends StatelessWidget {
         titleStyle: TextStyle(
           fontSize: isMobile(context) ? 10.sp : 7.sp,
           color: dataModel![index].isNew! ? Colors.white : Colors.transparent,
-          fontFamily: 'Poppins Medium',
+          fontFamily:
+              storage.languageCode == "ar" ? "Cairo Medium" : "Poppins Medium",
         ),
         color: AppThemeData.productBannerColor,
         location: RibbonLocation.topEnd,
@@ -103,7 +106,10 @@ class HomeProductCard extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   "${AppTags.reward.tr}: ${dataModel![index].reward}",
-                                  style: AppThemeData.rewardStyle,
+                                  style: AppThemeData.rewardStyle.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium"),
                                 ),
                               ),
                             ),
@@ -114,18 +120,33 @@ class HomeProductCard extends StatelessWidget {
                             textAlign: TextAlign.center,
                             overflow: TextOverflow.ellipsis,
                             style: isMobile(context)
-                                ? AppThemeData.todayDealTitleStyle
-                                : AppThemeData.todayDealTitleStyleTab),
+                                ? AppThemeData.todayDealTitleStyle.copyWith(
+                                    fontFamily: storage.languageCode == "ar"
+                                        ? "Cairo Medium"
+                                        : "Poppins Medium")
+                                : AppThemeData.todayDealTitleStyleTab.copyWith(
+                                    fontFamily: storage.languageCode == "ar"
+                                        ? "Cairo Medium"
+                                        : "Poppins Medium")),
                       ),
                       Text(
                         currencyConverterController
                             .convertCurrency(dataModel![index].discountPrice!),
                         overflow: TextOverflow.ellipsis,
                         style: isMobile(context)
-                            ? AppThemeData.todayDealDiscountPriceStyle
-                                .copyWith(color: Colors.black, fontSize: 20)
+                            ? AppThemeData.todayDealDiscountPriceStyle.copyWith(
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontFamily: storage.languageCode == "ar"
+                                    ? "Cairo Medium"
+                                    : "Poppins Medium")
                             : AppThemeData.todayDealDiscountPriceStyleTab
-                                .copyWith(color: Colors.black, fontSize: 22),
+                                .copyWith(
+                                    color: Colors.black,
+                                    fontSize: 22,
+                                    fontFamily: storage.languageCode == "ar"
+                                        ? "Cairo Medium"
+                                        : "Poppins Medium"),
                       ),
                       SizedBox(height: 5.h),
                       Padding(
@@ -144,8 +165,20 @@ class HomeProductCard extends StatelessWidget {
                                       style: isMobile(context)
                                           ? AppThemeData
                                               .todayDealDiscountPriceStyle
+                                              .copyWith(
+                                                  fontFamily:
+                                                      storage.languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium")
                                           : AppThemeData
-                                              .todayDealDiscountPriceStyleTab,
+                                              .todayDealDiscountPriceStyleTab
+                                              .copyWith(
+                                                  fontFamily:
+                                                      storage.languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium"),
                                     ),
                                   ],
                                 )
@@ -161,10 +194,20 @@ class HomeProductCard extends StatelessWidget {
                                           ? AppThemeData
                                               .todayDealOriginalPriceStyle
                                               .copyWith(
-                                              color: Colors.black87,
-                                            )
+                                                  fontFamily:
+                                                      storage.languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium",
+                                                  color: Colors.black87)
                                           : AppThemeData
-                                              .todayDealOriginalPriceStyleTab,
+                                              .todayDealOriginalPriceStyleTab
+                                              .copyWith(
+                                                  fontFamily:
+                                                      storage.languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium"),
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                     SizedBox(
@@ -204,8 +247,18 @@ class HomeProductCard extends StatelessWidget {
                                                                     context)
                                                                 ? AppThemeData
                                                                     .todayDealNewStyle
+                                                                    .copyWith(
+                                                                        fontFamily: storage.languageCode ==
+                                                                                "ar"
+                                                                            ? "Cairo Medium"
+                                                                            : "Poppins Medium")
                                                                 : AppThemeData
-                                                                    .todayDealNewStyleTab,
+                                                                    .todayDealNewStyleTab
+                                                                    .copyWith(
+                                                                        fontFamily: storage.languageCode ==
+                                                                                "ar"
+                                                                            ? "Cairo Medium"
+                                                                            : "Poppins Medium"),
                                                           ),
                                                         ),
                                                       )
@@ -243,8 +296,16 @@ class HomeProductCard extends StatelessWidget {
                                                                         context)
                                                                     ? AppThemeData
                                                                         .todayDealNewStyle
+                                                                        .copyWith(
+                                                                            fontFamily: storage.languageCode == "ar"
+                                                                                ? "Cairo Medium"
+                                                                                : "Poppins Medium")
                                                                     : AppThemeData
-                                                                        .todayDealNewStyleTab,
+                                                                        .todayDealNewStyleTab
+                                                                        .copyWith(
+                                                                            fontFamily: storage.languageCode == "ar"
+                                                                                ? "Cairo Medium"
+                                                                                : "Poppins Medium"),
                                                               ),
                                                             ),
                                                           )
@@ -272,8 +333,18 @@ class HomeProductCard extends StatelessWidget {
                                                         style: isMobile(context)
                                                             ? AppThemeData
                                                                 .todayDealNewStyle
+                                                                .copyWith(
+                                                                    fontFamily: storage.languageCode ==
+                                                                            "ar"
+                                                                        ? "Cairo Medium"
+                                                                        : "Poppins Medium")
                                                             : AppThemeData
-                                                                .todayDealNewStyleTab,
+                                                                .todayDealNewStyleTab
+                                                                .copyWith(
+                                                                    fontFamily: storage.languageCode ==
+                                                                            "ar"
+                                                                        ? "Cairo Medium"
+                                                                        : "Poppins Medium"),
                                                       ),
                                                     ),
                                                   )
@@ -293,14 +364,20 @@ class HomeProductCard extends StatelessWidget {
                           Text(
                             "FAST TRACK",
                             style: isMobile(context)
-                                ? const TextStyle(
+                                ? TextStyle(
                                     color: Colors.blue,
                                     fontSize: 13,
-                                    fontStyle: FontStyle.italic)
-                                : const TextStyle(
+                                    fontStyle: FontStyle.italic,
+                                    fontFamily: storage.languageCode == "ar"
+                                        ? "Cairo Medium"
+                                        : "Poppins Medium")
+                                : TextStyle(
                                     color: Colors.blue,
                                     fontSize: 15,
-                                    fontStyle: FontStyle.italic),
+                                    fontStyle: FontStyle.italic,
+                                    fontFamily: storage.languageCode == "ar"
+                                        ? "Cairo Medium"
+                                        : "Poppins Medium"),
                             overflow: TextOverflow.ellipsis,
                           ),
                           SizedBox(width: isMobile(context) ? 5.w : 4.w),

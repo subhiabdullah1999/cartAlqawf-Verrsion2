@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 
 import '../_route/routes.dart';
 import '../utils/app_theme_data.dart';
 import '../utils/responsive.dart';
-
 
 class ShopCardWidget extends StatelessWidget {
   final dynamic shop;
@@ -15,6 +15,7 @@ class ShopCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final storage = Get.put(StorageService());
     return InkWell(
       onTap: () {
         Get.toNamed(
@@ -28,8 +29,8 @@ class ShopCardWidget extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           Container(
-            height: isMobile(context)? 200.h : 230.h,
-            width: isMobile(context)?165.w:120.w,
+            height: isMobile(context) ? 200.h : 230.h,
+            width: isMobile(context) ? 165.w : 120.w,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(7.r)),
@@ -86,7 +87,16 @@ class ShopCardWidget extends StatelessWidget {
                         ),
                         Text(
                           shop.shopName!,
-                          style: isMobile(context)? AppThemeData.titleTextStyle_14.copyWith(fontSize: 13.sp):AppThemeData.titleTextStyle_11Tab,
+                          style: isMobile(context)
+                              ? AppThemeData.titleTextStyle_14.copyWith(
+                                  fontSize: 13.sp,
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.titleTextStyle_11Tab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                           maxLines: 1,
                         ),
                       ],
@@ -97,10 +107,10 @@ class ShopCardWidget extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: isMobile(context)? 55.w:42.w,
+            left: isMobile(context) ? 55.w : 42.w,
             child: Container(
               height: 55.h,
-              width: isMobile(context)?55.w:38.w,
+              width: isMobile(context) ? 55.w : 38.w,
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(35.r)),
@@ -115,7 +125,7 @@ class ShopCardWidget extends StatelessWidget {
               ),
               child: Container(
                 height: 60.h,
-                width: isMobile(context)?60.w:38.w,
+                width: isMobile(context) ? 60.w : 38.w,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(

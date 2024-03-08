@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import 'package:yoori_ecommerce/src/utils/images.dart';
 
 import '../_route/routes.dart';
@@ -22,6 +23,7 @@ class ShopCard extends StatefulWidget {
 
 class _ShopCardState extends State<ShopCard> {
   final _followController = Get.put(FavouriteController());
+  final storage = Get.put(StorageService());
 
   bool? isFollowed;
 
@@ -101,7 +103,16 @@ class _ShopCardState extends State<ShopCard> {
                         ),
                         Text(
                           widget.shop.shopName!,
-                          style: isMobile(context)? AppThemeData.titleTextStyle_14.copyWith(fontSize: 12.sp):AppThemeData.titleTextStyle_11Tab,
+                          style: isMobile(context)
+                              ? AppThemeData.titleTextStyle_14.copyWith(
+                                  fontSize: 12.sp,
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                              : AppThemeData.titleTextStyle_11Tab.copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium"),
                           maxLines: 1,
                         ),
                       ],
@@ -132,7 +143,7 @@ class _ShopCardState extends State<ShopCard> {
               },
               child: Container(
                 height: 23.h,
-                width: isMobile(context)? 25.w:18.w,
+                width: isMobile(context) ? 25.w : 18.w,
                 margin: EdgeInsets.all(7.r),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
@@ -147,7 +158,7 @@ class _ShopCardState extends State<ShopCard> {
                   ],
                 ),
                 child: Padding(
-                  padding:  EdgeInsets.all(5.r),
+                  padding: EdgeInsets.all(5.r),
                   child: isFollowed!
                       ? SvgPicture.asset(Images.heartOn)
                       : SvgPicture.asset(Images.heartOff),
@@ -159,12 +170,14 @@ class _ShopCardState extends State<ShopCard> {
             left: 32.w,
             child: Container(
               height: 45.h,
-              width: isMobile(context)? 45.w:28.w,
+              width: isMobile(context) ? 45.w : 28.w,
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                    image: NetworkImage(widget.shop.logo!.toString(),),
+                    image: NetworkImage(
+                      widget.shop.logo!.toString(),
+                    ),
                     fit: BoxFit.cover),
                 boxShadow: [
                   BoxShadow(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ribbon_widget/ribbon_widget.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../controllers/currency_converter_controller.dart';
 import '../../controllers/home_screen_controller.dart';
 import 'package:yoori_ecommerce/src/utils/app_tags.dart';
@@ -18,6 +19,7 @@ class VideoProductCard extends StatelessWidget {
   final dynamic dataModel;
   final int index;
   final currencyConverterController = Get.find<CurrencyConverterController>();
+  final storage = Get.put(StorageService());
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,8 @@ class VideoProductCard extends StatelessWidget {
       title: AppTags.neW.tr,
       titleStyle: TextStyle(
         fontSize: isMobile(context) ? 10.sp : 7.sp,
-        fontFamily: 'Poppins Medium',
+        fontFamily:
+            storage.languageCode == "ar" ? "Cairo Medium" : "Poppins Medium",
       ),
       color: AppThemeData.productBannerColor,
       location: RibbonLocation.topEnd,
@@ -85,7 +88,19 @@ class VideoProductCard extends StatelessWidget {
                                       "${currencyConverterController.convertCurrency(dataModel![index].specialDiscount!)} OFF",
                                       style: isMobile(context)
                                           ? AppThemeData.todayDealNewStyle
-                                          : AppThemeData.todayDealNewStyleTab,
+                                              .copyWith(
+                                                  fontFamily:
+                                                      storage.languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium")
+                                          : AppThemeData.todayDealNewStyleTab
+                                              .copyWith(
+                                                  fontFamily:
+                                                      storage.languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium"),
                                     ),
                                   ),
                                 )
@@ -111,8 +126,20 @@ class VideoProductCard extends StatelessWidget {
                                           textAlign: TextAlign.center,
                                           style: isMobile(context)
                                               ? AppThemeData.todayDealNewStyle
+                                                  .copyWith(
+                                                      fontFamily:
+                                                          storage.languageCode ==
+                                                                  "ar"
+                                                              ? "Cairo Medium"
+                                                              : "Poppins Medium")
                                               : AppThemeData
-                                                  .todayDealNewStyleTab,
+                                                  .todayDealNewStyleTab
+                                                  .copyWith(
+                                                      fontFamily: storage
+                                                                  .languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium"),
                                         ),
                                       ),
                                     )
@@ -134,8 +161,17 @@ class VideoProductCard extends StatelessWidget {
                                 child: Text(
                                   AppTags.stockOut.tr,
                                   style: isMobile(context)
-                                      ? AppThemeData.todayDealNewStyle
-                                      : AppThemeData.todayDealNewStyleTab,
+                                      ? AppThemeData.todayDealNewStyle.copyWith(
+                                          fontFamily:
+                                              storage.languageCode == "ar"
+                                                  ? "Cairo Medium"
+                                                  : "Poppins Medium")
+                                      : AppThemeData.todayDealNewStyleTab
+                                          .copyWith(
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium"),
                                 ),
                               ),
                             )
@@ -166,7 +202,10 @@ class VideoProductCard extends StatelessWidget {
                     child: Center(
                       child: Text(
                         "${AppTags.reward.tr}: ${dataModel![index].reward}",
-                        style: AppThemeData.rewardStyle,
+                        style: AppThemeData.rewardStyle.copyWith(
+                            fontFamily: storage.languageCode == "ar"
+                                ? "Cairo Medium"
+                                : "Poppins Medium"),
                       ),
                     ),
                   ),
@@ -177,8 +216,14 @@ class VideoProductCard extends StatelessWidget {
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
                   style: isMobile(context)
-                      ? AppThemeData.todayDealTitleStyle
-                      : AppThemeData.todayDealTitleStyleTab),
+                      ? AppThemeData.todayDealTitleStyle.copyWith(
+                          fontFamily: storage.languageCode == "ar"
+                              ? "Cairo Medium"
+                              : "Poppins Medium")
+                      : AppThemeData.todayDealTitleStyleTab.copyWith(
+                          fontFamily: storage.languageCode == "ar"
+                              ? "Cairo Medium"
+                              : "Poppins Medium")),
             ),
             SizedBox(height: 5.h),
             Padding(
@@ -193,7 +238,15 @@ class VideoProductCard extends StatelessWidget {
                                 .convertCurrency(dataModel![index].price!),
                             style: isMobile(context)
                                 ? AppThemeData.todayDealDiscountPriceStyle
-                                : AppThemeData.todayDealDiscountPriceStyleTab,
+                                    .copyWith(
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium")
+                                : AppThemeData.todayDealDiscountPriceStyleTab
+                                    .copyWith(
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium"),
                           ),
                         ],
                       )
@@ -206,7 +259,15 @@ class VideoProductCard extends StatelessWidget {
                             ),
                             style: isMobile(context)
                                 ? AppThemeData.todayDealOriginalPriceStyle
-                                : AppThemeData.todayDealOriginalPriceStyleTab,
+                                    .copyWith(
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium")
+                                : AppThemeData.todayDealOriginalPriceStyleTab
+                                    .copyWith(
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium"),
                           ),
                           SizedBox(width: 8.w),
                           Text(
@@ -214,7 +275,15 @@ class VideoProductCard extends StatelessWidget {
                                 dataModel![index].discountPrice!),
                             style: isMobile(context)
                                 ? AppThemeData.todayDealDiscountPriceStyle
-                                : AppThemeData.todayDealDiscountPriceStyleTab,
+                                    .copyWith(
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium")
+                                : AppThemeData.todayDealDiscountPriceStyleTab
+                                    .copyWith(
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium"),
                           ),
                         ],
                       ),

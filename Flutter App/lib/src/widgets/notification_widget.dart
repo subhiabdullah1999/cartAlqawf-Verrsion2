@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import 'package:yoori_ecommerce/src/utils/images.dart';
 
 import '../models/all_notifications.dart';
@@ -17,6 +19,7 @@ class NotificationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final storage = Get.put(StorageService());
     return Container(
       margin: EdgeInsets.only(bottom: isMobile(context) ? 6.h : 10.h),
       width: double.infinity,
@@ -74,14 +77,22 @@ class NotificationWidget extends StatelessWidget {
                     style: TextStyle(
                       fontSize: isMobile(context) ? 14.sp : 11.sp,
                       color: Colors.black,
-                      fontFamily: "Poppins Medium",
+                      fontFamily: storage.languageCode == "ar"
+                          ? "Cairo Medium"
+                          : "Poppins Medium",
                     ),
                   ),
                   Text(notification.details,
                       style: isMobile(context)
-                          ? AppThemeData.addressDefaultTextStyle_10
-                              .copyWith(fontSize: 13.sp)
-                          : AppThemeData.addressDefaultTextStyle_10)
+                          ? AppThemeData.addressDefaultTextStyle_10.copyWith(
+                              fontSize: 13.sp,
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium")
+                          : AppThemeData.addressDefaultTextStyle_10.copyWith(
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium"))
                 ],
               ),
             ),
@@ -95,9 +106,15 @@ class NotificationWidget extends StatelessWidget {
                         ? extractDate(notification.createdAt)
                         : extractTime(notification.createdAt),
                     style: isMobile(context)
-                        ? AppThemeData.hintTextStyle_10Tab
-                        : AppThemeData.hintTextStyle_10Tab
-                            .copyWith(fontSize: 8.sp))
+                        ? AppThemeData.hintTextStyle_10Tab.copyWith(
+                            fontFamily: storage.languageCode == "ar"
+                                ? "Cairo Medium"
+                                : "Poppins Medium")
+                        : AppThemeData.hintTextStyle_10Tab.copyWith(
+                            fontFamily: storage.languageCode == "ar"
+                                ? "Cairo Medium"
+                                : "Poppins Medium",
+                            fontSize: 8.sp))
               ],
             )
           ],

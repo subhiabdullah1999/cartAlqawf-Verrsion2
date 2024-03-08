@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../models/home_data_model.dart';
 import '../utils/app_theme_data.dart';
-
 
 class ShopTypeWidget extends StatelessWidget {
   final HomeDataModel? homeDataModel;
@@ -15,6 +16,7 @@ class ShopTypeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final storage = Get.put(StorageService());
     return SizedBox(
       height: 230.h,
       child: ListView.builder(
@@ -65,7 +67,8 @@ class ShopTypeWidget extends StatelessWidget {
                       ),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsets.only(left: 4.w, bottom: 4.h, top: 4.h),
+                          padding:
+                              EdgeInsets.only(left: 4.w, bottom: 4.h, top: 4.h),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -92,7 +95,10 @@ class ShopTypeWidget extends StatelessWidget {
                               Text(
                                 homeDataModel!
                                     .data![index].bestShops![index].shopName!,
-                                style: AppThemeData.titleTextStyle_14,
+                                style: AppThemeData.titleTextStyle_14.copyWith(
+                                    fontFamily: storage.languageCode == "ar"
+                                        ? "Cairo Medium"
+                                        : "Poppins Medium"),
                                 maxLines: 1,
                               ),
                             ],

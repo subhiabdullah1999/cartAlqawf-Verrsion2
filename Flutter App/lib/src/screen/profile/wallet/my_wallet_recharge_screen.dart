@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../../../config.dart';
 import 'package:yoori_ecommerce/src/_route/routes.dart';
 import '../../../controllers/payment_controller.dart';
@@ -19,7 +20,8 @@ class MyWalletRechargeScreen extends GetView<PaymentController> {
   final String amount = Get.parameters['amount']!;
   final String token = Get.parameters['token']!;
   final String langCurrCode =
-      "lang=${LocalDataHelper().getLangCode()??"en"}&curr=${LocalDataHelper().getCurrCode()}";
+      "lang=${LocalDataHelper().getLangCode() ?? "en"}&curr=${LocalDataHelper().getCurrCode()}";
+  final storage = Get.put(StorageService());
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,10 @@ class MyWalletRechargeScreen extends GetView<PaymentController> {
             centerTitle: true,
             title: Text(
               AppTags.paymentGateway.tr,
-              style: AppThemeData.headerTextStyle_16,
+              style: AppThemeData.headerTextStyle_16.copyWith(
+                  fontFamily: storage.languageCode == "ar"
+                      ? "Cairo Medium"
+                      : "Poppins Medium"),
             ),
           ),
           body: SafeArea(
@@ -60,26 +65,33 @@ class MyWalletRechargeScreen extends GetView<PaymentController> {
                         },
                         onLoadStart: (controller, url) {
                           printLog("LoadStart URL: $url");
-                          if (url == Uri.parse("${Config.apiServerUrl}/payment-success")) {
+                          if (url ==
+                              Uri.parse(
+                                  "${Config.apiServerUrl}/payment-success")) {
                             Get.offAllNamed(Routes.rechargeConfirm);
                           }
                         },
-                        androidOnPermissionRequest: (controller, origin, resources) async {
+                        androidOnPermissionRequest:
+                            (controller, origin, resources) async {
                           return PermissionRequestResponse(
                               resources: resources,
                               action: PermissionRequestResponseAction.GRANT);
                         },
-                        shouldOverrideUrlLoading: (controller, navigationAction) async {
+                        shouldOverrideUrlLoading:
+                            (controller, navigationAction) async {
                           return NavigationActionPolicy.ALLOW;
                         },
                         onLoadStop: (controller, url) async {
                           printLog("${NetworkService.walletRechargeUrl}/login");
                           printLog("LoadStart URL: $url");
-                          if (url == Uri.parse("${Config.apiServerUrl}/payment-success")) {
+                          if (url ==
+                              Uri.parse(
+                                  "${Config.apiServerUrl}/payment-success")) {
                             Get.offAllNamed(Routes.rechargeConfirm);
                           }
                           paymentController.isLoadingUpdate(false);
-                          paymentController.pullToRefreshController.endRefreshing();
+                          paymentController.pullToRefreshController
+                              .endRefreshing();
                           paymentController.webViewController!
                               .evaluateJavascript(
                                   source: "javascript:(function() { "
@@ -108,10 +120,12 @@ class MyWalletRechargeScreen extends GetView<PaymentController> {
                           paymentController.progressUpdate(progress);
 
                           if (progress == 100) {
-                            paymentController.pullToRefreshController.endRefreshing();
+                            paymentController.pullToRefreshController
+                                .endRefreshing();
                           }
                         },
-                        onUpdateVisitedHistory: (controller, url, androidIsReload) {},
+                        onUpdateVisitedHistory:
+                            (controller, url, androidIsReload) {},
                         onConsoleMessage: (controller, consoleMessage) {},
                       ),
                       paymentController.isLoading
