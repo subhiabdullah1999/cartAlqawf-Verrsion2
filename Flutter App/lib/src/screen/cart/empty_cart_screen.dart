@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import 'package:yoori_ecommerce/src/utils/images.dart';
 import '../../controllers/dashboard_controller.dart';
 import 'package:yoori_ecommerce/src/utils/app_tags.dart';
@@ -11,6 +12,8 @@ import 'package:yoori_ecommerce/src/utils/responsive.dart';
 class EmptyCartScreen extends StatelessWidget {
   EmptyCartScreen({Key? key}) : super(key: key);
   final homeScreenController = Get.put(DashboardController());
+  final storage = Get.put(StorageService());
+
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +35,9 @@ class EmptyCartScreen extends StatelessWidget {
           AppTags.emptyCart.tr,
           style: TextStyle(
             fontSize: 16.sp,
-            fontFamily: "Poppins Medium",
+            fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium",
             color: Colors.black,
           ),
         ),
@@ -44,8 +49,14 @@ class EmptyCartScreen extends StatelessWidget {
           child: Text(
             AppTags.emptyCartText.tr,
             style: isMobile(context)
-                ? AppThemeData.dateTextStyle_12
-                : AppThemeData.dateTextStyle_9Tab,
+                ? AppThemeData.dateTextStyle_12.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                : AppThemeData.dateTextStyle_9Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
             textAlign: TextAlign.center,
           ),
         ),
@@ -71,8 +82,14 @@ class EmptyCartScreen extends StatelessWidget {
               ),
               child: Text(AppTags.continueShopping.tr,
                   style: isMobile(context)
-                      ? AppThemeData.buttonTextStyle_14
-                      : AppThemeData.buttonTextStyle_11Tab),
+                      ? AppThemeData.buttonTextStyle_14.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                      : AppThemeData.buttonTextStyle_11Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")),
             ),
           ),
         ),

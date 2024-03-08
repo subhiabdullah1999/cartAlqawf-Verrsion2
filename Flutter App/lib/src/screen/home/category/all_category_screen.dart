@@ -96,7 +96,7 @@ class _AllCategoryState extends State<AllCategory> {
     return Container(
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 243, 11, 11),
+        color: const Color(0xffFFFFFF),
         borderRadius: const BorderRadius.all(
           Radius.circular(10),
         ),

@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../_route/routes.dart';
 import '../../controllers/auth_controller.dart';
 import '../../controllers/dashboard_controller.dart';
@@ -23,6 +24,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
   bool isDark = false;
   int _index = 0;
   final homeScreenController = Get.put(DashboardController());
+  final storage = Get.put(StorageService());
 
   final List _list = [
     {
@@ -149,7 +151,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                     color: _index == index
                                         ? Colors.white
                                         : AppThemeData.headlineTextColor,
-                                    fontFamily: 'Poppins Medium',
+                                    fontFamily: storage.languageCode == "ar"
+                                        ? "Cairo Medium"
+                                        : "Poppins Medium",
                                     fontSize: isMobile(context) ? 13.w : 9.w),
                               )
                             ],
@@ -174,7 +178,10 @@ class _DrawerScreenState extends State<DrawerScreen> {
       body: Center(
         child: Text(
           'Do you Really want to logout?',
-          style: AppThemeData.priceTextStyle_14,
+          style: AppThemeData.priceTextStyle_14.copyWith(
+              fontFamily: storage.languageCode == "ar"
+                  ? "Cairo Medium"
+                  : "Poppins Medium"),
         ),
       ),
       btnOkOnPress: () {

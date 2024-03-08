@@ -8,6 +8,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 import 'package:yoori_ecommerce/src/_route/routes.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import 'package:yoori_ecommerce/src/servers/repository.dart';
 import 'package:yoori_ecommerce/src/data/local_data_helper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,6 +26,7 @@ class SplashController extends GetxController {
   String? whatsNew;
   bool? updateSkippable;
   String? url;
+  final storage = Get.put(StorageService());
 
   videoSplash() {
     videoPlayerController =
@@ -56,6 +58,7 @@ class SplashController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    storage.languageCode = "ar";
     videoSplash();
     packageInfo = await PackageInfo.fromPlatform().then(
       (value) {

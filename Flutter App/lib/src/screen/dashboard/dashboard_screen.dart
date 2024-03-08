@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import 'package:yoori_ecommerce/src/utils/images.dart';
 import '../../controllers/dashboard_controller.dart';
 import '../../screen/cart/cart_screen.dart';
@@ -17,6 +18,8 @@ class DashboardScreen extends StatelessWidget {
   DashboardScreen({Key? key}) : super(key: key);
   final homeController = Get.find<DashboardController>();
   final cartContentController = Get.put(CartContentController());
+  final storage = Get.put(StorageService());
+
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -38,8 +41,11 @@ class DashboardScreen extends StatelessWidget {
           onTap: homeController.changeTabIndex,
           currentIndex: homeController.tabIndex.value,
           selectedItemColor: AppThemeData.buttonColor,
-          selectedLabelStyle:
-              const TextStyle(color: AppThemeData.headlineTextColor),
+          selectedLabelStyle: TextStyle(
+              color: AppThemeData.headlineTextColor,
+              fontFamily: storage.languageCode == "ar"
+                  ? "Cairo Medium"
+                  : "Poppins Medium"),
           elevation: 5.0,
           showSelectedLabels: false,
           showUnselectedLabels: false,
@@ -154,7 +160,12 @@ class DashboardScreen extends StatelessWidget {
                                 .toString()
                             : "0"
                         : "0",
-                    style: TextStyle(color: Colors.white, fontSize: 9.sp),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 9.sp,
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                   ),
                   child: SvgPicture.asset(
                     Images.cart,

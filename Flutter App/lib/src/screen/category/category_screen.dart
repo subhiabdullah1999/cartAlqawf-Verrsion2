@@ -2893,6 +2893,7 @@ import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:yoori_ecommerce/src/_route/routes.dart';
 import 'package:yoori_ecommerce/src/controllers/category_content_controller.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import 'package:yoori_ecommerce/src/utils/app_theme_data.dart';
 import 'package:flutter/material.dart';
 
@@ -2905,6 +2906,7 @@ import '../home/category/product_by_category_screen.dart';
 class CategoryScreen extends StatelessWidget {
   CategoryScreen({Key? key}) : super(key: key);
   final _catController = Get.put(CategoryContentController());
+  final storage = Get.put(StorageService());
 
   @override
   Widget build(BuildContext context) {
@@ -3127,7 +3129,10 @@ class CategoryScreen extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.w),
                     child: Text(AppTags.searchProduct.tr,
-                        style: AppThemeData.hintTextStyle_10Tab),
+                        style: AppThemeData.hintTextStyle_10Tab.copyWith(
+                            fontFamily: storage.languageCode == "ar"
+                                ? "Cairo Medium"
+                                : "Poppins Medium")),
                   )
                 ],
               )),
@@ -3246,8 +3251,14 @@ class CategoryScreen extends StatelessWidget {
                     _catController.categoryList[index].title.toString(),
                     overflow: TextOverflow.ellipsis,
                     style: isMobile(context)
-                        ? AppThemeData.categoryTitleTextStyle_12
-                        : AppThemeData.categoryTitleTextStyle_9Tab,
+                        ? AppThemeData.categoryTitleTextStyle_12.copyWith(
+                            fontFamily: storage.languageCode == "ar"
+                                ? "Cairo Medium"
+                                : "Poppins Medium")
+                        : AppThemeData.categoryTitleTextStyle_9Tab.copyWith(
+                            fontFamily: storage.languageCode == "ar"
+                                ? "Cairo Medium"
+                                : "Poppins Medium"),
                   )
                 ],
               ),

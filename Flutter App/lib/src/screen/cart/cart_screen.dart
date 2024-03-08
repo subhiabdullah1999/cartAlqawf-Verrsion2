@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../_route/routes.dart';
 import '../../controllers/cart_content_controller.dart';
 import '../../controllers/currency_converter_controller.dart';
@@ -26,6 +27,7 @@ class _CartScreenState extends State<CartScreen> {
   late final TextEditingController couponController = TextEditingController();
   late final CartContentController _cartController;
   final currencyConverterController = Get.find<CurrencyConverterController>();
+  final storage = Get.put(StorageService());
 
   @override
   void initState() {
@@ -52,8 +54,14 @@ class _CartScreenState extends State<CartScreen> {
         title: Text(
           AppTags.myCart.tr,
           style: isMobile(context)
-              ? AppThemeData.headerTextStyle_16
-              : AppThemeData.headerTextStyle_14,
+              ? AppThemeData.headerTextStyle_16.copyWith(
+                  fontFamily: storage.languageCode == "ar"
+                      ? "Cairo Medium"
+                      : "Poppins Medium")
+              : AppThemeData.headerTextStyle_14.copyWith(
+                  fontFamily: storage.languageCode == "ar"
+                      ? "Cairo Medium"
+                      : "Poppins Medium"),
         ),
       ),
       body: addToCartListModel.data!.carts!.isNotEmpty
@@ -105,9 +113,14 @@ class _CartScreenState extends State<CartScreen> {
                                     ? AppThemeData.buttonTextStyle_14Reg
                                         .copyWith(
                                             fontSize: 13.sp,
-                                            fontFamily: "Poppins Medium")
-                                    : AppThemeData.buttonTextStyleTab
-                                        .copyWith(fontFamily: "Poppins Medium"),
+                                            fontFamily:
+                                                storage.languageCode == "ar"
+                                                    ? "Cairo Medium"
+                                                    : "Poppins Medium")
+                                    : AppThemeData.buttonTextStyleTab.copyWith(
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium"),
                               ),
                               children: [
                                 Column(
@@ -169,13 +182,17 @@ class _CartScreenState extends State<CartScreen> {
                                                                 .title
                                                                 .toString(),
                                                             style: TextStyle(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontSize: isMobile(
-                                                                      context)
-                                                                  ? 12.sp
-                                                                  : 9.sp,
-                                                            ),
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: isMobile(
+                                                                        context)
+                                                                    ? 12.sp
+                                                                    : 9.sp,
+                                                                fontFamily: storage
+                                                                            .languageCode ==
+                                                                        "ar"
+                                                                    ? "Cairo Medium"
+                                                                    : "Poppins Medium"),
                                                           ),
                                                         ],
                                                       ),
@@ -188,8 +205,18 @@ class _CartScreenState extends State<CartScreen> {
                                                         style: isMobile(context)
                                                             ? AppThemeData
                                                                 .todayDealNewStyle
+                                                                .copyWith(
+                                                                    fontFamily: storage.languageCode ==
+                                                                            "ar"
+                                                                        ? "Cairo Medium"
+                                                                        : "Poppins Medium")
                                                             : AppThemeData
-                                                                .todayDealNewStyleTab,
+                                                                .todayDealNewStyleTab
+                                                                .copyWith(
+                                                                    fontFamily: storage.languageCode ==
+                                                                            "ar"
+                                                                        ? "Cairo Medium"
+                                                                        : "Poppins Medium"),
                                                       ),
                                                     ],
                                                   ),
@@ -225,8 +252,20 @@ class _CartScreenState extends State<CartScreen> {
                                             ),
                                             hintStyle: isMobile(context)
                                                 ? AppThemeData.dateTextStyle_12
+                                                    .copyWith(
+                                                        fontFamily: storage
+                                                                    .languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium")
                                                 : AppThemeData
-                                                    .dateTextStyle_9Tab,
+                                                    .dateTextStyle_9Tab
+                                                    .copyWith(
+                                                        fontFamily: storage
+                                                                    .languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium"),
                                             enabledBorder: OutlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(10.r),
@@ -293,12 +332,16 @@ class _CartScreenState extends State<CartScreen> {
                                                     : Text(
                                                         AppTags.apply.tr,
                                                         style: TextStyle(
-                                                          fontSize:
-                                                              isMobile(context)
-                                                                  ? 12.sp
-                                                                  : 9.sp,
-                                                          color: Colors.white,
-                                                        ),
+                                                            fontSize: isMobile(
+                                                                    context)
+                                                                ? 12.sp
+                                                                : 9.sp,
+                                                            color: Colors.white,
+                                                            fontFamily: storage
+                                                                        .languageCode ==
+                                                                    "ar"
+                                                                ? "Cairo Medium"
+                                                                : "Poppins Medium"),
                                                       ),
                                               ),
                                             ),
@@ -352,16 +395,34 @@ class _CartScreenState extends State<CartScreen> {
                                 Text(
                                   AppTags.subTotal.tr,
                                   style: isMobile(context)
-                                      ? AppThemeData.titleTextStyle_14
-                                      : AppThemeData.titleTextStyle_11Tab,
+                                      ? AppThemeData.titleTextStyle_14.copyWith(
+                                          fontFamily:
+                                              storage.languageCode == "ar"
+                                                  ? "Cairo Medium"
+                                                  : "Poppins Medium")
+                                      : AppThemeData.titleTextStyle_11Tab
+                                          .copyWith(
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium"),
                                 ),
                                 Text(
                                   currencyConverterController.convertCurrency(
                                       addToCartListModel.data!.calculations!
                                           .formattedSubTotal),
                                   style: isMobile(context)
-                                      ? AppThemeData.titleTextStyle_14
-                                      : AppThemeData.titleTextStyle_11Tab,
+                                      ? AppThemeData.titleTextStyle_14.copyWith(
+                                          fontFamily:
+                                              storage.languageCode == "ar"
+                                                  ? "Cairo Medium"
+                                                  : "Poppins Medium")
+                                      : AppThemeData.titleTextStyle_11Tab
+                                          .copyWith(
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium"),
                                 ),
                               ],
                             ),
@@ -371,8 +432,17 @@ class _CartScreenState extends State<CartScreen> {
                                 Text(
                                   AppTags.discount.tr,
                                   style: isMobile(context)
-                                      ? AppThemeData.titleTextStyle_14
-                                      : AppThemeData.titleTextStyle_11Tab,
+                                      ? AppThemeData.titleTextStyle_14.copyWith(
+                                          fontFamily:
+                                              storage.languageCode == "ar"
+                                                  ? "Cairo Medium"
+                                                  : "Poppins Medium")
+                                      : AppThemeData.titleTextStyle_11Tab
+                                          .copyWith(
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium"),
                                 ),
                                 Text(
                                   currencyConverterController.convertCurrency(
@@ -380,8 +450,17 @@ class _CartScreenState extends State<CartScreen> {
                                           .data!.calculations!.formattedDiscount
                                           .toString()),
                                   style: isMobile(context)
-                                      ? AppThemeData.titleTextStyle_14
-                                      : AppThemeData.titleTextStyle_11Tab,
+                                      ? AppThemeData.titleTextStyle_14.copyWith(
+                                          fontFamily:
+                                              storage.languageCode == "ar"
+                                                  ? "Cairo Medium"
+                                                  : "Poppins Medium")
+                                      : AppThemeData.titleTextStyle_11Tab
+                                          .copyWith(
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium"),
                                 ),
                               ],
                             ),
@@ -391,7 +470,17 @@ class _CartScreenState extends State<CartScreen> {
                                 Text(AppTags.deliveryCharge.tr,
                                     style: isMobile(context)
                                         ? AppThemeData.titleTextStyle_14
-                                        : AppThemeData.titleTextStyle_11Tab),
+                                            .copyWith(
+                                                fontFamily:
+                                                    storage.languageCode == "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium")
+                                        : AppThemeData.titleTextStyle_11Tab
+                                            .copyWith(
+                                                fontFamily:
+                                                    storage.languageCode == "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium")),
                                 Text(
                                     currencyConverterController.convertCurrency(
                                         addToCartListModel.data!.calculations!
@@ -399,7 +488,17 @@ class _CartScreenState extends State<CartScreen> {
                                             .toString()),
                                     style: isMobile(context)
                                         ? AppThemeData.titleTextStyle_14
-                                        : AppThemeData.titleTextStyle_11Tab),
+                                            .copyWith(
+                                                fontFamily:
+                                                    storage.languageCode == "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium")
+                                        : AppThemeData.titleTextStyle_11Tab
+                                            .copyWith(
+                                                fontFamily:
+                                                    storage.languageCode == "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium")),
                               ],
                             ),
                             Row(
@@ -408,7 +507,17 @@ class _CartScreenState extends State<CartScreen> {
                                 Text(AppTags.tax.tr,
                                     style: isMobile(context)
                                         ? AppThemeData.titleTextStyle_14
-                                        : AppThemeData.titleTextStyle_11Tab),
+                                            .copyWith(
+                                                fontFamily:
+                                                    storage.languageCode == "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium")
+                                        : AppThemeData.titleTextStyle_11Tab
+                                            .copyWith(
+                                                fontFamily:
+                                                    storage.languageCode == "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium")),
                                 Text(
                                     currencyConverterController.convertCurrency(
                                         addToCartListModel
@@ -416,7 +525,17 @@ class _CartScreenState extends State<CartScreen> {
                                             .toString()),
                                     style: isMobile(context)
                                         ? AppThemeData.titleTextStyle_14
-                                        : AppThemeData.titleTextStyle_11Tab),
+                                            .copyWith(
+                                                fontFamily:
+                                                    storage.languageCode == "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium")
+                                        : AppThemeData.titleTextStyle_11Tab
+                                            .copyWith(
+                                                fontFamily:
+                                                    storage.languageCode == "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium")),
                               ],
                             ),
                             const Divider(),
@@ -426,15 +545,34 @@ class _CartScreenState extends State<CartScreen> {
                                 Text(AppTags.total.tr,
                                     style: isMobile(context)
                                         ? AppThemeData.titleTextStyle_14
-                                        : AppThemeData.titleTextStyle_11Tab),
+                                            .copyWith(
+                                                fontFamily:
+                                                    storage.languageCode == "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium")
+                                        : AppThemeData.titleTextStyle_11Tab
+                                            .copyWith(
+                                                fontFamily:
+                                                    storage.languageCode == "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium")),
                                 Text(
                                   currencyConverterController.convertCurrency(
                                       addToCartListModel
                                           .data!.calculations!.formattedTotal
                                           .toString()),
                                   style: isMobile(context)
-                                      ? AppThemeData.titleTextStyle_14
-                                      : AppThemeData.titleTextStyle_11Tab,
+                                      ? AppThemeData.titleTextStyle_14.copyWith(
+                                          fontFamily:
+                                              storage.languageCode == "ar"
+                                                  ? "Cairo Medium"
+                                                  : "Poppins Medium")
+                                      : AppThemeData.titleTextStyle_11Tab
+                                          .copyWith(
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium"),
                                 ),
                               ],
                             ),

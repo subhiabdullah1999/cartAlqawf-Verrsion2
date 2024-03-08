@@ -3,10 +3,11 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 
 import '../utils/constants.dart';
 import 'home/home_screen.dart';
-
 
 class VerifyEmailPage extends StatefulWidget {
   const VerifyEmailPage({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class VerifyEmailPage extends StatefulWidget {
 class _VerifyEmailPageState extends State<VerifyEmailPage> {
   bool isEmailVerified = false;
   Timer? timer;
+  final storage = Get.put(StorageService());
 
   @override
   void initState() {
@@ -55,34 +57,34 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
       final user = FirebaseAuth.instance.currentUser;
       // await firebase.auth().currentUser.sendEmailVerification();
       await user!.sendEmailVerification().then((value) {
-            printLog("sent email: ");
+        printLog("sent email: ");
       });
-
     } on Exception catch (e) {
       printLog("verification page: error: $e");
     }
   }
 
-
   @override
   Widget build(BuildContext context) => isEmailVerified
       ? HomeScreenContent()
       : Scaffold(
-      appBar: AppBar(
-        title: const Text("Verify your email"),
-        centerTitle: true,
-        elevation: 0,
-
-
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        // crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text("Verification email is sent to you!!",
-              // textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20.sp),
-              textAlign: TextAlign.center),
-        ],
-      ));
+          appBar: AppBar(
+            title: const Text("Verify your email"),
+            centerTitle: true,
+            elevation: 0,
+          ),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text("Verification email is sent to you!!",
+                  // textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 20.sp,
+                      fontFamily: storage.languageCode == "ar"
+                          ? "Cairo Medium"
+                          : "Poppins Medium"),
+                  textAlign: TextAlign.center),
+            ],
+          ));
 }

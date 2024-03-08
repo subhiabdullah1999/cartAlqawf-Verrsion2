@@ -8,6 +8,7 @@ import 'package:country_pickers/country_picker_dropdown.dart';
 import 'package:country_pickers/utils/utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../_route/routes.dart';
 import '../../controllers/currency_converter_controller.dart';
 import '../../models/add_to_cart_list_model.dart';
@@ -44,6 +45,8 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   final postalCodeController = TextEditingController();
   final addressController = TextEditingController();
   final currencyConverterController = Get.find<CurrencyConverterController>();
+  final storage = Get.put(StorageService());
+
   bool isSelectPickup = false;
   bool isSelectBilling = false;
   int? shippingIndex = 0;
@@ -142,7 +145,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                     centerTitle: false,
                     title: Text(
                       AppTags.billingShippingAddress.tr,
-                      style: AppThemeData.headerTextStyle_16,
+                      style: AppThemeData.headerTextStyle_16.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                     ),
                     actions: [
                       Padding(
@@ -150,7 +156,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                         child: TextButton(
                           child: Text(
                             "+ ${AppTags.add.tr}",
-                            style: AppThemeData.addAddressTextStyle_13,
+                            style: AppThemeData.addAddressTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                           ),
                           onPressed: () {
                             if (token != null) {
@@ -191,7 +200,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                     centerTitle: false,
                     title: Text(
                       AppTags.billingShippingAddress.tr,
-                      style: AppThemeData.headerTextStyle_14,
+                      style: AppThemeData.headerTextStyle_14.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                     ),
                     actions: [
                       Padding(
@@ -199,7 +211,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                         child: TextButton(
                           child: Text(
                             "+ ${AppTags.add.tr}",
-                            style: AppThemeData.addAddressTextStyle_10Tab,
+                            style: AppThemeData.addAddressTextStyle_10Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                           ),
                           onPressed: () {
                             if (token != null) {
@@ -304,9 +319,15 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                         Text(AppTags.iWantToPickup.tr,
                                             style: isMobile(context)
                                                 ? AppThemeData
-                                                    .headerTextStyle_14
+                                                    .headerTextStyle_14.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
                                                 : AppThemeData
-                                                    .titleTextStyleTab)
+                                                    .titleTextStyleTab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"))
                                       ],
                                     ),
                                   ),
@@ -350,13 +371,22 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                             hint: Text(
                                                 AppTags.selectPickupPoint.tr,
                                                 style: AppThemeData
-                                                    .hintTextStyle_13),
+                                                    .hintTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")),
                                             // Not necessary for Option 1
                                             value: selectPickUpAddress,
                                             style: isMobile(context)
-                                                ? AppThemeData.titleTextStyle_13
+                                                ? AppThemeData.titleTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
                                                 : AppThemeData
-                                                    .titleTextStyleTab,
+                                                    .titleTextStyleTab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                             onChanged: (newValue) {
                                               setState(() {
                                                 selectPickUpAddress = newValue;
@@ -371,9 +401,15 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                                   pickUp.address.toString(),
                                                   style: isMobile(context)
                                                       ? AppThemeData
-                                                          .titleTextStyle_13
+                                                          .titleTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
                                                       : AppThemeData
-                                                          .titleTextStyleTab,
+                                                          .titleTextStyleTab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                                 ),
                                               );
                                             }).toList(),
@@ -486,9 +522,15 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                                           style: isMobile(
                                                                   context)
                                                               ? AppThemeData
-                                                                  .headerTextStyle_14
+                                                                  .headerTextStyle_14.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
                                                               : AppThemeData
-                                                                  .titleTextStyleTab)
+                                                                  .titleTextStyleTab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"))
                                                     ],
                                                   ),
                                                 ),
@@ -533,8 +575,14 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                 Text(
                                   AppTags.subTotal.tr,
                                   style: isMobile(context)
-                                      ? AppThemeData.titleTextStyle_14
-                                      : AppThemeData.titleTextStyle_11Tab,
+                                      ? AppThemeData.titleTextStyle_14.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                                      : AppThemeData.titleTextStyle_11Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                 ),
                                 Text(
                                     currencyConverterController.convertCurrency(
@@ -542,8 +590,14 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                             .calculations!.formattedSubTotal
                                             .toString()),
                                     style: isMobile(context)
-                                        ? AppThemeData.titleTextStyle_14
-                                        : AppThemeData.titleTextStyle_11Tab),
+                                        ? AppThemeData.titleTextStyle_14.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                                        : AppThemeData.titleTextStyle_11Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")),
                               ],
                             ),
                             Row(
@@ -551,16 +605,28 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                               children: [
                                 Text(AppTags.discount.tr,
                                     style: isMobile(context)
-                                        ? AppThemeData.titleTextStyle_14
-                                        : AppThemeData.titleTextStyle_11Tab),
+                                        ? AppThemeData.titleTextStyle_14.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                                        : AppThemeData.titleTextStyle_11Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")),
                                 Text(
                                     currencyConverterController.convertCurrency(
                                         widget.addToCartListModel!.data!
                                             .calculations!.formattedDiscount
                                             .toString()),
                                     style: isMobile(context)
-                                        ? AppThemeData.titleTextStyle_14
-                                        : AppThemeData.titleTextStyle_11Tab),
+                                        ? AppThemeData.titleTextStyle_14.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                                        : AppThemeData.titleTextStyle_11Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")),
                               ],
                             ),
                             Row(
@@ -568,8 +634,14 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                               children: [
                                 Text(AppTags.deliveryCharge.tr,
                                     style: isMobile(context)
-                                        ? AppThemeData.titleTextStyle_14
-                                        : AppThemeData.titleTextStyle_11Tab),
+                                        ? AppThemeData.titleTextStyle_14.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                                        : AppThemeData.titleTextStyle_11Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")),
                                 Text(
                                     currencyConverterController.convertCurrency(
                                       isSelectPickup
@@ -581,8 +653,14 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                               .formattedShippingCost,
                                     ),
                                     style: isMobile(context)
-                                        ? AppThemeData.titleTextStyle_14
-                                        : AppThemeData.titleTextStyle_11Tab),
+                                        ? AppThemeData.titleTextStyle_14.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                                        : AppThemeData.titleTextStyle_11Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")),
                               ],
                             ),
                             Row(
@@ -590,16 +668,28 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                               children: [
                                 Text(AppTags.tax.tr,
                                     style: isMobile(context)
-                                        ? AppThemeData.titleTextStyle_14
-                                        : AppThemeData.titleTextStyle_11Tab),
+                                        ? AppThemeData.titleTextStyle_14.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                                        : AppThemeData.titleTextStyle_11Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")),
                                 Text(
                                     currencyConverterController.convertCurrency(
                                       widget.addToCartListModel!.data!
                                           .calculations!.formattedTax,
                                     ),
                                     style: isMobile(context)
-                                        ? AppThemeData.titleTextStyle_14
-                                        : AppThemeData.titleTextStyle_11Tab),
+                                        ? AppThemeData.titleTextStyle_14.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                                        : AppThemeData.titleTextStyle_11Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")),
                               ],
                             ),
                             const Divider(),
@@ -608,8 +698,14 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                               children: [
                                 Text(AppTags.total.tr,
                                     style: isMobile(context)
-                                        ? AppThemeData.titleTextStyle_14
-                                        : AppThemeData.titleTextStyle_11Tab),
+                                        ? AppThemeData.titleTextStyle_14.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                                        : AppThemeData.titleTextStyle_11Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")),
                                 Text(
                                     currencyConverterController.convertCurrency(
                                       isSelectPickup
@@ -628,8 +724,14 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                               .calculations!.formattedTotal,
                                     ),
                                     style: isMobile(context)
-                                        ? AppThemeData.titleTextStyle_14
-                                        : AppThemeData.titleTextStyle_11Tab),
+                                        ? AppThemeData.titleTextStyle_14.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                                        : AppThemeData.titleTextStyle_11Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")),
                               ],
                             ),
                             SizedBox(
@@ -779,27 +881,51 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                     Text(
                       "${AppTags.name.tr}: ${shippingAddressModel.data!.addresses![index].name.toString()}",
                       style: isMobile(context)
-                          ? AppThemeData.profileTextStyle_13
-                          : AppThemeData.profileTextStyle_10Tab,
+                          ? AppThemeData.profileTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                          : AppThemeData.profileTextStyle_10Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                     ),
                     SizedBox(height: 8.h),
                     Text(
                         "${AppTags.email.tr}: ${shippingAddressModel.data!.addresses![index].email.toString()}",
                         style: isMobile(context)
-                            ? AppThemeData.profileTextStyle_13
-                            : AppThemeData.profileTextStyle_10Tab),
+                            ? AppThemeData.profileTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                            : AppThemeData.profileTextStyle_10Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")),
                     SizedBox(height: 8.h),
                     Text(
                         "${AppTags.phone.tr}: ${shippingAddressModel.data!.addresses![index].phoneNo.toString()}",
                         style: isMobile(context)
-                            ? AppThemeData.profileTextStyle_13
-                            : AppThemeData.profileTextStyle_10Tab),
+                            ? AppThemeData.profileTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                            : AppThemeData.profileTextStyle_10Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")),
                     SizedBox(height: 8.h),
                     Text(
                         "${AppTags.address.tr}: ${shippingAddressModel.data!.addresses![index].address.toString()}",
                         style: isMobile(context)
-                            ? AppThemeData.profileTextStyle_13
-                            : AppThemeData.profileTextStyle_10Tab),
+                            ? AppThemeData.profileTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                            : AppThemeData.profileTextStyle_10Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")),
                     SizedBox(height: 8.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -861,8 +987,14 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                               padding: EdgeInsets.symmetric(vertical: 8.h),
                               child: Text(AppTags.delete.tr,
                                   style: isMobile(context)
-                                      ? AppThemeData.buttonDltTextStyle_13
-                                      : AppThemeData.buttonDltTextStyle_10Tab),
+                                      ? AppThemeData.buttonDltTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                                      : AppThemeData.buttonDltTextStyle_10Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")),
                             ),
                           ),
                         ),
@@ -894,8 +1026,14 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                               padding: EdgeInsets.symmetric(vertical: 8.h),
                               child: Text(AppTags.edit.tr,
                                   style: isMobile(context)
-                                      ? AppThemeData.buttonTextStyle_13
-                                      : AppThemeData.buttonTextStyle_10Tab),
+                                      ? AppThemeData.buttonTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                                      : AppThemeData.buttonTextStyle_10Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")),
                             ),
                           ),
                         ),
@@ -943,7 +1081,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                       children: [
                         Text(
                           AppTags.home_.tr,
-                          style: AppThemeData.headerTextStyle_14,
+                          style: AppThemeData.headerTextStyle_14.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                         ),
                         InkWell(
                           onTap: () {
@@ -987,21 +1128,39 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                     Text(
                       "${AppTags.name.tr}: ${shippingAddressModel.data!.addresses![index].name.toString()}",
                       style: isMobile(context)
-                          ? AppThemeData.profileTextStyle_13
-                          : AppThemeData.profileTextStyle_10Tab,
+                          ? AppThemeData.profileTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                          : AppThemeData.profileTextStyle_10Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                     ),
                     SizedBox(height: 8.h),
                     Text(
                         "${AppTags.email.tr}: ${shippingAddressModel.data!.addresses![index].email.toString()}",
                         style: isMobile(context)
-                            ? AppThemeData.profileTextStyle_13
-                            : AppThemeData.profileTextStyle_10Tab),
+                            ? AppThemeData.profileTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                            : AppThemeData.profileTextStyle_10Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")),
                     SizedBox(height: 8.h),
                     Text(
                         "${AppTags.phone.tr}: ${shippingAddressModel.data!.addresses![index].phoneNo.toString()}",
                         style: isMobile(context)
-                            ? AppThemeData.profileTextStyle_13
-                            : AppThemeData.profileTextStyle_10Tab),
+                            ? AppThemeData.profileTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                            : AppThemeData.profileTextStyle_10Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")),
                     SizedBox(height: 8.h),
                     Text(
                         "${AppTags.address.tr}: ${shippingAddressModel.data!.addresses![index].address.toString()}",
@@ -1069,8 +1228,14 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                               padding: EdgeInsets.symmetric(vertical: 8.h),
                               child: Text(AppTags.delete.tr,
                                   style: isMobile(context)
-                                      ? AppThemeData.buttonDltTextStyle_13
-                                      : AppThemeData.buttonDltTextStyle_10Tab),
+                                      ? AppThemeData.buttonDltTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                                      : AppThemeData.buttonDltTextStyle_10Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")),
                             ),
                           ),
                         ),
@@ -1102,8 +1267,14 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                               padding: EdgeInsets.symmetric(vertical: 8.h),
                               child: Text(AppTags.edit.tr,
                                   style: isMobile(context)
-                                      ? AppThemeData.buttonTextStyle_13
-                                      : AppThemeData.buttonTextStyle_10Tab),
+                                      ? AppThemeData.buttonTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                                      : AppThemeData.buttonTextStyle_10Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")),
                             ),
                           ),
                         ),
@@ -1295,7 +1466,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                       children: [
                         Text(
                           AppTags.addAddress.tr,
-                          style: AppThemeData.priceTextStyle_14,
+                          style: AppThemeData.priceTextStyle_14.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                         ),
                         InkWell(
                           onTap: () {
@@ -1337,7 +1511,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                               children: [
                                 Text(
                                   AppTags.name.tr,
-                                  style: AppThemeData.titleTextStyle_13,
+                                  style: AppThemeData.titleTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                 ),
                                 SizedBox(height: 8.h),
                                 Container(
@@ -1365,7 +1542,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: AppTags.name.tr,
-                                      hintStyle: AppThemeData.hintTextStyle_13,
+                                      hintStyle: AppThemeData.hintTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                       contentPadding: EdgeInsets.only(
                                         left: 8.w,
                                         right: 8.w,
@@ -1377,7 +1557,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                 SizedBox(height: 10.h),
                                 Text(
                                   AppTags.email.tr,
-                                  style: AppThemeData.titleTextStyle_13,
+                                  style: AppThemeData.titleTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                 ),
                                 SizedBox(height: 8.h),
                                 Container(
@@ -1405,7 +1588,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: AppTags.email.tr,
-                                      hintStyle: AppThemeData.hintTextStyle_13,
+                                      hintStyle: AppThemeData.hintTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                       contentPadding: EdgeInsets.only(
                                         left: 8.w,
                                         right: 8.w,
@@ -1417,7 +1603,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                 SizedBox(height: 10.h),
                                 Text(
                                   AppTags.phone.tr,
-                                  style: AppThemeData.titleTextStyle_13,
+                                  style: AppThemeData.titleTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                 ),
                                 SizedBox(
                                   height: 8.h,
@@ -1482,7 +1671,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                             border: InputBorder.none,
                                             hintText: AppTags.phone.tr,
                                             hintStyle:
-                                                AppThemeData.hintTextStyle_13,
+                                                AppThemeData.hintTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                           ),
                                           onChanged: (value) {},
                                         ),
@@ -1493,7 +1685,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                 SizedBox(height: 10.h),
                                 Text(
                                   AppTags.country.tr,
-                                  style: AppThemeData.titleTextStyle_13,
+                                  style: AppThemeData.titleTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                 ),
                                 SizedBox(height: 8.h),
                                 Container(
@@ -1514,7 +1709,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                       isExpanded: true,
                                       hint: Text(
                                         AppTags.selectCountry.tr,
-                                        style: AppThemeData.hintTextStyle_13,
+                                        style: AppThemeData.hintTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                       ),
                                       value: _selectedCountry,
                                       onChanged: (newValue) {
@@ -1539,7 +1737,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                 SizedBox(height: 16.h),
                                 Text(
                                   AppTags.state.tr,
-                                  style: AppThemeData.titleTextStyle_13,
+                                  style: AppThemeData.titleTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                 ),
                                 SizedBox(
                                   height: 8.h,
@@ -1564,7 +1765,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                             hint: Text(
                                               AppTags.selectState.tr,
                                               style:
-                                                  AppThemeData.hintTextStyle_13,
+                                                  AppThemeData.hintTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                             ),
                                             value: _selectedState,
                                             onChanged: (newValue) {
@@ -1607,7 +1811,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                             isExpanded: true,
                                             hint: Text(AppTags.selectState.tr,
                                                 style: AppThemeData
-                                                    .hintTextStyle_13),
+                                                    .hintTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")),
                                             value: _selectedState,
                                             onChanged: (newValue) {
                                               setState(
@@ -1626,7 +1833,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                   children: [
                                     Text(
                                       AppTags.city.tr,
-                                      style: AppThemeData.titleTextStyle_13,
+                                      style: AppThemeData.titleTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                     ),
                                     SizedBox(
                                       height: 8.h,
@@ -1652,7 +1862,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                                 hint: Text(
                                                   AppTags.selectCity.tr,
                                                   style: AppThemeData
-                                                      .hintTextStyle_13,
+                                                      .hintTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                                 ),
                                                 value: _selectedCity,
                                                 onChanged: (newValue) {
@@ -1692,7 +1905,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                                   hint: Text(
                                                       AppTags.selectCity.tr,
                                                       style: AppThemeData
-                                                          .hintTextStyle_13),
+                                                          .hintTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")),
                                                   value: _selectedCity,
                                                   onChanged: (newValue) {
                                                     setState(() {
@@ -1709,7 +1925,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                 ),
                                 Text(
                                   AppTags.postalCode.tr,
-                                  style: AppThemeData.titleTextStyle_13,
+                                  style: AppThemeData.titleTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                 ),
                                 SizedBox(
                                   height: 8.h,
@@ -1739,7 +1958,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: AppTags.postalCode.tr,
-                                      hintStyle: AppThemeData.hintTextStyle_13,
+                                      hintStyle: AppThemeData.hintTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                       contentPadding: EdgeInsets.only(
                                         left: 8.w,
                                         right: 8.w,
@@ -1753,7 +1975,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                 ),
                                 Text(
                                   AppTags.address.tr,
-                                  style: AppThemeData.titleTextStyle_13,
+                                  style: AppThemeData.titleTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                 ),
                                 SizedBox(
                                   height: 8.h,
@@ -1783,7 +2008,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: AppTags.streetAddress.tr,
-                                      hintStyle: AppThemeData.hintTextStyle_13,
+                                      hintStyle: AppThemeData.hintTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                       contentPadding: EdgeInsets.only(
                                         left: 8.w,
                                         right: 8.w,
@@ -1848,8 +2076,14 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                               child: Text(
                                 AppTags.add.tr,
                                 style: isMobile(context)
-                                    ? AppThemeData.buttonTextStyle_13
-                                    : AppThemeData.buttonTextStyle_10Tab,
+                                    ? AppThemeData.buttonTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                                    : AppThemeData.buttonTextStyle_10Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                 textAlign: TextAlign.center,
                               ),
                             ),
@@ -1883,7 +2117,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                     children: [
                       Text(
                         AppTags.addAddress.tr,
-                        style: AppThemeData.priceTextStyle_14,
+                        style: AppThemeData.priceTextStyle_14.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                       ),
                       InkWell(
                         onTap: () {
@@ -1920,7 +2157,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                       children: [
                         Text(
                           AppTags.name.tr,
-                          style: AppThemeData.titleTextStyle_13,
+                          style: AppThemeData.titleTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                         ),
                         SizedBox(
                           height: 8.h,
@@ -1946,7 +2186,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                               border: InputBorder.none,
                               hintText:
                                   editViewModel.data!.address!.name.toString(),
-                              hintStyle: AppThemeData.hintTextStyle_13,
+                              hintStyle: AppThemeData.hintTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                               contentPadding: EdgeInsets.only(
                                   left: 8.w, right: 8.w, bottom: 8.h),
                             ),
@@ -1955,7 +2198,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                         SizedBox(height: 16.h),
                         Text(
                           AppTags.email.tr,
-                          style: AppThemeData.titleTextStyle_13,
+                          style: AppThemeData.titleTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                         ),
                         SizedBox(
                           height: 8.h,
@@ -1980,7 +2226,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                               border: InputBorder.none,
                               hintText:
                                   editViewModel.data!.address!.email.toString(),
-                              hintStyle: AppThemeData.hintTextStyle_13,
+                              hintStyle: AppThemeData.hintTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                               contentPadding: EdgeInsets.only(
                                   left: 8.w, right: 8.w, bottom: 8.h),
                             ),
@@ -1989,7 +2238,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                         SizedBox(height: 16.h),
                         Text(
                           AppTags.phone.tr,
-                          style: AppThemeData.titleTextStyle_13,
+                          style: AppThemeData.titleTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                         ),
                         SizedBox(
                           height: 8.h,
@@ -2044,7 +2296,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                         SizedBox(height: 16.h),
                         Text(
                           AppTags.country.tr,
-                          style: AppThemeData.titleTextStyle_13,
+                          style: AppThemeData.titleTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                         ),
                         SizedBox(
                           height: 8.h,
@@ -2068,7 +2323,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                 child: Text(
                                   editViewModel.data!.address!.country!
                                       .toString(),
-                                  style: AppThemeData.hintTextStyle_13,
+                                  style: AppThemeData.hintTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                 ),
                               ),
                               // Not necessary for Option 1
@@ -2095,7 +2353,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                         SizedBox(height: 16.h),
                         Text(
                           AppTags.state.tr,
-                          style: AppThemeData.titleTextStyle_13,
+                          style: AppThemeData.titleTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                         ),
                         SizedBox(
                           height: 8.h,
@@ -2121,7 +2382,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                       child: Text(
                                         editViewModel.data!.address!.state!
                                             .toString(),
-                                        style: AppThemeData.hintTextStyle_13,
+                                        style: AppThemeData.hintTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                       ),
                                     ),
                                     value: _selectedState,
@@ -2166,7 +2430,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                       child: Text(
                                         editViewModel.data!.address!.state!
                                             .toString(),
-                                        style: AppThemeData.hintTextStyle_13,
+                                        style: AppThemeData.hintTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                       ),
                                     ),
                                     // Not necessary for Option 1
@@ -2194,7 +2461,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                   children: [
                                     Text(
                                       AppTags.city.tr,
-                                      style: AppThemeData.titleTextStyle_13,
+                                      style: AppThemeData.titleTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                     ),
                                     SizedBox(
                                       height: 8.h,
@@ -2225,7 +2495,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                                         .data!.address!.city!
                                                         .toString(),
                                                     style: AppThemeData
-                                                        .hintTextStyle_13,
+                                                        .hintTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                                   ),
                                                 ),
                                                 value: _selectedCity,
@@ -2271,7 +2544,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                                           .data!.address!.city!
                                                           .toString(),
                                                       style: AppThemeData
-                                                          .hintTextStyle_13,
+                                                          .hintTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                                     ),
                                                   ),
                                                   value: _selectedCity,
@@ -2297,7 +2573,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                   children: [
                                     Text(
                                       AppTags.postalCode.tr,
-                                      style: AppThemeData.titleTextStyle_13,
+                                      style: AppThemeData.titleTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                     ),
                                     SizedBox(
                                       height: 8.h,
@@ -2326,7 +2605,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                               .data!.address!.postalCode!
                                               .toString(),
                                           hintStyle:
-                                              AppThemeData.hintTextStyle_13,
+                                              AppThemeData.hintTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                                           contentPadding: EdgeInsets.only(
                                               left: 8.w,
                                               right: 8.w,
@@ -2345,7 +2627,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                         ),
                         Text(
                           AppTags.address.tr,
-                          style: AppThemeData.titleTextStyle_13,
+                          style: AppThemeData.titleTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                         ),
                         SizedBox(
                           height: 8.h,
@@ -2371,7 +2656,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                               border: InputBorder.none,
                               hintText: editViewModel.data!.address!.address!
                                   .toString(),
-                              hintStyle: AppThemeData.hintTextStyle_13,
+                              hintStyle: AppThemeData.hintTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                               contentPadding: EdgeInsets.only(
                                   left: 8.w, right: 8.w, bottom: 8.h),
                             ),
@@ -2442,8 +2730,14 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                             child: Text(
                               AppTags.add.tr,
                               style: isMobile(context)
-                                  ? AppThemeData.buttonTextStyle_13
-                                  : AppThemeData.buttonTextStyle_10Tab,
+                                  ? AppThemeData.buttonTextStyle_13.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                                  : AppThemeData.buttonTextStyle_10Tab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                               textAlign: TextAlign.center,
                             ),
                           ),

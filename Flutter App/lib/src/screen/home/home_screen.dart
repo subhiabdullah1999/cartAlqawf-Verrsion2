@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:yoori_ecommerce/src/_route/routes.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import 'package:yoori_ecommerce/src/models/home_data_model.dart';
 import 'package:yoori_ecommerce/src/utils/images.dart';
 import '../../controllers/cart_content_controller.dart';
@@ -44,6 +45,7 @@ class HomeScreenContent extends StatelessWidget {
       Get.find<DashboardController>();
   final _cartController = Get.find<CartContentController>();
   final homeScreenContentController = Get.find<HomeScreenController>();
+  final storage = Get.put(StorageService());
   final detailsPageController = Get.lazyPut(
     () => DetailsPageController(),
     fenix: true,
@@ -248,7 +250,13 @@ class HomeScreenContent extends StatelessWidget {
                                   SizedBox(
                                     width: 5,
                                   ),
-                                  Text("Delivery to".tr),
+                                  Text(
+                                    "Delivery to".tr,
+                                    style: TextStyle(
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium"),
+                                  ),
                                   SizedBox(
                                     width: 5,
                                   ),
@@ -306,8 +314,14 @@ class HomeScreenContent extends StatelessWidget {
               child: Text(
                 AppTags.topCategories.tr,
                 style: isMobile(context)
-                    ? AppThemeData.headerTextStyle
-                    : AppThemeData.headerTextStyleTab,
+                    ? AppThemeData.headerTextStyle.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium")
+                    : AppThemeData.headerTextStyleTab.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
               ),
             ),
             InkWell(

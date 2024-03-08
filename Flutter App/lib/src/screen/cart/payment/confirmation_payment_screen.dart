@@ -1,6 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:yoori_ecommerce/src/_route/routes.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../../controllers/dashboard_controller.dart';
 import '../../../controllers/order_history_controller.dart';
 import '../../../utils/app_tags.dart';
@@ -14,6 +15,7 @@ class PaymentConfirmationScreen extends StatelessWidget {
   PaymentConfirmationScreen({Key? key}) : super(key: key);
   final homeScreenController = Get.find<DashboardController>();
   final orderHistory = Get.put(OrderHistoryController());
+  final storage = Get.put(StorageService());
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,10 @@ class PaymentConfirmationScreen extends StatelessWidget {
         centerTitle: true,
         title: Text(
           AppTags.confirmation.tr,
-          style: AppThemeData.headerTextStyle_16,
+          style: AppThemeData.headerTextStyle_16.copyWith(
+              fontFamily: storage.languageCode == "ar"
+                  ? "Cairo Medium"
+                  : "Poppins Medium"),
         ),
       ),
       body: SizedBox(
@@ -58,18 +63,25 @@ class PaymentConfirmationScreen extends StatelessWidget {
                   ),
                   Text(
                     AppTags.successfulPayment.tr,
-                    style: AppThemeData.seccessfulPayTextStyle_18,
+                    style: AppThemeData.seccessfulPayTextStyle_18.copyWith(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium"),
                   ),
                   SizedBox(
                     height: 25.h,
                   ),
-                  Text(
-                    AppTags.thankYouPurchasing.tr,
-                    style: isMobile(context)
-                        ? AppThemeData.titleTextStyle_14
-                        : AppThemeData.titleTextStyle_14
-                            .copyWith(fontSize: 11.sp),
-                  ),
+                  Text(AppTags.thankYouPurchasing.tr,
+                      style: isMobile(context)
+                          ? AppThemeData.titleTextStyle_14.copyWith(
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium")
+                          : AppThemeData.titleTextStyle_14.copyWith(
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium",
+                              fontSize: 11.sp)),
                   SizedBox(
                     height: 50.h,
                   )
@@ -118,7 +130,9 @@ class PaymentConfirmationScreen extends StatelessWidget {
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: isMobile(context) ? 13.sp : 10.sp,
-                                  fontFamily: "Poppins Medium",
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium",
                                 ),
                               ),
                             ),
@@ -148,7 +162,9 @@ class PaymentConfirmationScreen extends StatelessWidget {
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: isMobile(context) ? 13.sp : 10.sp,
-                                  fontFamily: "Poppins Medium",
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium",
                                 ),
                               ),
                             ),
@@ -177,10 +193,12 @@ class PaymentConfirmationScreen extends StatelessWidget {
                       ),
                       child: Text(
                         AppTags.orderHistory.tr,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
                           fontSize: 13,
-                          fontFamily: "Poppins Medium",
+                          fontFamily: storage.languageCode == "ar"
+                              ? "Cairo Medium"
+                              : "Poppins Medium",
                         ),
                       ),
                     ),
