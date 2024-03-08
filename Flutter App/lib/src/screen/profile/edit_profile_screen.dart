@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:yoori_ecommerce/src/controllers/profile_content_controller.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import 'package:yoori_ecommerce/src/servers/repository.dart';
 import 'package:yoori_ecommerce/src/utils/app_tags.dart';
 import 'package:yoori_ecommerce/src/utils/app_theme_data.dart';
@@ -19,9 +20,6 @@ import 'package:yoori_ecommerce/src/utils/responsive.dart';
 import '../../widgets/loader/loader_widget.dart';
 import '../../widgets/login_edit_textform_field.dart';
 
-
-
-
 class EditProfile extends StatefulWidget {
   final ProfileDataModel userDataModel;
   const EditProfile({Key? key, required this.userDataModel}) : super(key: key);
@@ -31,6 +29,8 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
+  final storage = Get.put(StorageService());
+
   TextEditingController? firstNameController;
   TextEditingController? lastNameController;
   TextEditingController? emailController;
@@ -59,6 +59,7 @@ class _EditProfileState extends State<EditProfile> {
       });
     }
   }
+
   @override
   void initState() {
     firstNameController =
@@ -89,46 +90,54 @@ class _EditProfileState extends State<EditProfile> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar:isMobile(context)? AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
+      appBar: isMobile(context)
+          ? AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: IconButton(
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                ),
 
-          onPressed: () {
-            Get.back();
-          }, // null disables the button
-        ),
-        centerTitle: true,
-        title: Text(
-          AppTags.editProfile.tr,
-          style: AppThemeData.headerTextStyle_16,
-        ),
-      ): AppBar(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      toolbarHeight: 60.h,
-      leadingWidth: 40.w,
-      leading: IconButton(
-        icon: Icon(
-          Icons.arrow_back,
-          color: Colors.black,
-          size: 25.r,
-        ),
+                onPressed: () {
+                  Get.back();
+                }, // null disables the button
+              ),
+              centerTitle: true,
+              title: Text(
+                AppTags.editProfile.tr,
+                style: AppThemeData.headerTextStyle_16.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
+              ),
+            )
+          : AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              toolbarHeight: 60.h,
+              leadingWidth: 40.w,
+              leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                  size: 25.r,
+                ),
 
-        onPressed: () {
-          Get.back();
-        }, // null disables the button
-      ),
-      centerTitle: true,
-      title: Text(
-        AppTags.editProfile.tr,
-        style: AppThemeData.headerTextStyle_14,
-      ),
-    ),
+                onPressed: () {
+                  Get.back();
+                }, // null disables the button
+              ),
+              centerTitle: true,
+              title: Text(
+                AppTags.editProfile.tr,
+                style: AppThemeData.headerTextStyle_14.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
+              ),
+            ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 0.w),
         child: SizedBox(
@@ -164,24 +173,25 @@ class _EditProfileState extends State<EditProfile> {
                                 selectedImage!,
                                 fit: BoxFit.cover,
                                 height: 75.h,
-                                width: isMobile(context)? 75.w:50.w,
+                                width: isMobile(context) ? 75.w : 50.w,
                               )
                             : Image.network(
                                 widget.userDataModel.data!.image!,
                                 fit: BoxFit.cover,
                                 height: 75.h,
-                                width:isMobile(context)? 75.w:50.w,
+                                width: isMobile(context) ? 75.w : 50.w,
                               ))
                     : ClipOval(
-                        child: SvgPicture.asset(Images.dUser,
+                        child: SvgPicture.asset(
+                        Images.dUser,
                         fit: BoxFit.cover,
                         height: 75.h,
-                        width: isMobile(context)? 75.w:50.w,
+                        width: isMobile(context) ? 75.w : 50.w,
                       )),
               ),
               Positioned(
                   bottom: 0.h,
-                  right:isMobile(context)? 2.w:0.w,
+                  right: isMobile(context) ? 2.w : 0.w,
                   child: InkWell(
                     onTap: () {
                       chooseImage("Gallery");
@@ -214,7 +224,15 @@ class _EditProfileState extends State<EditProfile> {
           padding: EdgeInsets.only(left: 20.w),
           child: Text(
             AppTags.firstName.tr,
-            style: isMobile(context)? AppThemeData.titleTextStyle_14:AppThemeData.titleTextStyle_11Tab,
+            style: isMobile(context)
+                ? AppThemeData.titleTextStyle_14.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium")
+                : AppThemeData.titleTextStyle_11Tab.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
           ),
         ),
         LoginEditTextField(
@@ -231,7 +249,15 @@ class _EditProfileState extends State<EditProfile> {
           padding: EdgeInsets.only(left: 20.w),
           child: Text(
             AppTags.lastName.tr,
-            style: isMobile(context)? AppThemeData.titleTextStyle_14:AppThemeData.titleTextStyle_11Tab,
+            style: isMobile(context)
+                ? AppThemeData.titleTextStyle_14.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium")
+                : AppThemeData.titleTextStyle_11Tab.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
           ),
         ),
         LoginEditTextField(
@@ -246,10 +272,21 @@ class _EditProfileState extends State<EditProfile> {
         ),
         Padding(
           padding: EdgeInsets.only(left: 20.w),
-          child: Text(AppTags.phone.tr, style: isMobile(context)? AppThemeData.titleTextStyle_14:AppThemeData.titleTextStyle_11Tab,),
+          child: Text(
+            AppTags.phone.tr,
+            style: isMobile(context)
+                ? AppThemeData.titleTextStyle_14.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium")
+                : AppThemeData.titleTextStyle_11Tab.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
+          ),
         ),
         LoginEditTextField(
-          isReadonly: widget.userDataModel.data!.phone!.isEmpty? false:true,
+          isReadonly: widget.userDataModel.data!.phone!.isEmpty ? false : true,
           myController: phoneController,
           keyboardType: TextInputType.text,
           hintText: AppTags.phone.tr,
@@ -261,10 +298,21 @@ class _EditProfileState extends State<EditProfile> {
         ),
         Padding(
           padding: EdgeInsets.only(left: 20.w),
-          child: Text(AppTags.email.tr, style: isMobile(context)? AppThemeData.titleTextStyle_14:AppThemeData.titleTextStyle_11Tab,),
+          child: Text(
+            AppTags.email.tr,
+            style: isMobile(context)
+                ? AppThemeData.titleTextStyle_14.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium")
+                : AppThemeData.titleTextStyle_11Tab.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
+          ),
         ),
         LoginEditTextField(
-          isReadonly: widget.userDataModel.data!.email!.isEmpty? false:true,
+          isReadonly: widget.userDataModel.data!.email!.isEmpty ? false : true,
           myController: emailController,
           keyboardType: TextInputType.text,
           hintText: AppTags.email.tr,
@@ -276,11 +324,23 @@ class _EditProfileState extends State<EditProfile> {
         ),
         Padding(
           padding: EdgeInsets.only(left: 20.w),
-          child: Text(AppTags.gender.tr, style: isMobile(context)? AppThemeData.titleTextStyle_14:AppThemeData.titleTextStyle_11Tab,),
+          child: Text(
+            AppTags.gender.tr,
+            style: isMobile(context)
+                ? AppThemeData.titleTextStyle_14.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium")
+                : AppThemeData.titleTextStyle_11Tab.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
+          ),
         ),
         SizedBox(height: 5.h),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal:isMobile(context)? 15.w:15.w),
+          padding:
+              EdgeInsets.symmetric(horizontal: isMobile(context) ? 15.w : 15.w),
           child: Container(
             decoration: BoxDecoration(
               //color: Color(0xfff3f3f4),
@@ -296,10 +356,26 @@ class _EditProfileState extends State<EditProfile> {
               ],
             ),
             child: Padding(
-              padding: EdgeInsets.only(left: 15.w, right: 10.w,top: isMobile(context)? 3.h:8.h,bottom: isMobile(context)? 3.h:8.h),
+              padding: EdgeInsets.only(
+                  left: 15.w,
+                  right: 10.w,
+                  top: isMobile(context) ? 3.h : 8.h,
+                  bottom: isMobile(context) ? 3.h : 8.h),
               child: DropdownButton<String>(
-                hint: Text(widget.userDataModel.data!.gender!.isNotEmpty?widget.userDataModel.data!.gender!:AppTags.selectGender.tr,
-                    style: isMobile(context)? AppThemeData.titleTextStyle_14:AppThemeData.titleTextStyle_11Tab,),
+                hint: Text(
+                  widget.userDataModel.data!.gender!.isNotEmpty
+                      ? widget.userDataModel.data!.gender!
+                      : AppTags.selectGender.tr,
+                  style: isMobile(context)
+                      ? AppThemeData.titleTextStyle_14.copyWith(
+                          fontFamily: storage.languageCode == "ar"
+                              ? "Cairo Medium"
+                              : "Poppins Medium")
+                      : AppThemeData.titleTextStyle_11Tab.copyWith(
+                          fontFamily: storage.languageCode == "ar"
+                              ? "Cairo Medium"
+                              : "Poppins Medium"),
+                ),
                 value: selectGender,
                 isExpanded: true,
                 underline: Container(),
@@ -313,7 +389,15 @@ class _EditProfileState extends State<EditProfile> {
                     value: user,
                     child: Text(
                       user,
-                      style: isMobile(context)? AppThemeData.titleTextStyle_14:AppThemeData.titleTextStyle_11Tab,
+                      style: isMobile(context)
+                          ? AppThemeData.titleTextStyle_14.copyWith(
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium")
+                          : AppThemeData.titleTextStyle_11Tab.copyWith(
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium"),
                     ),
                   );
                 }).toList(),
@@ -326,7 +410,18 @@ class _EditProfileState extends State<EditProfile> {
         ),
         Padding(
           padding: EdgeInsets.only(left: 20.w),
-          child: Text(AppTags.dateOfBirth.tr, style: isMobile(context)? AppThemeData.titleTextStyle_14:AppThemeData.titleTextStyle_11Tab,),
+          child: Text(
+            AppTags.dateOfBirth.tr,
+            style: isMobile(context)
+                ? AppThemeData.titleTextStyle_14.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium")
+                : AppThemeData.titleTextStyle_11Tab.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
+          ),
         ),
         SizedBox(
           height: 5.h,
@@ -335,7 +430,9 @@ class _EditProfileState extends State<EditProfile> {
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.grey, backgroundColor: Colors.white, elevation: 12,
+                foregroundColor: Colors.grey,
+                backgroundColor: Colors.white,
+                elevation: 12,
                 shadowColor: AppThemeData.boxShadowColor.withOpacity(0.15),
                 padding: EdgeInsets.all(12.r),
                 shape: RoundedRectangleBorder(
@@ -348,10 +445,21 @@ class _EditProfileState extends State<EditProfile> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                      formetedDate != null
-                          ? formetedDate!
-                          : widget.userDataModel.data!.dateOfBirth!.isNotEmpty?widget.userDataModel.data!.dateOfBirth!: AppTags.selectDateOfBirth.tr,
-                      style: isMobile(context)? AppThemeData.titleTextStyle_14:AppThemeData.titleTextStyle_11Tab,),
+                    formetedDate != null
+                        ? formetedDate!
+                        : widget.userDataModel.data!.dateOfBirth!.isNotEmpty
+                            ? widget.userDataModel.data!.dateOfBirth!
+                            : AppTags.selectDateOfBirth.tr,
+                    style: isMobile(context)
+                        ? AppThemeData.titleTextStyle_14.copyWith(
+                            fontFamily: storage.languageCode == "ar"
+                                ? "Cairo Medium"
+                                : "Poppins Medium")
+                        : AppThemeData.titleTextStyle_11Tab.copyWith(
+                            fontFamily: storage.languageCode == "ar"
+                                ? "Cairo Medium"
+                                : "Poppins Medium"),
+                  ),
                   const Icon(Icons.date_range)
                 ],
               ),
@@ -379,7 +487,7 @@ class _EditProfileState extends State<EditProfile> {
           padding: EdgeInsets.all(15.r),
           child: GestureDetector(
             onTap: () {
-              if(isLoading==false){
+              if (isLoading == false) {
                 updateProfile();
               }
             },
@@ -477,10 +585,26 @@ class _EditProfileState extends State<EditProfile> {
                 : null,
             contentPadding: EdgeInsets.only(bottom: 3.h),
             labelText: labelText,
-            labelStyle: isMobile(context)? AppThemeData.labelTextStyle_16 :AppThemeData.priceTextStyle_14,
+            labelStyle: isMobile(context)
+                ? AppThemeData.labelTextStyle_16.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium")
+                : AppThemeData.priceTextStyle_14.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: placeholder,
-            hintStyle:isMobile(context)? AppThemeData.hintTextStyle_13:AppThemeData.hintTextStyle_10Tab),
+            hintStyle: isMobile(context)
+                ? AppThemeData.hintTextStyle_13.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium")
+                : AppThemeData.hintTextStyle_10Tab.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium")),
       ),
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pagination_view/pagination_view.dart';
 import 'package:flutter/material.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../_route/routes.dart';
 import '../../controllers/news_controller.dart';
 import '../../models/all_news_model.dart';
@@ -12,51 +13,61 @@ import '../../widgets/loader/shimmer_all_news.dart';
 
 class AllNews extends StatelessWidget {
   final PaginationViewType paginationViewType = PaginationViewType.gridView;
-  final GlobalKey<PaginationViewState> globalKey = GlobalKey<PaginationViewState>();
+  final GlobalKey<PaginationViewState> globalKey =
+      GlobalKey<PaginationViewState>();
   final NewsController newsController = Get.put(NewsController());
+  final storage = Get.put(StorageService());
 
   AllNews({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: isMobile(context)? AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Get.back();
-          }, // null disables the button
-        ),
-        centerTitle: true,
-        title: Text(
-          AppTags.allNews.tr,
-          style: AppThemeData.headerTextStyle_16,
-        ),
-      ): AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        toolbarHeight: 60.h,
-        leadingWidth: 40.w,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-            size: 25.r,
-          ),
-          onPressed: () {
-            Get.back();
-          }, // null disables the button
-        ),
-        centerTitle: true,
-        title: Text(
-          AppTags.allNews.tr,
-          style: AppThemeData.headerTextStyle_14,
-        ),
-      ),
+      appBar: isMobile(context)
+          ? AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: IconButton(
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  Get.back();
+                }, // null disables the button
+              ),
+              centerTitle: true,
+              title: Text(
+                AppTags.allNews.tr,
+                style: AppThemeData.headerTextStyle_16.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
+              ),
+            )
+          : AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              toolbarHeight: 60.h,
+              leadingWidth: 40.w,
+              leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                  size: 25.r,
+                ),
+                onPressed: () {
+                  Get.back();
+                }, // null disables the button
+              ),
+              centerTitle: true,
+              title: Text(
+                AppTags.allNews.tr,
+                style: AppThemeData.headerTextStyle_14.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
+              ),
+            ),
       body: PaginationView<AllNewsDataModel>(
         key: globalKey,
         paginationViewType: paginationViewType,
@@ -72,11 +83,11 @@ class AllNews extends StatelessWidget {
           child: CircularProgressIndicator(),
         ),
         initialLoader: const ShimmerAllNews(),
-        gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: isMobile(context)? 2:3,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: isMobile(context) ? 2 : 3,
           childAspectRatio: 0.85,
-          mainAxisSpacing: isMobile(context)? 15:20,
-          crossAxisSpacing: isMobile(context)? 15:20,
+          mainAxisSpacing: isMobile(context) ? 15 : 20,
+          crossAxisSpacing: isMobile(context) ? 15 : 20,
         ),
         itemBuilder: (BuildContext context, AllNewsDataModel news, int index) {
           return InkWell(
@@ -103,7 +114,7 @@ class AllNews extends StatelessWidget {
                         spreadRadius: 0,
                         blurRadius: 10.r,
                         offset:
-                        const Offset(0, 3), // changes position of shadow
+                            const Offset(0, 3), // changes position of shadow
                       ),
                     ],
                   ),
@@ -128,13 +139,23 @@ class AllNews extends StatelessWidget {
                       Expanded(
                         child: Padding(
                           padding:
-                          EdgeInsets.only(left: 4.w, bottom: 4.h, top: 4.h),
+                              EdgeInsets.only(left: 4.w, bottom: 4.h, top: 4.h),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
                                 news.title!,
-                                style: isMobile(context)? AppThemeData.titleTextStyle_14:AppThemeData.titleTextStyle_11Tab,
+                                style: isMobile(context)
+                                    ? AppThemeData.titleTextStyle_14.copyWith(
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium")
+                                    : AppThemeData.titleTextStyle_11Tab
+                                        .copyWith(
+                                            fontFamily:
+                                                storage.languageCode == "ar"
+                                                    ? "Cairo Medium"
+                                                    : "Poppins Medium"),
                                 maxLines: 1,
                               ),
                               SizedBox(
@@ -142,7 +163,15 @@ class AllNews extends StatelessWidget {
                               ),
                               Text(
                                 news.shortDescription!,
-                                style:isMobile(context)? AppThemeData.qsTextStyle_12:AppThemeData.qsTextStyle_9Tab,
+                                style: isMobile(context)
+                                    ? AppThemeData.qsTextStyle_12.copyWith(
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium")
+                                    : AppThemeData.qsTextStyle_9Tab.copyWith(
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium"),
                                 maxLines: 3,
                               ),
                             ],

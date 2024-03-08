@@ -4,6 +4,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:yoori_ecommerce/config.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import '../../controllers/news_controller.dart';
 import '../../utils/app_theme_data.dart';
 import 'package:yoori_ecommerce/src/utils/responsive.dart';
@@ -14,6 +15,7 @@ class NewsScreen extends GetView<NewsController> {
   final String title = Get.parameters['title']!;
   final String url = Get.parameters['url']!;
   final String image = Get.parameters['image']!;
+  final storage = Get.put(StorageService());
 
   @override
   Widget build(BuildContext context) {
@@ -21,54 +23,65 @@ class NewsScreen extends GetView<NewsController> {
       builder: (newsController) {
         return Scaffold(
           extendBody: true,
-          appBar: isMobile(context)? AppBar(
-            backgroundColor: Colors.white,
-            elevation: 0,
-            leading: IconButton(
-              icon: const Icon(
-                Icons.arrow_back,
-                color: Colors.black,
-              ),
-              onPressed: () {
-                Get.back();
-              }, // null disables the button
-            ),
-          ): AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          toolbarHeight: 60.h,
-          leadingWidth: 40.w,
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-              size: 25.r,
-            ),
+          appBar: isMobile(context)
+              ? AppBar(
+                  backgroundColor: Colors.white,
+                  elevation: 0,
+                  leading: IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      Get.back();
+                    }, // null disables the button
+                  ),
+                )
+              : AppBar(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  toolbarHeight: 60.h,
+                  leadingWidth: 40.w,
+                  leading: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: Colors.black,
+                      size: 25.r,
+                    ),
 
-            onPressed: () {
-              Get.back();
-            }, // null disables the button
-          ),
-
-        ),
+                    onPressed: () {
+                      Get.back();
+                    }, // null disables the button
+                  ),
+                ),
           body: SafeArea(
             child: Padding(
               padding: EdgeInsets.all(10.r),
               child: Column(
                 children: [
-
                   SizedBox(
                     height: 180.h,
-                      width: MediaQuery.of(context).size.width-30,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.network(image,fit: BoxFit.fill,),
+                    width: MediaQuery.of(context).size.width - 30,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.network(
+                        image,
+                        fit: BoxFit.fill,
                       ),
+                    ),
                   ),
                   SizedBox(height: 10.h),
                   Text(
                     title,
-                    style: isMobile(context)? AppThemeData.buttonTextStyle_14Reg:AppThemeData.buttonTextStyleTab,
+                    style: isMobile(context)
+                        ? AppThemeData.buttonTextStyle_14Reg.copyWith(
+                            fontFamily: storage.languageCode == "ar"
+                                ? "Cairo Medium"
+                                : "Poppins Medium")
+                        : AppThemeData.buttonTextStyleTab.copyWith(
+                            fontFamily: storage.languageCode == "ar"
+                                ? "Cairo Medium"
+                                : "Poppins Medium"),
                     maxLines: 2,
                     textAlign: TextAlign.center,
                   ),
@@ -101,8 +114,8 @@ class NewsScreen extends GetView<NewsController> {
                           },
                           shouldOverrideUrlLoading:
                               (controller, navigationAction) async {
-                                return null;
-                              },
+                            return null;
+                          },
                           onLoadStop: (controller, url) async {
                             newsController.isLoadingUpdate(false);
                             newsController.pullToRefreshController
@@ -115,10 +128,12 @@ class NewsScreen extends GetView<NewsController> {
                           onProgressChanged: (controller, progress) {
                             newsController.progressUpdate(progress);
                             if (progress == 100) {
-                              newsController.pullToRefreshController.endRefreshing();
+                              newsController.pullToRefreshController
+                                  .endRefreshing();
                             }
                           },
-                          onUpdateVisitedHistory: (controller, url, androidIsReload) {},
+                          onUpdateVisitedHistory:
+                              (controller, url, androidIsReload) {},
                           onConsoleMessage: (controller, consoleMessage) {},
                         ),
                         newsController.isLoading

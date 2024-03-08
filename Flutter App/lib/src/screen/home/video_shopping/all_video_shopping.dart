@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pagination_view/pagination_view.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import 'package:yoori_ecommerce/src/servers/repository.dart';
 import 'package:yoori_ecommerce/src/utils/app_tags.dart';
 import '../../../models/video_shopping_model.dart';
@@ -21,6 +22,7 @@ class _AllVideoShoppingState extends State<AllVideoShopping> {
   int page = 0;
   PaginationViewType paginationViewType = PaginationViewType.gridView;
   final GlobalKey<PaginationViewState> _key = GlobalKey<PaginationViewState>();
+  final storage = Get.put(StorageService());
 
   Future<List<Data>> getData(int offset) async {
     //page = (offset / 1).round();
@@ -31,45 +33,53 @@ class _AllVideoShoppingState extends State<AllVideoShopping> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: isMobile(context)? AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Get.back();
-          },
-        ),
-        centerTitle: true,
-        title: Text(
-          AppTags.videoShopping.tr,
-          style: AppThemeData.headerTextStyle_16,
-        ),
-      ): AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        toolbarHeight: 60.h,
-        leadingWidth: 40.w,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-            size: 25.r,
-          ),
+      appBar: isMobile(context)
+          ? AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: IconButton(
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  Get.back();
+                },
+              ),
+              centerTitle: true,
+              title: Text(
+                AppTags.videoShopping.tr,
+                style: AppThemeData.headerTextStyle_16.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
+              ),
+            )
+          : AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              toolbarHeight: 60.h,
+              leadingWidth: 40.w,
+              leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                  size: 25.r,
+                ),
 
-          onPressed: () {
-            Get.back();
-          }, // null disables the button
-        ),
-        centerTitle: true,
-        title: Text(
-          AppTags.videoShopping.tr,
-          style: AppThemeData.headerTextStyle_14,
-        ),
-      ),
+                onPressed: () {
+                  Get.back();
+                }, // null disables the button
+              ),
+              centerTitle: true,
+              title: Text(
+                AppTags.videoShopping.tr,
+                style: AppThemeData.headerTextStyle_14.copyWith(
+                    fontFamily: storage.languageCode == "ar"
+                        ? "Cairo Medium"
+                        : "Poppins Medium"),
+              ),
+            ),
       body: PaginationView<Data>(
         key: _key,
         paginationViewType: paginationViewType,
@@ -84,10 +94,10 @@ class _AllVideoShoppingState extends State<AllVideoShopping> {
         bottomLoader: const ShimmerVideoBottomLoader(),
         initialLoader: const ShimmerAllVideoShopping(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: isMobile(context)? 3:4,
+          crossAxisCount: isMobile(context) ? 3 : 4,
           childAspectRatio: 0.68,
-          mainAxisSpacing: isMobile(context)? 10:20,
-          crossAxisSpacing: isMobile(context)? 10:20,
+          mainAxisSpacing: isMobile(context) ? 10 : 20,
+          crossAxisSpacing: isMobile(context) ? 10 : 20,
         ),
         itemBuilder: (BuildContext context, Data productVideo, int index) {
           return VideoShoppingCard(

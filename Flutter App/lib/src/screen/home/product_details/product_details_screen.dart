@@ -8,6 +8,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoori_ecommerce/src/_route/routes.dart';
+import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import 'package:yoori_ecommerce/src/utils/images.dart';
 import '../../../controllers/cart_content_controller.dart';
 import '../../../controllers/color_selection_controller.dart';
@@ -44,6 +45,7 @@ class DetailsPage extends StatelessWidget {
   final _favouriteController = Get.find<FavouriteController>();
   final _cartController = Get.find<CartContentController>();
   final _colorSelectionController = Get.put(ColorSelectionController());
+  final storage = Get.put(StorageService());
 
   final productId = Get.parameters['productId'];
   dynamic sizeValue;
@@ -82,7 +84,10 @@ class DetailsPage extends StatelessWidget {
       centerTitle: true,
       title: Text(
         AppTags.productDetails.tr,
-        style: AppThemeData.headerTextStyle_16,
+        style: AppThemeData.headerTextStyle_16.copyWith(
+            fontFamily: storage.languageCode == "ar"
+                ? "Cairo Medium"
+                : "Poppins Medium"),
       ),
       actions: [
         Row(
@@ -114,7 +119,11 @@ class DetailsPage extends StatelessWidget {
                       cartContentController
                           .addToCartListModel.data!.carts!.length
                           .toString(),
-                      style: const TextStyle(color: Colors.white),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: storage.languageCode == "ar"
+                              ? "Cairo Medium"
+                              : "Poppins Medium"),
                     ),
                     child: SvgPicture.asset(
                       Images.shoppingBag,
@@ -202,7 +211,10 @@ class DetailsPage extends StatelessWidget {
       centerTitle: true,
       title: Text(
         AppTags.productDetails.tr,
-        style: AppThemeData.whyUsTextStyle_13,
+        style: AppThemeData.whyUsTextStyle_13.copyWith(
+            fontFamily: storage.languageCode == "ar"
+                ? "Cairo Medium"
+                : "Poppins Medium"),
       ),
       actions: [
         Row(
@@ -235,7 +247,12 @@ class DetailsPage extends StatelessWidget {
                       cartContentController
                           .addToCartListModel.data!.carts!.length
                           .toString(),
-                      style: TextStyle(color: Colors.white, fontSize: 10.sp),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 10.sp,
+                          fontFamily: storage.languageCode == "ar"
+                              ? "Cairo Medium"
+                              : "Poppins Medium"),
                     ),
                     child: SvgPicture.asset(
                       Images.shoppingBag,
@@ -389,6 +406,12 @@ class DetailsPage extends StatelessWidget {
                                                     style: isMobile(context)
                                                         ? AppThemeData
                                                             .todayDealNewStyle
+                                                            .copyWith(
+                                                                fontFamily: storage
+                                                                            .languageCode ==
+                                                                        "ar"
+                                                                    ? "Cairo Medium"
+                                                                    : "Poppins Medium")
                                                         : AppThemeData
                                                             .todayDealNewStyleTab,
                                                   ),
@@ -420,8 +443,18 @@ class DetailsPage extends StatelessWidget {
                                                         style: isMobile(context)
                                                             ? AppThemeData
                                                                 .todayDealNewStyle
+                                                                .copyWith(
+                                                                    fontFamily: storage.languageCode ==
+                                                                            "ar"
+                                                                        ? "Cairo Medium"
+                                                                        : "Poppins Medium")
                                                             : AppThemeData
-                                                                .todayDealNewStyleTab,
+                                                                .todayDealNewStyleTab
+                                                                .copyWith(
+                                                                    fontFamily: storage.languageCode ==
+                                                                            "ar"
+                                                                        ? "Cairo Medium"
+                                                                        : "Poppins Medium"),
                                                       ),
                                                     ),
                                                   )
@@ -447,8 +480,20 @@ class DetailsPage extends StatelessWidget {
                                             AppTags.stockOut.tr,
                                             style: isMobile(context)
                                                 ? AppThemeData.todayDealNewStyle
+                                                    .copyWith(
+                                                        fontFamily: storage
+                                                                    .languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium")
                                                 : AppThemeData
-                                                    .todayDealNewStyleTab,
+                                                    .todayDealNewStyleTab
+                                                    .copyWith(
+                                                        fontFamily: storage
+                                                                    .languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium"),
                                           ),
                                         ),
                                       )
@@ -485,7 +530,17 @@ class DetailsPage extends StatelessWidget {
                                   "${detailsController.productImageNumber.value + 1}/${detailsModel.data!.images!.length}",
                                   style: isMobile(context)
                                       ? AppThemeData.orderHistoryTextStyle_12
-                                      : AppThemeData.orderHistoryTextStyle_9Tab,
+                                          .copyWith(
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium")
+                                      : AppThemeData.orderHistoryTextStyle_9Tab
+                                          .copyWith(
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium"),
                                 ),
                               ),
                             ),
@@ -520,7 +575,12 @@ class DetailsPage extends StatelessWidget {
                                 SizedBox(width: 4.w),
                                 Text(
                                   detailsModel.data!.rating.toString(),
-                                  style: AppThemeData.reatingTextStyle_12,
+                                  style: AppThemeData.reatingTextStyle_12
+                                      .copyWith(
+                                          fontFamily:
+                                              storage.languageCode == "ar"
+                                                  ? "Cairo Medium"
+                                                  : "Poppins Medium"),
                                 ),
                               ],
                             ),
@@ -764,7 +824,17 @@ class DetailsPage extends StatelessWidget {
                                     maxLines: 2,
                                     style: isMobile(context)
                                         ? AppThemeData.labelTextStyle_16
-                                        : AppThemeData.labelTextStyle_12tab,
+                                            .copyWith(
+                                                fontFamily:
+                                                    storage.languageCode == "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium")
+                                        : AppThemeData.labelTextStyle_12tab
+                                            .copyWith(
+                                                fontFamily:
+                                                    storage.languageCode == "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium"),
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
@@ -811,7 +881,11 @@ class DetailsPage extends StatelessWidget {
                                       detailsController.sizeProd[0].toString(),
                                       style: TextStyle(color: Colors.grey[500]),
                                     ),
-                                    style: TextStyle(color: Colors.grey[500]),
+                                    style: TextStyle(
+                                        fontFamily: storage.languageCode == "ar"
+                                            ? "Cairo Medium"
+                                            : "Poppins Medium",
+                                        color: Colors.grey[500]),
                                     value: sizeValue,
                                     onChanged: (newValue) {
                                       sizeValue = newValue!;
@@ -898,13 +972,25 @@ class DetailsPage extends StatelessWidget {
                                                             .phone
                                                             .toString(),
                                                     style: AppThemeData
-                                                        .detailsScreenPhoneNumber,
+                                                        .detailsScreenPhoneNumber
+                                                        .copyWith(
+                                                            fontFamily: storage
+                                                                        .languageCode ==
+                                                                    "ar"
+                                                                ? "Cairo Medium"
+                                                                : "Poppins Medium"),
                                                   ),
                                                   Text(
                                                     AppTags
                                                         .clickHereToSeePhone.tr,
                                                     style: AppThemeData
-                                                        .detailsScreenPhoneNumberShow,
+                                                        .detailsScreenPhoneNumberShow
+                                                        .copyWith(
+                                                            fontFamily: storage
+                                                                        .languageCode ==
+                                                                    "ar"
+                                                                ? "Cairo Medium"
+                                                                : "Poppins Medium"),
                                                   ),
                                                 ]),
                                           ),
@@ -925,8 +1011,20 @@ class DetailsPage extends StatelessWidget {
                                                   style: isMobile(context)
                                                       ? AppThemeData
                                                           .seccessfulPayTextStyle_18
+                                                          .copyWith(
+                                                              fontFamily: storage
+                                                                          .languageCode ==
+                                                                      "ar"
+                                                                  ? "Cairo Medium"
+                                                                  : "Poppins Medium")
                                                       : AppThemeData
-                                                          .headerTextStyle_14,
+                                                          .headerTextStyle_14
+                                                          .copyWith(
+                                                              fontFamily: storage
+                                                                          .languageCode ==
+                                                                      "ar"
+                                                                  ? "Cairo Medium"
+                                                                  : "Poppins Medium"),
                                                 ),
                                               ],
                                             )
@@ -937,8 +1035,20 @@ class DetailsPage extends StatelessWidget {
                                                   style: isMobile(context)
                                                       ? AppThemeData
                                                           .seccessfulPayTextStyle_18
+                                                          .copyWith(
+                                                              fontFamily: storage
+                                                                          .languageCode ==
+                                                                      "ar"
+                                                                  ? "Cairo Medium"
+                                                                  : "Poppins Medium")
                                                       : AppThemeData
-                                                          .headerTextStyle_14,
+                                                          .headerTextStyle_14
+                                                          .copyWith(
+                                                              fontFamily: storage
+                                                                          .languageCode ==
+                                                                      "ar"
+                                                                  ? "Cairo Medium"
+                                                                  : "Poppins Medium"),
                                                 ),
                                                 SizedBox(width: 5.w),
                                                 Text(
@@ -949,7 +1059,11 @@ class DetailsPage extends StatelessWidget {
                                                     fontSize: isMobile(context)
                                                         ? 14.sp
                                                         : 11.sp,
-                                                    fontFamily: "Poppins",
+                                                    fontFamily:
+                                                        storage.languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium",
                                                   ),
                                                 ),
                                               ],
@@ -1012,8 +1126,11 @@ class DetailsPage extends StatelessWidget {
                                                             : AppThemeData
                                                                 .labelTextStyle_12tab
                                                                 .copyWith(
-                                                                fontFamily:
-                                                                    "Poppins",
+                                                                fontFamily: storage
+                                                                            .languageCode ==
+                                                                        "ar"
+                                                                    ? "Cairo Medium"
+                                                                    : "Poppins Medium",
                                                                 fontSize: 13.sp,
                                                               ),
                                                         key: ValueKey(
@@ -1080,14 +1197,37 @@ class DetailsPage extends StatelessWidget {
                                         Text("${AppTags.delivery.tr}:",
                                             style: isMobile(context)
                                                 ? AppThemeData.titleTextStyle_13
-                                                : AppThemeData
-                                                    .titleTextStyleTab),
+                                                    .copyWith(
+                                                        fontFamily: storage
+                                                                    .languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium")
+                                                : AppThemeData.titleTextStyleTab
+                                                    .copyWith(
+                                                        fontFamily: storage
+                                                                    .languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium")),
                                         SizedBox(width: 5.w),
                                         Text(
                                           "${detailsModel.data!.delivery.toString()} days, ${detailsModel.data!.returnData.toString()} days return",
                                           style: isMobile(context)
                                               ? AppThemeData.titleTextStyle_13
-                                              : AppThemeData.titleTextStyleTab,
+                                                  .copyWith(
+                                                      fontFamily:
+                                                          storage.languageCode ==
+                                                                  "ar"
+                                                              ? "Cairo Medium"
+                                                              : "Poppins Medium")
+                                              : AppThemeData.titleTextStyleTab
+                                                  .copyWith(
+                                                      fontFamily: storage
+                                                                  .languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium"),
                                         ),
                                       ],
                                     ),
@@ -1126,8 +1266,20 @@ class DetailsPage extends StatelessWidget {
                                                     style: isMobile(context)
                                                         ? AppThemeData
                                                             .whyUsTextStyle_13
+                                                            .copyWith(
+                                                                fontFamily: storage
+                                                                            .languageCode ==
+                                                                        "ar"
+                                                                    ? "Cairo Medium"
+                                                                    : "Poppins Medium")
                                                         : AppThemeData
-                                                            .whyUsTextStyle_10Tab,
+                                                            .whyUsTextStyle_10Tab
+                                                            .copyWith(
+                                                                fontFamily: storage
+                                                                            .languageCode ==
+                                                                        "ar"
+                                                                    ? "Cairo Medium"
+                                                                    : "Poppins Medium"),
                                                   ),
                                                 ],
                                               ),
@@ -1281,7 +1433,13 @@ class DetailsPage extends StatelessWidget {
                                                       Text(
                                                         "${detailsModel.data!.attributes![i].title!.toString()}:",
                                                         style: AppThemeData
-                                                            .whyUsTextStyle_13,
+                                                            .whyUsTextStyle_13
+                                                            .copyWith(
+                                                                fontFamily: storage
+                                                                            .languageCode ==
+                                                                        "ar"
+                                                                    ? "Cairo Medium"
+                                                                    : "Poppins Medium"),
                                                       ),
                                                       SizedBox(
                                                         height: 5.h,
@@ -1378,8 +1536,8 @@ class DetailsPage extends StatelessWidget {
                                                                                 ? AppThemeData.detwailsScreenBottomSheetTitle.copyWith(color: AppThemeData.productBoxDecorationColor)
                                                                                 : AppThemeData.detailsScreenBottomSheetTitleTab.copyWith(color: AppThemeData.productBoxDecorationColor)
                                                                             : isMobile(context)
-                                                                                ? AppThemeData.detwailsScreenBottomSheetTitle
-                                                                                : AppThemeData.detailsScreenBottomSheetTitleTab,
+                                                                                ? AppThemeData.detwailsScreenBottomSheetTitle.copyWith(fontFamily: storage.languageCode == "ar" ? "Cairo Medium" : "Poppins Medium")
+                                                                                : AppThemeData.detailsScreenBottomSheetTitleTab.copyWith(fontFamily: storage.languageCode == "ar" ? "Cairo Medium" : "Poppins Medium"),
                                                                       ),
                                                                     ),
                                                                   ),
@@ -1457,15 +1615,25 @@ class DetailsPage extends StatelessWidget {
                                                     style: isMobile(context)
                                                         ? AppThemeData
                                                             .titleTextStyle_13
+                                                            .copyWith(
+                                                                fontFamily: storage
+                                                                            .languageCode ==
+                                                                        "ar"
+                                                                    ? "Cairo Medium"
+                                                                    : "Poppins Medium")
                                                         : AppThemeData
-                                                            .titleTextStyleTab,
+                                                            .titleTextStyleTab
+                                                            .copyWith(
+                                                                fontFamily: storage
+                                                                            .languageCode ==
+                                                                        "ar"
+                                                                    ? "Cairo Medium"
+                                                                    : "Poppins Medium"),
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                   ),
                                                   Text(
-                                                      LocalDataHelper()
-                                                                      .getRefundAddon() !=
-                                                                  null &&
+                                                      LocalDataHelper().getRefundAddon() != null &&
                                                               LocalDataHelper()
                                                                       .getRefundAddon()!
                                                                       .addonData !=
@@ -1478,10 +1646,17 @@ class DetailsPage extends StatelessWidget {
                                                       style: isMobile(context)
                                                           ? AppThemeData
                                                               .whyUsTextStyle_13
+                                                              .copyWith(
+                                                                  fontFamily: storage.languageCode == "ar"
+                                                                      ? "Cairo Medium"
+                                                                      : "Poppins Medium")
                                                           : AppThemeData
-                                                              .whyUsTextStyle_10Tab,
-                                                      overflow: TextOverflow
-                                                          .ellipsis),
+                                                              .whyUsTextStyle_10Tab
+                                                              .copyWith(
+                                                                  fontFamily: storage.languageCode == "ar"
+                                                                      ? "Cairo Medium"
+                                                                      : "Poppins Medium"),
+                                                      overflow: TextOverflow.ellipsis),
                                                 ],
                                               ),
                                             ],
@@ -1527,8 +1702,20 @@ class DetailsPage extends StatelessWidget {
                                               style: isMobile(context)
                                                   ? AppThemeData
                                                       .titleTextStyle_14
+                                                      .copyWith(
+                                                          fontFamily: storage
+                                                                      .languageCode ==
+                                                                  "ar"
+                                                              ? "Cairo Medium"
+                                                              : "Poppins Medium")
                                                   : AppThemeData
-                                                      .titleTextStyle_11Tab,
+                                                      .titleTextStyle_11Tab
+                                                      .copyWith(
+                                                          fontFamily: storage
+                                                                      .languageCode ==
+                                                                  "ar"
+                                                              ? "Cairo Medium"
+                                                              : "Poppins Medium"),
                                             ),
                                             // detailsController
                                             //         .isDescription.value
@@ -1685,8 +1872,20 @@ class DetailsPage extends StatelessWidget {
                                                       style: isMobile(context)
                                                           ? AppThemeData
                                                               .titleTextStyle_13
+                                                              .copyWith(
+                                                                  fontFamily: storage
+                                                                              .languageCode ==
+                                                                          "ar"
+                                                                      ? "Cairo Medium"
+                                                                      : "Poppins Medium")
                                                           : AppThemeData
-                                                              .titleTextStyleTab),
+                                                              .titleTextStyleTab
+                                                              .copyWith(
+                                                                  fontFamily: storage
+                                                                              .languageCode ==
+                                                                          "ar"
+                                                                      ? "Cairo Medium"
+                                                                      : "Poppins Medium")),
                                                 ],
                                               ),
                                               Row(
@@ -1695,8 +1894,20 @@ class DetailsPage extends StatelessWidget {
                                                       style: isMobile(context)
                                                           ? AppThemeData
                                                               .titleTextStyle_13
+                                                              .copyWith(
+                                                                  fontFamily: storage
+                                                                              .languageCode ==
+                                                                          "ar"
+                                                                      ? "Cairo Medium"
+                                                                      : "Poppins Medium")
                                                           : AppThemeData
-                                                              .titleTextStyleTab),
+                                                              .titleTextStyleTab
+                                                              .copyWith(
+                                                                  fontFamily: storage
+                                                                              .languageCode ==
+                                                                          "ar"
+                                                                      ? "Cairo Medium"
+                                                                      : "Poppins Medium")),
                                                 ],
                                               ),
                                               Row(
@@ -1705,8 +1916,20 @@ class DetailsPage extends StatelessWidget {
                                                       style: isMobile(context)
                                                           ? AppThemeData
                                                               .titleTextStyle_13
+                                                              .copyWith(
+                                                                  fontFamily: storage
+                                                                              .languageCode ==
+                                                                          "ar"
+                                                                      ? "Cairo Medium"
+                                                                      : "Poppins Medium")
                                                           : AppThemeData
-                                                              .titleTextStyleTab),
+                                                              .titleTextStyleTab
+                                                              .copyWith(
+                                                                  fontFamily: storage
+                                                                              .languageCode ==
+                                                                          "ar"
+                                                                      ? "Cairo Medium"
+                                                                      : "Poppins Medium")),
                                                 ],
                                               ),
                                             ],
@@ -1802,16 +2025,40 @@ class DetailsPage extends StatelessWidget {
                                                       style: isMobile(context)
                                                           ? AppThemeData
                                                               .whyUsTextStyle_13
+                                                              .copyWith(
+                                                                  fontFamily: storage
+                                                                              .languageCode ==
+                                                                          "ar"
+                                                                      ? "Cairo Medium"
+                                                                      : "Poppins Medium")
                                                           : AppThemeData
-                                                              .whyUsTextStyle_10Tab,
+                                                              .whyUsTextStyle_10Tab
+                                                              .copyWith(
+                                                                  fontFamily: storage
+                                                                              .languageCode ==
+                                                                          "ar"
+                                                                      ? "Cairo Medium"
+                                                                      : "Poppins Medium"),
                                                       overflow: TextOverflow
                                                           .ellipsis),
                                                   Text(AppTags.returnPolicy.tr,
                                                       style: isMobile(context)
                                                           ? AppThemeData
                                                               .titleTextStyle_13
+                                                              .copyWith(
+                                                                  fontFamily: storage
+                                                                              .languageCode ==
+                                                                          "ar"
+                                                                      ? "Cairo Medium"
+                                                                      : "Poppins Medium")
                                                           : AppThemeData
-                                                              .titleTextStyleTab,
+                                                              .titleTextStyleTab
+                                                              .copyWith(
+                                                                  fontFamily: storage
+                                                                              .languageCode ==
+                                                                          "ar"
+                                                                      ? "Cairo Medium"
+                                                                      : "Poppins Medium"),
                                                       overflow: TextOverflow
                                                           .ellipsis),
                                                 ],
@@ -1863,16 +2110,40 @@ class DetailsPage extends StatelessWidget {
                                                       style: isMobile(context)
                                                           ? AppThemeData
                                                               .whyUsTextStyle_13
+                                                              .copyWith(
+                                                                  fontFamily: storage
+                                                                              .languageCode ==
+                                                                          "ar"
+                                                                      ? "Cairo Medium"
+                                                                      : "Poppins Medium")
                                                           : AppThemeData
-                                                              .whyUsTextStyle_10Tab,
+                                                              .whyUsTextStyle_10Tab
+                                                              .copyWith(
+                                                                  fontFamily: storage
+                                                                              .languageCode ==
+                                                                          "ar"
+                                                                      ? "Cairo Medium"
+                                                                      : "Poppins Medium"),
                                                       overflow: TextOverflow
                                                           .ellipsis),
                                                   Text(AppTags.returnPolicy.tr,
                                                       style: isMobile(context)
                                                           ? AppThemeData
                                                               .titleTextStyle_13
+                                                              .copyWith(
+                                                                  fontFamily: storage
+                                                                              .languageCode ==
+                                                                          "ar"
+                                                                      ? "Cairo Medium"
+                                                                      : "Poppins Medium")
                                                           : AppThemeData
-                                                              .titleTextStyleTab,
+                                                              .titleTextStyleTab
+                                                              .copyWith(
+                                                                  fontFamily: storage
+                                                                              .languageCode ==
+                                                                          "ar"
+                                                                      ? "Cairo Medium"
+                                                                      : "Poppins Medium"),
                                                       overflow: TextOverflow
                                                           .ellipsis),
                                                 ],
@@ -1947,8 +2218,18 @@ class DetailsPage extends StatelessWidget {
                                                                   context)
                                                               ? AppThemeData
                                                                   .whyUsTextStyle_13
+                                                                  .copyWith(
+                                                                      fontFamily: storage.languageCode ==
+                                                                              "ar"
+                                                                          ? "Cairo Medium"
+                                                                          : "Poppins Medium")
                                                               : AppThemeData
-                                                                  .whyUsTextStyle_10Tab,
+                                                                  .whyUsTextStyle_10Tab
+                                                                  .copyWith(
+                                                                      fontFamily: storage.languageCode ==
+                                                                              "ar"
+                                                                          ? "Cairo Medium"
+                                                                          : "Poppins Medium"),
                                                           overflow: TextOverflow
                                                               .ellipsis),
                                                       Row(
@@ -1958,7 +2239,12 @@ class DetailsPage extends StatelessWidget {
                                                         children: [
                                                           Text("\$230.00",
                                                               style: AppThemeData
-                                                                  .priceTextStyle_13),
+                                                                  .priceTextStyle_13
+                                                                  .copyWith(
+                                                                      fontFamily: storage.languageCode ==
+                                                                              "ar"
+                                                                          ? "Cairo Medium"
+                                                                          : "Poppins Medium")),
                                                           Container(
                                                               height: 24.h,
                                                               width: 80.w,
@@ -2050,8 +2336,18 @@ class DetailsPage extends StatelessWidget {
                                                                   context)
                                                               ? AppThemeData
                                                                   .whyUsTextStyle_13
+                                                                  .copyWith(
+                                                                      fontFamily: storage.languageCode ==
+                                                                              "ar"
+                                                                          ? "Cairo Medium"
+                                                                          : "Poppins Medium")
                                                               : AppThemeData
-                                                                  .whyUsTextStyle_10Tab,
+                                                                  .whyUsTextStyle_10Tab
+                                                                  .copyWith(
+                                                                      fontFamily: storage.languageCode ==
+                                                                              "ar"
+                                                                          ? "Cairo Medium"
+                                                                          : "Poppins Medium"),
                                                           overflow: TextOverflow
                                                               .ellipsis),
                                                       Row(
@@ -2061,7 +2357,12 @@ class DetailsPage extends StatelessWidget {
                                                         children: [
                                                           Text("\$230.00",
                                                               style: AppThemeData
-                                                                  .priceTextStyle_13),
+                                                                  .priceTextStyle_13
+                                                                  .copyWith(
+                                                                      fontFamily: storage.languageCode ==
+                                                                              "ar"
+                                                                          ? "Cairo Medium"
+                                                                          : "Poppins Medium")),
                                                           Container(
                                                               height: 24.h,
                                                               width: 80.w,
@@ -2157,8 +2458,17 @@ class DetailsPage extends StatelessWidget {
                                 Text(
                                   "${AppTags.review.tr} (${detailsModel.data!.reviews!.length})",
                                   style: isMobile(context)
-                                      ? AppThemeData.priceTextStyle_14
-                                      : AppThemeData.labelTextStyle_12tab,
+                                      ? AppThemeData.priceTextStyle_14.copyWith(
+                                          fontFamily:
+                                              storage.languageCode == "ar"
+                                                  ? "Cairo Medium"
+                                                  : "Poppins Medium")
+                                      : AppThemeData.labelTextStyle_12tab
+                                          .copyWith(
+                                              fontFamily:
+                                                  storage.languageCode == "ar"
+                                                      ? "Cairo Medium"
+                                                      : "Poppins Medium"),
                                 ),
                                 InkWell(
                                   onTap: () {
@@ -2206,8 +2516,18 @@ class DetailsPage extends StatelessWidget {
                                         : AppTags.writeReview.tr,
                                     style: isMobile(context)
                                         ? AppThemeData.writeReviewTextStyle_13
+                                            .copyWith(
+                                                fontFamily:
+                                                    storage.languageCode == "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium")
                                         : AppThemeData
-                                            .detailsScreenPhoneNumberShow,
+                                            .detailsScreenPhoneNumberShow
+                                            .copyWith(
+                                                fontFamily:
+                                                    storage.languageCode == "ar"
+                                                        ? "Cairo Medium"
+                                                        : "Poppins Medium"),
                                   ),
                                 ),
                               ],
@@ -2417,8 +2737,20 @@ class DetailsPage extends StatelessWidget {
                                               style: isMobile(context)
                                                   ? AppThemeData
                                                       .detailsScreenTotal
+                                                      .copyWith(
+                                                          fontFamily: storage
+                                                                      .languageCode ==
+                                                                  "ar"
+                                                              ? "Cairo Medium"
+                                                              : "Poppins Medium")
                                                   : AppThemeData
-                                                      .detailsScreenTotalTab,
+                                                      .detailsScreenTotalTab
+                                                      .copyWith(
+                                                          fontFamily: storage
+                                                                      .languageCode ==
+                                                                  "ar"
+                                                              ? "Cairo Medium"
+                                                              : "Poppins Medium"),
                                               children: [
                                                 TextSpan(
                                                   text:
@@ -2430,8 +2762,20 @@ class DetailsPage extends StatelessWidget {
                                                   style: isMobile(context)
                                                       ? AppThemeData
                                                           .detailsScreenTotalPrice
+                                                          .copyWith(
+                                                              fontFamily: storage
+                                                                          .languageCode ==
+                                                                      "ar"
+                                                                  ? "Cairo Medium"
+                                                                  : "Poppins Medium")
                                                       : AppThemeData
-                                                          .detailsScreenTotalPriceTab,
+                                                          .detailsScreenTotalPriceTab
+                                                          .copyWith(
+                                                              fontFamily: storage
+                                                                          .languageCode ==
+                                                                      "ar"
+                                                                  ? "Cairo Medium"
+                                                                  : "Poppins Medium"),
                                                 ),
                                               ],
                                             ),
@@ -2535,8 +2879,20 @@ class DetailsPage extends StatelessWidget {
                                           AppTags.addToCart.tr,
                                           style: isMobile(context)
                                               ? AppThemeData.buttonTextStyle_14
+                                                  .copyWith(
+                                                      fontFamily:
+                                                          storage.languageCode ==
+                                                                  "ar"
+                                                              ? "Cairo Medium"
+                                                              : "Poppins Medium")
                                               : AppThemeData
-                                                  .buttonTextStyle_11Tab,
+                                                  .buttonTextStyle_11Tab
+                                                  .copyWith(
+                                                      fontFamily: storage
+                                                                  .languageCode ==
+                                                              "ar"
+                                                          ? "Cairo Medium"
+                                                          : "Poppins Medium"),
                                         ),
                                       ],
                                     ),
@@ -2601,15 +2957,27 @@ class DetailsPage extends StatelessWidget {
                               detailsModel.data!.reviews![index].user!.name
                                   .toString(),
                               style: isMobile(context)
-                                  ? AppThemeData.titleTextStyle_14
-                                  : AppThemeData.titleTextStyle_11Tab,
+                                  ? AppThemeData.titleTextStyle_14.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium")
+                                  : AppThemeData.titleTextStyle_11Tab.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium"),
                             ),
                             Text(
                               detailsModel.data!.reviews![index].date
                                   .toString(),
                               style: isMobile(context)
-                                  ? AppThemeData.dateTextStyle_12
-                                  : AppThemeData.dateTextStyle_9Tab,
+                                  ? AppThemeData.dateTextStyle_12.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium")
+                                  : AppThemeData.dateTextStyle_9Tab.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium"),
                             )
                           ],
                         ),
@@ -2642,7 +3010,9 @@ class DetailsPage extends StatelessWidget {
                 style: isMobile(context)
                     ? const TextStyle()
                     : AppThemeData.labelTextStyle_12tab.copyWith(
-                        fontFamily: "Poppins",
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium",
                         fontSize: 10.sp,
                       ),
               ),
@@ -2816,16 +3186,28 @@ class DetailsPage extends StatelessWidget {
                                   .replies![index].user!.name
                                   .toString(),
                               style: isMobile(context)
-                                  ? AppThemeData.titleTextStyle_14
-                                  : AppThemeData.titleTextStyle_11Tab,
+                                  ? AppThemeData.titleTextStyle_14.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium")
+                                  : AppThemeData.titleTextStyle_11Tab.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium"),
                             ),
                             Text(
                               detailsModel
                                   .data!.reviews![indexId].replies![index].date
                                   .toString(),
                               style: isMobile(context)
-                                  ? AppThemeData.dateTextStyle_12
-                                  : AppThemeData.dateTextStyle_9Tab,
+                                  ? AppThemeData.dateTextStyle_12.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium")
+                                  : AppThemeData.dateTextStyle_9Tab.copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium"),
                             )
                           ],
                         ),
@@ -2865,7 +3247,11 @@ class DetailsPage extends StatelessWidget {
                   children: [
                     Text(
                       AppTags.rating.tr,
-                      style: AppThemeData.detwailsScreenBottomSheetTitle,
+                      style: AppThemeData.detwailsScreenBottomSheetTitle
+                          .copyWith(
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium"),
                     ),
                     InkWell(
                       onTap: () {
@@ -2907,8 +3293,14 @@ class DetailsPage extends StatelessWidget {
                 Text(
                   AppTags.uploadImage.tr,
                   style: isMobile(context)
-                      ? AppThemeData.detwailsScreenBottomSheetTitle
-                      : AppThemeData.detailsScreenPhoneNumberShow,
+                      ? AppThemeData.detwailsScreenBottomSheetTitle.copyWith(
+                          fontFamily: storage.languageCode == "ar"
+                              ? "Cairo Medium"
+                              : "Poppins Medium")
+                      : AppThemeData.detailsScreenPhoneNumberShow.copyWith(
+                          fontFamily: storage.languageCode == "ar"
+                              ? "Cairo Medium"
+                              : "Poppins Medium"),
                 ),
                 SizedBox(
                   height: 8.h,
@@ -2973,7 +3365,14 @@ class DetailsPage extends StatelessWidget {
                       AppTags.reviewTitle.tr,
                       style: isMobile(context)
                           ? AppThemeData.detwailsScreenBottomSheetTitle
-                          : AppThemeData.detailsScreenPhoneNumberShow,
+                              .copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                          : AppThemeData.detailsScreenPhoneNumberShow.copyWith(
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium"),
                     ),
                   ],
                 ),
@@ -3001,7 +3400,11 @@ class DetailsPage extends StatelessWidget {
                             .toString()
                         : AppTags.reviewTitle.tr,
                     // pass the hint text parameter here
-                    hintStyle: const TextStyle(color: Colors.grey),
+                    hintStyle: TextStyle(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium",
+                        color: Colors.grey),
                   ),
                 ),
                 SizedBox(
@@ -3014,7 +3417,14 @@ class DetailsPage extends StatelessWidget {
                       AppTags.writeReview.tr,
                       style: isMobile(context)
                           ? AppThemeData.detwailsScreenBottomSheetTitle
-                          : AppThemeData.detailsScreenPhoneNumberShow,
+                              .copyWith(
+                                  fontFamily: storage.languageCode == "ar"
+                                      ? "Cairo Medium"
+                                      : "Poppins Medium")
+                          : AppThemeData.detailsScreenPhoneNumberShow.copyWith(
+                              fontFamily: storage.languageCode == "ar"
+                                  ? "Cairo Medium"
+                                  : "Poppins Medium"),
                     ),
                   ],
                 ),
@@ -3039,7 +3449,11 @@ class DetailsPage extends StatelessWidget {
                             .comment
                         : AppTags.review.tr,
                     // pass the hint text parameter here
-                    hintStyle: const TextStyle(color: Colors.grey),
+                    hintStyle: TextStyle(
+                        fontFamily: storage.languageCode == "ar"
+                            ? "Cairo Medium"
+                            : "Poppins Medium",
+                        color: Colors.grey),
                   ),
                 )
               ],
@@ -3102,7 +3516,11 @@ class DetailsPage extends StatelessWidget {
                           ? Text(
                               AppTags.postReview.tr,
                               style: AppThemeData.detwailsScreenBottomSheetTitle
-                                  .copyWith(color: Colors.white),
+                                  .copyWith(
+                                      fontFamily: storage.languageCode == "ar"
+                                          ? "Cairo Medium"
+                                          : "Poppins Medium",
+                                      color: Colors.white),
                             )
                           : const CircularProgressIndicator(
                               color: Colors.white,
@@ -3135,8 +3553,14 @@ class DetailsPage extends StatelessWidget {
                       Text(
                         AppTags.replyReview.tr,
                         style: isMobile(context)
-                            ? AppThemeData.titleTextStyle_14
-                            : AppThemeData.titleTextStyle_11Tab,
+                            ? AppThemeData.titleTextStyle_14.copyWith(
+                                fontFamily: storage.languageCode == "ar"
+                                    ? "Cairo Medium"
+                                    : "Poppins Medium")
+                            : AppThemeData.titleTextStyle_11Tab.copyWith(
+                                fontFamily: storage.languageCode == "ar"
+                                    ? "Cairo Medium"
+                                    : "Poppins Medium"),
                       ),
                       InkWell(
                           onTap: () {
@@ -3164,7 +3588,11 @@ class DetailsPage extends StatelessWidget {
                       ),
                       hintText: AppTags.writeSomething
                           .tr, // pass the hint text parameter here
-                      hintStyle: const TextStyle(color: Colors.grey),
+                      hintStyle: TextStyle(
+                          color: Colors.grey,
+                          fontFamily: storage.languageCode == "ar"
+                              ? "Cairo Medium"
+                              : "Poppins Medium"),
                     ),
                   ),
                 ],
@@ -3198,8 +3626,14 @@ class DetailsPage extends StatelessWidget {
                       child: Text(
                         AppTags.replyReview.tr,
                         style: isMobile(context)
-                            ? AppThemeData.buttonTextStyle_14
-                            : AppThemeData.buttonTextStyle_11Tab,
+                            ? AppThemeData.buttonTextStyle_14.copyWith(
+                                fontFamily: storage.languageCode == "ar"
+                                    ? "Cairo Medium"
+                                    : "Poppins Medium")
+                            : AppThemeData.buttonTextStyle_11Tab.copyWith(
+                                fontFamily: storage.languageCode == "ar"
+                                    ? "Cairo Medium"
+                                    : "Poppins Medium"),
                       ),
                     ),
                   ),
