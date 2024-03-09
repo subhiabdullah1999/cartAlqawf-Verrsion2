@@ -418,39 +418,39 @@ class CategoryProductCard extends StatelessWidget {
                     ),
 
                     SizedBox(height: 5.h),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "FAST TRACK",
-                          style: isMobile(context)
-                              ? TextStyle(
-                                  color: Colors.blue,
-                                  fontSize: 13,
-                                  fontStyle: FontStyle.italic,
-                                  fontFamily: storage.languageCode == "ar"
-                                      ? "Cairo Medium"
-                                      : "Poppins Medium")
-                              : TextStyle(
-                                  color: Colors.blue,
-                                  fontSize: 15,
-                                  fontStyle: FontStyle.italic,
-                                  fontFamily: storage.languageCode == "ar"
-                                      ? "Cairo Medium"
-                                      : "Poppins Medium"),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        SizedBox(width: isMobile(context) ? 5.w : 4.w),
-                        SizedBox(
-                          height: 50,
-                          width: 50,
-                          child: SvgPicture.asset(
-                            "assets/icons/delivery-truck-fast-svgrepo-com.svg",
-                            color: Colors.blue,
-                          ),
-                        )
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     Text(
+                    //       "FAST TRACK",
+                    //       style: isMobile(context)
+                    //           ? TextStyle(
+                    //               color: Colors.blue,
+                    //               fontSize: 13,
+                    //               fontStyle: FontStyle.italic,
+                    //               fontFamily: storage.languageCode == "ar"
+                    //                   ? "Cairo Medium"
+                    //                   : "Poppins Medium")
+                    //           : TextStyle(
+                    //               color: Colors.blue,
+                    //               fontSize: 15,
+                    //               fontStyle: FontStyle.italic,
+                    //               fontFamily: storage.languageCode == "ar"
+                    //                   ? "Cairo Medium"
+                    //                   : "Poppins Medium"),
+                    //       overflow: TextOverflow.ellipsis,
+                    //     ),
+                    //     SizedBox(width: isMobile(context) ? 5.w : 4.w),
+                    //     SizedBox(
+                    //       height: 50,
+                    //       width: 50,
+                    //       child: SvgPicture.asset(
+                    //         "assets/icons/delivery-truck-fast-svgrepo-com.svg",
+                    //         color: Colors.blue,
+                    //       ),
+                    //     )
+                    //   ],
+                    // ),
                     // const SizedBox(
                     //   height: 13,
                     // )

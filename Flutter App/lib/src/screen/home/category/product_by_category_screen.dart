@@ -98,7 +98,7 @@ class _ProductByCategoryState extends State<ProductByCategory> {
           GetBuilder<CategoryContentController>(
             builder: (controller) => Container(
               margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-              height: 45,
+              height: 40,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: _catController
@@ -153,7 +153,7 @@ class _ProductByCategoryState extends State<ProductByCategory> {
                       child: Container(
                         margin: EdgeInsets.symmetric(horizontal: 4),
                         padding: EdgeInsets.symmetric(horizontal: 22),
-                        height: 22,
+                        height: 20,
                         // width: 75,
                         decoration: BoxDecoration(
                             color: controller.indexsubcat == index

@@ -1688,49 +1688,46 @@ class DetailsPage extends StatelessWidget {
                                 padding: EdgeInsets.all(10.r),
                                 child: Column(
                                   children: [
-                                    Obx(
-                                      () => InkWell(
-                                        onTap: () {
-                                          // detailsController.isDeliveryUpdate();
-                                        },
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              "${AppTags.description.tr}:",
-                                              style: isMobile(context)
-                                                  ? AppThemeData
-                                                      .titleTextStyle_14
-                                                      .copyWith(
-                                                          fontFamily: storage
-                                                                      .languageCode ==
-                                                                  "ar"
-                                                              ? "Cairo Medium"
-                                                              : "Poppins Medium")
-                                                  : AppThemeData
-                                                      .titleTextStyle_11Tab
-                                                      .copyWith(
-                                                          fontFamily: storage
-                                                                      .languageCode ==
-                                                                  "ar"
-                                                              ? "Cairo Medium"
-                                                              : "Poppins Medium"),
-                                            ),
-                                            // detailsController
-                                            //         .isDescription.value
-                                            //     ? Icon(Icons.remove,
-                                            //         size: 16.r,
-                                            //         color: AppThemeData
-                                            //             .detailsIconColor)
-                                            //     : Icon(
-                                            //         Icons.add,
-                                            //         size: 16.r,
-                                            //         color: AppThemeData
-                                            //             .detailsIconColor,
-                                            //       )
-                                          ],
-                                        ),
+                                    InkWell(
+                                      onTap: () {
+                                        // detailsController.isDeliveryUpdate();
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            "${AppTags.description.tr}:",
+                                            style: isMobile(context)
+                                                ? AppThemeData.titleTextStyle_14
+                                                    .copyWith(
+                                                        fontFamily: storage
+                                                                    .languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium")
+                                                : AppThemeData
+                                                    .titleTextStyle_11Tab
+                                                    .copyWith(
+                                                        fontFamily: storage
+                                                                    .languageCode ==
+                                                                "ar"
+                                                            ? "Cairo Medium"
+                                                            : "Poppins Medium"),
+                                          ),
+                                          // detailsController
+                                          //         .isDescription.value
+                                          //     ? Icon(Icons.remove,
+                                          //         size: 16.r,
+                                          //         color: AppThemeData
+                                          //             .detailsIconColor)
+                                          //     : Icon(
+                                          //         Icons.add,
+                                          //         size: 16.r,
+                                          //         color: AppThemeData
+                                          //             .detailsIconColor,
+                                          //       )
+                                        ],
                                       ),
                                     ),
                                     Obx(
