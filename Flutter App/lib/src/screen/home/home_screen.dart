@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:yoori_ecommerce/src/_route/routes.dart';
+import 'package:yoori_ecommerce/src/controllers/category_content_controller.dart';
 import 'package:yoori_ecommerce/src/data/data_storage_service.dart';
 import 'package:yoori_ecommerce/src/models/home_data_model.dart';
 import 'package:yoori_ecommerce/src/utils/images.dart';
@@ -44,6 +45,7 @@ class HomeScreenContent extends StatelessWidget {
   final DashboardController homeScreenController =
       Get.find<DashboardController>();
   final _cartController = Get.find<CartContentController>();
+
   final homeScreenContentController = Get.find<HomeScreenController>();
   final storage = Get.put(StorageService());
   final detailsPageController = Get.lazyPut(
@@ -603,6 +605,9 @@ class HomeScreenContent extends StatelessWidget {
 
   // Categories
   Widget _categories(categoryIndex, context) {
+    CategoryContentController _catControllers =
+        Get.put(CategoryContentController());
+
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 4.h),
       child: Container(
@@ -631,21 +636,35 @@ class HomeScreenContent extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 2),
                       child: InkWell(
                         onTap: () {
+                          _catControllers.updateFeaturedIndexData(false);
+                          _catControllers.updateIndex(index);
+                          print(
+                              "yttttttttttttrrrrrrrrrrrrrrreeeeeeeeeeeewwwwwwwwwww");
+                          print(
+                            _catControllers
+                                .categoryList[_catControllers.index.value]
+                                .subCategories!
+                                .length,
+                          );
+                          print(
+                              "yttttttttttttrrrrrrrrrrrrrrreeeeeeeeeeeewwwwwwwwwww");
+
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (_) => ProductByCategory(
-                                id: homeScreenContentController
-                                    .homeDataModel
-                                    .value
-                                    .data![categoryIndex]
-                                    .categories![index]
-                                    .id,
-                                title: homeScreenContentController
-                                    .homeDataModel
-                                    .value
-                                    .data![categoryIndex]
-                                    .categories![index]
-                                    .title,
+                                id: _catControllers
+                                        .categoryList[
+                                            _catControllers.index.value]
+                                        .subCategories!
+                                        .isEmpty
+                                    ? _catControllers.categoryList[index].id
+                                    : _catControllers
+                                        .categoryList[
+                                            _catControllers.index.value]
+                                        .subCategories![0]
+                                        .id,
+                                title:
+                                    _catControllers.categoryList[index].title,
                               ),
                             ),
                           );

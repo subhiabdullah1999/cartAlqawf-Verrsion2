@@ -114,7 +114,7 @@ class _ProductByCategoryState extends State<ProductByCategory> {
                             .id;
                         // key = GlobalKey<PaginationViewState>();
 
-                        // page = 0;
+                        page = 0;
 
                         // getData(widget.id!);
                         // key.currentState?.refresh();
