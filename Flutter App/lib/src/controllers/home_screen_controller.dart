@@ -72,6 +72,7 @@ class HomeScreenController extends GetxController implements GetxService {
     print(placemark);
     print("y64532222222222222211-----------");
     userAdress = '  ${placemark.country}, ${placemark.locality}';
+    update();
 
     return '  ${placemark.country}, ${placemark.locality}';
   }
